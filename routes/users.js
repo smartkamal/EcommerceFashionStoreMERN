@@ -5,6 +5,4 @@ const {sayHi} = require('../controllers/users');
 
 router.get('/api',sayHi);
 
-
-
 module.exports = router;
