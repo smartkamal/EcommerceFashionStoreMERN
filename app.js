@@ -7,7 +7,7 @@ require('dotenv').config();
 
 //require routes
 const userRoutes = require('./routes/users');
-
+const productRoutes = require("./routes/product");
 //app
 const app  = express();
 
@@ -22,8 +22,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
 //routes
 app.use("/api",userRoutes);
+app.use("/api",productRoutes);
+
 
 const port = process.env.PORT || 5000;
 
