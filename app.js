@@ -8,6 +8,9 @@ require('dotenv').config();
 //require routes
 const userRoutes = require('./routes/users');
 const productRoutes = require("./routes/product");
+const braintreeRoutes = require('./routes/braintree');
+
+
 //app
 const app  = express();
 
@@ -24,8 +27,11 @@ app.use(cookieParser());
 
 
 //routes
+
 app.use("/api",userRoutes);
 app.use("/api",productRoutes);
+app.use("/api",braintreeRoutes);
+
 
 
 const port = process.env.PORT || 5000;

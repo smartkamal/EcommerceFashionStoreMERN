@@ -20,6 +20,8 @@
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.2",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "braintree": "^2.22.0",
+    "braintree-web-drop-in-react": "^1.1.1"
   }
 }
