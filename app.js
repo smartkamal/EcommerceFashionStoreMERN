@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 //require routes
 const userRoutes = require('./routes/users');
+const braintreeRoutes = require('./routes/braintree');
 
 //app
 const app  = express();
@@ -16,6 +17,7 @@ mongoose.connect(process.env.DATABASE,{
 
 //routes
 app.use(userRoutes);
+app.use(braintreeRoutes);
 
 const port = process.env.PORT || 5000;
 
