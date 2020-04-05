@@ -50,7 +50,13 @@ usersSchema.virtual('password')
     return this._password;
 });
 
-usersSchema.methods = {encryptPassword: function (password) {
+usersSchema.methods = {
+
+    authenticateUser: function(text){
+        return this.encryptPassword(text) === this.hashed_password
+    },
+
+    encryptPassword: function (password) {
         if (!password) return '';
         try {
             return crypto.createHmac('sha1',this.salt).update(password).digest("hex");
