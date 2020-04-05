@@ -3,11 +3,16 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
 require('dotenv').config();
 
 //require routes
-const userRoutes = require('./routes/users');
+const authenticationRoutes = require('./routes/authentication');
 const productRoutes = require("./routes/product");
+
+const braintreeRoutes = require('./routes/braintree');
+const userRoutes = require('./routes/user');
+
 //app
 const app  = express();
 
@@ -21,14 +26,16 @@ mongoose.connect(process.env.DATABASE,{
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(expressValidator());
 
 
 //routes
-app.use("/api",userRoutes);
+app.use("/api",authenticationRoutes);
 app.use("/api",productRoutes);
+app.use("/api",braintreeRoutes);
+app.use("/api",userRoutes);
 
-
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () =>{
     console.log(`Server running on ${port}`);
