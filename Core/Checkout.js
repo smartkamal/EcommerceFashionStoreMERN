@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Layout from './Layout';
-import {getProducts, getBraintreeClientToken} from './apiCore';
+import {getProducts, getBraintreeClientToken, processPayment} from './apiCore';
 import Card from "./Card";
 import {isAuthenticated} from '../auth';
 import {Link} from "react-router-dom";
@@ -23,7 +23,7 @@ const Checkout = ({products}) => {
             if (data.error){
                 setData({...data,error: data.error});
             }else {
-                setData({...data, clientToken: data.clientToken})
+                setData({clientToken: data.clientToken})
             }
         })
     }
@@ -54,15 +54,27 @@ const Checkout = ({products}) => {
         let nonce;
         let getNonce = data.instance.requestPaymentMethod()
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 nonce = data.nonce
                 // once you have nonce (card type, card number) send nonce as 'paymentMehtodNonce'
-                //and also total to be charged
-                console.log('send nonce and total to process : ', nonce, getTotal(products))
+                // and also total to be charged
+                //console.log('send nonce and total to process : ', nonce, getTotal(products));
+                const paymentData = {
+                    paymentMethodNonce: nonce,
+                    amount: getTotal(products)
+                }
+                processPayment(userId, token, paymentData)
+                    .then(response => {
+                        //console.log(response
+                        setData({...data, success: response.success})
+                        //empty cart
+                        //create order
+                    })
+                    .catch(error => console.log(error));
             })
             .catch(error => {
-                console.log('dropin error: ', error)
-                setData({...data, error: error.message})
+                //console.log('dropin error: ', error)
+                setData({...data, error: error.message});
             })
     }
 
@@ -73,7 +85,7 @@ const Checkout = ({products}) => {
                     <DropIn options={{
                         authorization: data.clientToken
                     }}onInstance={instance => data.instance = instance}/>
-                    <button onClick={buy} className="btn btn-success">Pay</button>
+                    <button onClick={buy} className="btn btn-success btn-block">Pay</button>
                 </div>
             ) : null}
         </div>
@@ -85,9 +97,16 @@ const Checkout = ({products}) => {
         </div>
     );
 
+    const showSuccess = success => (
+        <div className="alert alert-info" style={{display: success ? '' : 'none'}}>
+            Thanks! Your payment was successful!
+        </div>
+    );
+
     return(
         <div>
             <h2>Total: ${getTotal()}</h2>
+            {showSuccess(data.success)}
             {showError(data.error)}
             {showCheckout()}
         </div>
