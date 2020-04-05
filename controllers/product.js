@@ -17,7 +17,7 @@ exports.ProductAdd=(req,res) =>{
         let product = new Product(data);
 
         if(files.productImage) {
-            product.productImage.data = fs.readFileSync(files.productImage.path)
+            product.productImage.data = fs.readFileSync(files.productImage.path);
             product.productImage.contentType = files.productImage.type
         }
 
