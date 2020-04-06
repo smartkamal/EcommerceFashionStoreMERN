@@ -128,3 +128,119 @@ exports.updateProduct=(req,res) =>{
 
     })
 };
+
+
+//retrieve product image
+
+exports.retrieveImage = (req,res,next) =>{
+    if(req.product.productImage.data){
+        res.set('Content-Type',req.product.productImage.contentType);
+        return res.send(req.product.productImage.data)
+    }
+    next();
+};
+
+
+/*fetch the product list to the front end depending on sell/ arrival of
+item
+ */
+
+exports.listProducts = (req,res) =>{
+    //ways in which a reqest can come from the front end to list items
+    let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    let order = req.query.order ? req.query.order : 'asc';
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    Product.find()
+        .select("-productImage")
+        .populate("productCat")
+        .sort([[sortBy , order]])
+        .limit(limit)
+        .exec((err, result) =>{
+            if(err){
+                return res.status(400).json({
+                    error: 'Products unavailable'
+                })
+            }
+            res.json(result);
+        })
+
+};
+
+//products under the corresponding category will be listed
+exports.listRelatedProducts = (req,res) =>{
+
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    Product.find({_id : {$ne:req.product}, productCat:req.product.productCat})
+        .populate('productCat','_id productName')
+        .limit(limit)
+        .exec((err,result) =>{
+            if(err){
+                return res.status(400).json({
+                    error: 'Products unavailable'
+                })
+            }
+            res.json(result);
+        })
+};
+
+//list down the categories which have products
+exports.listCategories = (req,res) =>{
+    Product.distinct("productCat", {} , (err,catResult)=>{
+        if(err){
+            return res.status(400).json({
+                error: 'Categories unavailable'
+            })
+        }
+        res.json(catResult);
+
+    })
+};
+
+//product find for search
+exports.searchProd= (req, res) => {
+    let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    let order = req.body.order ? req.body.order : "desc";
+    let limit = req.body.limit ? parseInt(req.body.limit) : 100;
+    let more= parseInt(req.body.skip);
+    let searchArgs = {};
+
+    // console.log(order, sortBy, limit, skip, req.body.filters);
+    // console.log("findArgs", findArgs);
+
+    for (let key in req.body.filters) {
+        if (req.body.filters[key].length > 0) {
+            if (key === "productPrice") {
+                //mongodb keys gte and lte
+                // gte -  greater than price [0-10]
+                // lte - less than
+                searchArgs[key] = {
+                    $gte: req.body.filters[key][0],
+                    $lte: req.body.filters[key][1]
+                };
+            } else {
+                searchArgs[key] = req.body.filters[key];
+            }
+        }
+    }
+
+    Product.find(searchArgs)
+        .select("-productImage")
+        .populate("productCat")
+        .sort([[sortBy, order]])
+        .skip(more)
+        .limit(limit)
+        .exec((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: "Products unavailable"
+                });
+            }
+
+            res.json({
+                size: result.length,
+                result
+            });
+        });
+};
