@@ -9,8 +9,7 @@ const productCategorySchema = new mongoose.Schema({
             required: true,
             trim: true,
             maxlength: 32
-        },
-
+        }
     },
     {timestamps: true}
 

@@ -40,8 +40,8 @@ exports.signin = (req, res) =>{
         //keep the token as 'tn' in cookie with expiry date
         res.cookie('tn',token,{expire: new Date()+9999})
         //return response with user and token
-        const {_id, firstName, lastName, type} = user
-        return res.json({token, user: {_id,email,firstName,lastName,type}})
+        const {_id, firstName, lastName, userType} = user
+        return res.json({token, user: {_id,email,firstName,lastName,userType}})
     });
 };
 
