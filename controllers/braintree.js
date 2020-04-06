@@ -4,11 +4,11 @@ require('dotenv').config()
 
 
 const gateway = braintree.connect({
-    environment: braintree.environment.Sandbox,
+    environment: braintree.Environment.Sandbox, // Production
     merchantId: process.env.BRAINTREE_MERCHANT_ID,
     publicKey: process.env.BRAINTREE_PUBLIC_KEY,
     privateKey: process.env.BRAINTREE_PRIVATE_KEY
-})
+});
 exports.generateToken = (req, res) => {
     gateway.clientToken.generate({},function (err,response) {
         if(err){
@@ -17,7 +17,7 @@ exports.generateToken = (req, res) => {
             res.send(response);
         }
     })
-}
+};
 
 exports.processPayment = (req,res) => {
     let nonceFromTheClient = req.body.paymentMethodNonce
@@ -35,5 +35,5 @@ exports.processPayment = (req,res) => {
         }else{
             res.json(result);
         }
-    })
-}
+    });
+};
