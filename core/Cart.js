@@ -35,7 +35,7 @@ const Cart = () =>{
                   {items.length>0 ? displayItems(items):emptyItemMsg()}
               </div>
 
-                <div className="col-6">
+                <div>
                     <p>Show checkout options/shipping address/ Total/Update Quantity</p>
                 </div>
             </div>
