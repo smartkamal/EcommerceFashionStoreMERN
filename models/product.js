@@ -18,6 +18,10 @@ const productSchema = new mongoose.Schema({
         productQuantity: {
             type: Number
         },
+        soldQuantity: {
+            type: Number,
+            default: 0
+        },
         productDesc: {
             type: String,
             required: true,
