@@ -23,5 +23,8 @@
     "uuid": "^7.0.3",
     "braintree": "^2.22.0",
     "braintree-web-drop-in-react": "^1.1.1"
+  },
+  "devDependencies": {
+    "react-router-dom": "^5.1.2"
   }
 }
