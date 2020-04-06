@@ -28,6 +28,13 @@ export const itemTotal =() =>{
 return 0;
 };
 
+export const emptyCart = next => {
+    if (typeof window !== "undefined"){
+        localStorage.removeItem("cart");
+        next();
+    }
+};
+
 export const getCart =() =>{
     if(typeof window!=='undefined') {
         if (localStorage.getItem('cart')) {
