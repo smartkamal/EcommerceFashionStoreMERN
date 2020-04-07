@@ -12,7 +12,7 @@ router.get('/secret/:id', controlSignin, authenticatedUser, userAdmin, (req, res
     });
 });
 
-router.param('id', findUserById)
+router.param('id', findUserById);
 
 module.exports = router;
 
