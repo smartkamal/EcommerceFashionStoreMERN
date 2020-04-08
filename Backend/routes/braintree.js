@@ -8,5 +8,5 @@ const {generateToken,processPayment} = require("../controllers/braintree");
 router.get('/braintree/getToken/:id',controlSignin, authenticatedUser, generateToken)
 router.post('/braintree/payment/:id',controlSignin, authenticatedUser, processPayment)
 
-router.param('id',findUserById);
+router.param('userId',findUserById);
 module.exports = router
