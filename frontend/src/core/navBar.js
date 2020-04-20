@@ -1,9 +1,8 @@
-import React from "react";
+import React,{Fragment} from "react";
 import {Link, withRouter} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-
-
+import {signOut, isValidated} from "../validators";
 
 
 const isActive = (history,path) => {
@@ -25,13 +24,25 @@ function Menus({history}) {
                         <Link style={isActive(history,"/")} to="/">Home  </Link>
                      </Nav.Link>
 
-                <Nav.Link  >
-                    <Link to="/signin" style={isActive(history,"/signin")}>Sign In </Link>
-                </Nav.Link>
+                {!isValidated() && (
+                    <Fragment>
+                        <Nav.Link  >
+                            <Link to="/signin" style={isActive(history,"/signin")}>Sign In </Link>
+                        </Nav.Link>
 
-                <Nav.Link >
-                    <Link to="/signup" style={isActive(history,"/signup")}>Sign Up </Link>
-                </Nav.Link>
+                        <Nav.Link >
+                            <Link to="/signup" style={isActive(history,"/signup")}>Sign Up </Link>
+                        </Nav.Link>
+                    </Fragment>
+                )}
+
+                {isValidated() && (
+                    <Nav.Link >
+                        <Link style={{cursor: 'pointer', color: '#ffffff'}} onClick={() => signOut(() => {
+                            history.push('/')
+                        })}>Sign Out </Link>
+                    </Nav.Link>
+                )}
             </Nav>
         </Navbar>
     );

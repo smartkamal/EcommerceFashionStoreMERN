@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter,Route,Switch} from "react-router-dom";
 
-import signIn from './user/signIn'
+import signIn from './user/SignIn'
 import signUp from './user/signUp'
 import Home from './core/Home'
 import NavBar from './core/navBar'
