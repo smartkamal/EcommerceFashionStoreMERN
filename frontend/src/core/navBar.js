@@ -1,25 +1,10 @@
 import React from "react";
 import {Link, withRouter} from "react-router-dom";
-import {makeStyles} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-}));
+
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -31,38 +16,24 @@ const isActive = (history,path) => {
 
 
 function Menus({history}) {
-    const classes = useStyles();
+
     return (
-        <div className={classes.root}>
-            <AppBar  position={"relative"}>
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        News
-                    </Typography>
+        <Navbar bg="dark" variant="dark" className=" py-3">
+            <Navbar.Brand href="#home">Home</Navbar.Brand>
+            <Nav className="mr-auto  py-0">
+                    <Nav.Link >
+                        <Link style={isActive(history,"/")} to="/">Home  </Link>
+                     </Nav.Link>
 
-                   <Link style={isActive(history,'/')} to="/">
-                       <Button color="inherit">
-                         Home
-                       </Button>
-                    </Link>
-                    <Link style={isActive(history,'/signup')} to="/signup">
-                        <Button color="inherit">
-                           Sign Up
-                        </Button>
-                    </Link>
-                    <Link style={isActive(history,'/signin')} to="/signin">
-                        <Button color="inherit">
-                            Sign In
-                        </Button>
-                    </Link>
+                <Nav.Link  >
+                    <Link to="/signin" style={isActive(history,"/signin")}>Sign In </Link>
+                </Nav.Link>
 
-                </Toolbar>
-            </AppBar>
-        </div>
-
+                <Nav.Link >
+                    <Link to="/signup" style={isActive(history,"/signup")}>Sign Up </Link>
+                </Nav.Link>
+            </Nav>
+        </Navbar>
     );
 }
 
