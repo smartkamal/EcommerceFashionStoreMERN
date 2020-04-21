@@ -24,6 +24,24 @@ function Menus({history}) {
                         <Link style={isActive(history,"/")} to="/">Home  </Link>
                      </Nav.Link>
 
+                {isValidated() && isValidated().user.userType === "user" && (
+                    <Nav.Link >
+                        <Link style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard  </Link>
+                    </Nav.Link>
+                )}
+
+                {isValidated() && isValidated().user.userType === "manager" && (
+                    <Nav.Link >
+                        <Link style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard  </Link>
+                    </Nav.Link>
+                )}
+
+                {isValidated() && isValidated().user.userType === "admin" && (
+                    <Nav.Link >
+                        <Link style={isActive(history,"/admin/admindashboard")} to="/admin/admindashboard">Dashboard  </Link>
+                    </Nav.Link>
+                )}
+
                 {!isValidated() && (
                     <Fragment>
                         <Nav.Link  >

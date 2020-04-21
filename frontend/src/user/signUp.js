@@ -72,7 +72,7 @@ const SignUp=  () => {
                     <Form.Control onChange={handleChange('password')}  type="password" placeholder="Password" value={password}/>
                 </Form.Group>
                 <Button variant="success" type="submit" onClick={submitForm}>
-                    Submit
+                    SignUp
                 </Button>
             </Form>
             </Col>

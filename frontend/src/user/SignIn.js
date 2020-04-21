@@ -7,18 +7,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Alert} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
-import {signIn, validate} from "../validators";
+import {signIn, validate,isValidated} from "../validators";
 
 const SignIn=  () => {
     const [values, setValues] = useState({
-        email: '',
-        password:'',
+        email: 'janedoe@gmail.com',
+        password:'jane1234',
         error:'',
         loading:false,
         redirectToRef: false,
     })
 
     const {email, password, error, loading, redirectToRef} = values
+    const {user} = isValidated();
 
     const handleChange = val => e =>{
         setValues({...values,error: false,[val]: e.target.value})
@@ -60,7 +61,7 @@ const SignIn=  () => {
                             <Form.Control onChange={handleChange('password')}  type="password" placeholder="Password" value={password}/>
                         </Form.Group>
                         <Button variant="success" type="submit" onClick={submitForm}>
-                            Submit
+                            SignIn
                         </Button>
                     </Form>
                 </Col>
@@ -87,6 +88,17 @@ const SignIn=  () => {
 
     const userRedirect = () => {
         if (redirectToRef){
+            if (user && user.userType === "admin"){
+                return <Redirect to ="/admin/admindashboard"></Redirect>
+            }
+            else if (user && user.userType === "manager"){
+                return <Redirect to ="/manager/managerdashboard"></Redirect>
+            }
+            else {
+                return <Redirect to ="/user/userdashboard"></Redirect>
+            }
+        }
+        if (isValidated()) {
             return <Redirect to ="/"></Redirect>
         }
     }
