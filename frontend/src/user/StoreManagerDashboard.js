@@ -16,7 +16,7 @@ const StoreManagerDashboard = () => {
                     <Card.Header className="text-center">Manager Links</Card.Header>
                     <ListGroup>
                         <ListGroup.Item>
-                            <Link className="nav-link" to="/create/products">Products</Link>
+                            <Link className="nav-link" to="/product/add">Add Products</Link>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>

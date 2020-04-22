@@ -16,7 +16,7 @@ const AdminDashboard = () => {
                     <Card.Header className="text-center">Admin Links</Card.Header>
                     <ListGroup>
                         <ListGroup.Item>
-                            <Link className="nav-link" to="/create/category">Create Category</Link>
+                            <Link className="nav-link" to="/category/add">Create Category</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Link className="nav-link" to="/create/storemanager">Create Store Manager</Link>
