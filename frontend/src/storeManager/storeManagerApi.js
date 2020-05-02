@@ -17,3 +17,13 @@ export const addProduct  = (userId,token,product) => {
             console.log(error);
         })
 }
+
+export const getCategories = () =>{
+    return fetch(`${API}/categoryList`,{
+        method: "GET"
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err=> console.log(err));
+}
