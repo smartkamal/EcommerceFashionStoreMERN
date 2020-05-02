@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../core/Layout";
+import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Card, Col, Container, Row} from "react-bootstrap";

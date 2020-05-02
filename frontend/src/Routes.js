@@ -3,8 +3,8 @@ import {BrowserRouter,Route,Switch} from "react-router-dom";
 
 import signIn from './user/SignIn'
 import signUp from './user/signUp'
-import Home from './core/Home'
-import NavBar from './core/navBar'
+import Home from './ui/Home'
+import NavBar from './ui/navBar'
 import UserRoute from "./validators/UserRoute";
 import userDashboard from "./user/UserDashboard";
 import AdminRoute from "./validators/AdminRoute";
