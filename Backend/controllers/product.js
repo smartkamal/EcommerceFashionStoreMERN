@@ -50,7 +50,7 @@ exports.ProductAdd=(req,res) =>{
 
 exports.findProductById = (req,res,next,id) =>{
 
-    Product.findById(id).exec((err, resProduct) =>{
+    Product.findById(id).populate("productCat").exec((err, resProduct) =>{
         if(err || !resProduct){
             return res.status(400).json({
                 error: "Product not available"

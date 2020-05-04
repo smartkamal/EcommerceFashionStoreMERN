@@ -10,6 +10,16 @@ export const getProducts = (orderBy) =>{
         .catch(err=> console.log(err));
 }
 
+export const getUniquePro = (productID) =>{
+    return fetch(`${API}/product/${productID}`,{
+        method: "GET"
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err=> console.log(err));
+}
+
 
 // export const getBraintreeClientToken = (userId, token) => {
 //     return fetch(`${API}/braintree/getToken/${userId}`, {

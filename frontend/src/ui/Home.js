@@ -70,23 +70,6 @@ const Home=  () => {
             </Row>
 
 
-            {/*<pre> <code>{JSON.stringify(productsLoadByArrival)}</code></pre>*/}
-            {/*<hr/>*/}
-            {/*<pre>{JSON.stringify(productsLoadBySold)}</pre>*/}
-            {/*<Container>*/}
-            {/*    <Row>*/}
-            {/*        <Col xs={12}>*/}
-            {/*            <pre> <code>{JSON.stringify(productsLoadByArrival)}</code></pre>*/}
-            {/*            <hr/>*/}
-            {/*            <pre>{JSON.stringify(productsLoadBySold)}</pre>*/}
-
-
-            {/*        </Col>*/}
-            {/*    </Row>*/}
-            {/*</Container>*/}
-            {/*{JSON.stringify(productsArrival)}*/}
-
-
         </Layout>
 
     );
