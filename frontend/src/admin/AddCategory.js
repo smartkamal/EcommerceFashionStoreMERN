@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Layout from "../core/Layout";
+import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
 import {Alert, Col, Container, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";

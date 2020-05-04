@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../core/Layout";
+import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Card, Col, Container, Row} from "react-bootstrap";
@@ -16,7 +16,7 @@ const AdminDashboard = () => {
                     <Card.Header className="text-center">Admin Links</Card.Header>
                     <ListGroup>
                         <ListGroup.Item>
-                            <Link className="nav-link" to="/create/category">Create Category</Link>
+                            <Link className="nav-link" to="/category/add">Create Category</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Link className="nav-link" to="/create/storemanager">Create Store Manager</Link>

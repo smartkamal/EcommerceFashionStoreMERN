@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Layout from "../core/Layout";
+import Layout from "../ui/Layout";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -11,8 +11,8 @@ import {signIn, validate,isValidated} from "../validators";
 
 const SignIn=  () => {
     const [values, setValues] = useState({
-        email: 'janedoe@gmail.com',
-        password:'jane1234',
+        email: 'ush@gmail.com',
+        password:'ush1234',
         error:'',
         loading:false,
         redirectToRef: false,
