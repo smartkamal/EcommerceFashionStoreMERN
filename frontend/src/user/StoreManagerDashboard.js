@@ -19,6 +19,11 @@ const StoreManagerDashboard = () => {
                             <Link className="nav-link" to="/product/add">Add Products</Link>
                         </ListGroup.Item>
                     </ListGroup>
+                    <ListGroup>
+                        <ListGroup.Item>
+                            <Link className="nav-link" to="/storemanager/manageproducts">Edit Products</Link>
+                        </ListGroup.Item>
+                    </ListGroup>
                 </Card>
                 <br/>
             </div>

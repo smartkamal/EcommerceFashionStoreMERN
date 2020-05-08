@@ -95,13 +95,13 @@ exports.updateProduct=(req,res) =>{
             })
         }
         //check that all data is found
-        const {productName,productPrice,productQuantity,productDesc,productCat,shipping}= data;
-
-        if(!productName || !productPrice || !productQuantity || !productDesc || !productCat|| !shipping){
-            return res.status(400).json({
-                error:'Please fill all the fields'
-            })
-        }
+        // const {productName,productPrice,productQuantity,productDesc,productCat,shipping}= data;
+        //
+        // if(!productName || !productPrice || !productQuantity || !productDesc || !productCat|| !shipping){
+        //     return res.status(400).json({
+        //         error:'Please fill all the fields'
+        //     })
+        // }
 
         let updatePro= req.product;
 

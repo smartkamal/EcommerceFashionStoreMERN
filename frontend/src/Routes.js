@@ -14,6 +14,8 @@ import StoreManagerRoute from "./validators/StoreManagerRoute";
 import AddCategory from "./admin/AddCategory";
 import Product from "./ui/Product";
 import AddProduct from "./storeManager/AddProduct"
+import ProductManagement from './storeManager/productManagement'
+import UpdateProduct from './storeManager/updateProduct'
 
 const Routes = () =>{
     return(
@@ -29,6 +31,8 @@ const Routes = () =>{
             <StoreManagerRoute path="/manager/managerdashboard" exact component={StoreManagerDashboard}/>
             <AdminRoute path="/category/add" exact component={AddCategory}/>
             <StoreManagerRoute path="/product/add" exact component={AddProduct}/>
+            <StoreManagerRoute path="/storemanager/manageproducts" exact component={ProductManagement}/>
+            <StoreManagerRoute path="/storemanager/edit/product/:productID" exact component={UpdateProduct}/>
         </Switch>
     </BrowserRouter>)
 
