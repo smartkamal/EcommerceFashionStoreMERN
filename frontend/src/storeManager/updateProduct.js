@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {getCategories,getAProduct,updateProduct} from "./storeManagerApi";
 import Redirect from "react-router-dom/es/Redirect";
+import bsCustomFileInput from 'bs-custom-file-input'
 
 function UpdateProduct({match}) {
 
@@ -91,6 +92,9 @@ function UpdateProduct({match}) {
     //when component mounts execute load method
     useEffect(() =>{
         loadProduct(match.params.productID);
+        bsCustomFileInput.init();
+
+
     },[])
 
 
@@ -183,6 +187,7 @@ function UpdateProduct({match}) {
             </Button>
         </Form>
 
+
     )
     const Loading = () => (
         loading && (
@@ -195,15 +200,8 @@ function UpdateProduct({match}) {
     const userRedirect = () =>{
         if(redirectToProfile){
             if(!error){
-
-                return ( <Redirect to="/"  />
-
-                )
-
-
+                return ( <Redirect to="/"  />)
             }
-
-
         }
 
     }
@@ -220,7 +218,7 @@ function UpdateProduct({match}) {
     );
 
     return (
-        <Layout title="Add a Product" description={`Hello ${user.firstName}, Let's add a new Product`}
+        <Layout title="Add a Product" description={`Hello ${user.firstName}, Let's Update a product`}
                 className="container col-md-6 offset-md-3">
 
             <Container>
@@ -238,7 +236,11 @@ function UpdateProduct({match}) {
                 </Row>
             </Container>
         </Layout>
-    )
+
+
+
+
+)
 
 
 }
