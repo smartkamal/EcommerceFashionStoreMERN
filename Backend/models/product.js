@@ -22,6 +22,10 @@ const productSchema = new mongoose.Schema({
             type: Number,
             default: 0
         },
+        productDisc: {
+            type: Number,
+            default: 0
+        },
         productDesc: {
             type: String,
             required: true,
