@@ -1,9 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-//import Layout from './Layout';
+import Layout from './Layout';
 import {getCart,removeCartItem} from './cartHandler';
-//import Card from './Card';
-import Checkout from "./Checkout";
+import Card from "./proCard";
+//import Checkout from "./Checkout";
 
 const Cart = () =>{
     const [items, setItems] = useState([]);
@@ -16,21 +16,23 @@ const Cart = () =>{
     const displayItems=items=>{
         return(
             <div>
-                <h3>No. fo Items: {'${items.length}'}</h3>
+                <h3>Items Quantity: {items.length}</h3>
                 <hr/>
                 {items.map((product, i)=>(<Card
                     key={i}
                     product={product}
-                    showAddToCArtButton={false}
-                    cartUdate={true}
-                    showRemoveitemButton={true}
+                    addToCartBtn={false}
+                    updateCartOpt={true}
+                    removeItemBtn={true}
+
                 />))}
             </div>
         )
     };
 
     const emptyItemMsg=()=>(
-        <h3>Your cart is empty. <br/> <Link to="/Shop">Continue Shopping</Link></h3>
+        <h3>Your cart is empty. <br/> <Link to="/
+        ">Continue Shopping</Link></h3>
     );
     return(
         <Layout
@@ -45,7 +47,7 @@ const Cart = () =>{
                 <div>
                   <h3>Your Cart Summery</h3>
                 <hr/>
-                <Checkout products={items}/>
+                    {/*<Checkout products={items}/>*/}
                 </div>
             </div>
 
