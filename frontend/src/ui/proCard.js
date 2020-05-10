@@ -22,7 +22,7 @@ const loadAddToCart = () =>{
 const stockAvailabilty = (quantity) =>{
     return (quantity > 0 ?
 
-                <Badge  pill variant="primary">In Stock</Badge>: <Badge pill variant="warning">Out of stock</Badge>
+            <Badge  pill variant="primary">In Stock</Badge>: <Badge pill variant="warning">Out of stock</Badge>
 
 
     )
@@ -39,7 +39,7 @@ const productCard = ({product,viewProductBtn=true}) =>{
 
                 <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
 
-                <img className="card-img-top" style={{maxHeight:"50%" }} src={`${API}/product/image/${product._id}`} alt="Card image cap"/>
+                    <img className="card-img-top" style={{maxHeight:"50%" }} src={`${API}/product/image/${product._id}`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">{product.productName}</h5>
                         <p className="card-text">{product.productDesc.substring(0,100)}</p>
@@ -63,7 +63,7 @@ const productCard = ({product,viewProductBtn=true}) =>{
                         </div>
                     </div>
 
-                 </div>
+                </div>
             </div>
 
         </div>

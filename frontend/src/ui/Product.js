@@ -4,6 +4,7 @@ import {getUniquePro} from './apiCore'
 import {Col, Container, Row} from "react-bootstrap";
 import  Card from './proCard'
 
+
 const Product = (props) =>{
 
     //hold product state
