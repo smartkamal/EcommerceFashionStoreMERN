@@ -17,6 +17,8 @@ function UpdateProduct({match}) {
         productName: '',
         productDesc: '',
         productPrice: '',
+        productDisc:'',
+        totalDiscPrice:'',
         categories: [],
         productCat: '',
         shipping: '',
@@ -35,8 +37,10 @@ function UpdateProduct({match}) {
         productDesc,
         productPrice,
         categories,
+        productDisc,
         productCat,
         shipping,
+        totalDiscPrice,
         productQuantity,
         error,
         loading,
@@ -78,7 +82,9 @@ function UpdateProduct({match}) {
                         productName: res.productName,productDesc:res.productDesc,
                         productCat: res.productCat._id,
                         productPrice: res.productPrice,
+                        productDisc: res.productDisc,
                         productQuantity: res.productQuantity,
+                        totalDiscPrice: res.totalDiscPrice,
                         shipping: res.shipping,
                         formData: new FormData()
                     })
@@ -113,8 +119,10 @@ function UpdateProduct({match}) {
                         productName: '',
                         productDesc: '',
                         productPrice: '',
+                        productDisc:'',
                         productQuantity: '',
                         productImage: '',
+                        totalDiscPrice:'',
                         error: false,
                         loading: false,
                         productAdded: formD.productName
@@ -148,6 +156,14 @@ function UpdateProduct({match}) {
             <Form.Group controlId="formBasicPrice">
                 <Form.Label>Product Price</Form.Label>
                 <Form.Control onChange={handleChange('productPrice')} type="number" placeholder="Enter Product price" value={productPrice} />
+            </Form.Group>
+            <Form.Group controlId="formBasicDiscount">
+                <Form.Label>Product Discount</Form.Label>
+                    <Form.Control onChange={handleChange('productDisc')} type="number" placeholder="Enter Product Discount" value={productDisc} />
+            </Form.Group>
+            <Form.Group controlId="formBasicTotDiscount">
+                <Form.Label>Product Price After Discount</Form.Label>
+                <Form.Control disabled type="number" step="0.01"  value={totalDiscPrice} />
             </Form.Group>
             <Form.Group  controlId="formBasicCategory">
                 <Form.Label>Product Category</Form.Label>
@@ -216,6 +232,7 @@ function UpdateProduct({match}) {
             {error}
         </div>
     );
+
 
     return (
         <Layout title="Update a Product" description={`Hello ${user.firstName}, Let's Update a product`}

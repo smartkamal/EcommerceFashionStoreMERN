@@ -27,6 +27,17 @@ const stockAvailabilty = (quantity) =>{
 
 }
 
+const checkDiscount = (discount, totPrice) =>{
+   if(discount> 0){
+       return(
+
+           <h4>
+               <Badge pill className="iconPM"  variant="danger">Discounted Price : {totPrice}</Badge>
+           </h4>
+       )
+   }
+
+}
 
 const ProductCard = ({
                          product,
@@ -70,10 +81,12 @@ const ProductCard = ({
                     <p className="card-text">{product.productDesc.substring(0,100)}</p>
                     <p className="card-text">Rs.{product.productPrice}</p>
                     <p className="card-text">Category :{product.productCat && product.productCat.categoryName}</p>
-                    <p className="card-text">Product Added on {moment(product.createdAt).fromNow()} </p>
+                    <p className="card-text">Product: Added {moment(product.createdAt).fromNow()} </p>
                     <div className="card-footer bg-transparent border-danger">
 
                         {stockAvailabilty(product.productQuantity)}
+                        <br/><br/>
+                        {checkDiscount(product.productDisc, product.totalDiscPrice)}
                         <br/><br/>
 
                         <Link to={`/product/${product._id}`}>

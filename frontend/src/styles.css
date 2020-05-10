@@ -1,0 +1,9 @@
+.iconPM {
+
+    animation: blink 2s ease-in infinite;
+}
+
+@keyframes blink {
+    from, to { opacity: 1 }
+    50% { opacity: 0 }
+}
