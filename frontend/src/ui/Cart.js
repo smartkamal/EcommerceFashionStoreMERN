@@ -35,8 +35,8 @@ const Cart = () =>{
     };
 
     const emptyItemMsg=()=>(
-        <h3>Your cart is empty. <br/> <Link to="/
-        ">Continue Shopping</Link></h3>
+        <h3>Your cart is empty. <br/> <Link to="/">
+            Continue Shopping</Link></h3>
     );
     return(
         <Layout
