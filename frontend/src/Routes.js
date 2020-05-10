@@ -11,12 +11,15 @@ import AdminRoute from "./validators/AdminRoute";
 import AdminDashboard from "./user/AdminDashboard";
 import StoreManagerDashboard from "./user/StoreManagerDashboard";
 import StoreManagerRoute from "./validators/StoreManagerRoute";
+import StoreManagerSignUp from './admin/storeManagerSignup.js'
 import AddCategory from "./admin/AddCategory";
 import Product from "./ui/Product";
 import AddProduct from "./storeManager/AddProduct"
 import ProductManagement from './storeManager/productManagement'
 import UpdateProduct from './storeManager/updateProduct'
 import Cart from "./ui/Cart";
+import UserProfile from './user/UserProfile'
+
 
 const Routes = () =>{
     return(
@@ -31,10 +34,13 @@ const Routes = () =>{
             <AdminRoute path="/admin/admindashboard" exact component={AdminDashboard}/>
             <StoreManagerRoute path="/manager/managerdashboard" exact component={StoreManagerDashboard}/>
             <AdminRoute path="/category/add" exact component={AddCategory}/>
-            <StoreManagerRoute path="/products/add" exact component={AddProduct}/>
+            <AdminRoute path="/create/storemanager" exact component={StoreManagerSignUp}/>
+            <StoreManagerRoute path="/product/add" exact component={AddProduct}/>
             <StoreManagerRoute path="/storemanager/manageproducts" exact component={ProductManagement}/>
             <StoreManagerRoute path="/storemanager/edit/product/:productID" exact component={UpdateProduct}/>
             <Route path="/cart" exact component={Cart}/>
+            <UserRoute path="/UserProfile/:userId" exact component = {UserProfile}/>
+
         </Switch>
     </BrowserRouter>)
 
