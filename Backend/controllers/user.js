@@ -1,7 +1,4 @@
 const User = require('../models/user');
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
-
 
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
