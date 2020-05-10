@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -9,6 +10,7 @@ import {API} from "../Config";
 import moment from 'moment'
 import Badge from "react-bootstrap/Badge";
 import {addItem,updateCartItem,removeCartItem} from "./cartHandler";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 
@@ -31,7 +33,9 @@ const ProductCard = ({
                          viewProductBtn=true,
                          addToCartBtn=true,
                          updateCartOpt=false,
-                         removeItemBtn=false
+                         removeItemBtn=false,
+                         setRun =f=>f,
+                         run=undefined
 }) =>{
     //creating add to cart
     const [ redirect, setRedirect]= useState(false);
@@ -49,6 +53,7 @@ const ProductCard = ({
     };
 
     const handleChange = productId => event =>{
+        setRun(!run);
         setCount(event.target.value <1 ? 1: event.target.value)
         if(event.target.value>=1){
             updateCartItem(productId,event.target.value)
@@ -80,11 +85,13 @@ const ProductCard = ({
 
                         {
                             addToCartBtn && <Button variant="outline-success" onClick={addToCart}>Add to cart</Button>
-                        };
+                        }
 
                         {
-                            removeItemBtn && <Button variant="outline-danger" onClick={()=>removeCartItem(product._id)}>Remove</Button>
-                        };
+                            removeItemBtn && <Button variant="outline-danger"
+                                                     onClick={()=>{removeCartItem(product._id);setRun(!run);}}>
+                                Remove</Button>
+                        }
 
                         {
                             updateCartOpt && <div>
@@ -95,7 +102,7 @@ const ProductCard = ({
                                     <input type="number" className="form-control" value={count} onChange={handleChange(product._id)}/>
                                 </div>
                             </div>
-                        };
+                        }
 
                     </div>
                 </div>

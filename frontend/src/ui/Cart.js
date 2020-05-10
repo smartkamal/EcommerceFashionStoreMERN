@@ -8,10 +8,12 @@ import Card from "./proCard";
 const Cart = () =>{
     const [items, setItems] = useState([]);
 
-    useEffect(()=>{
-        setItems(getCart())
+    const[run,setRun]=useState(false);
 
-    },[items]);
+    useEffect(()=>{
+        setItems(getCart());
+
+    },[run]);
 
     const displayItems=items=>{
         return(
@@ -24,6 +26,8 @@ const Cart = () =>{
                     addToCartBtn={false}
                     updateCartOpt={true}
                     removeItemBtn={true}
+                    setRun={setRun}
+                    run={run}
 
                 />))}
             </div>
