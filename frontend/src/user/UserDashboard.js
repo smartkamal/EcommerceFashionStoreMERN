@@ -19,7 +19,7 @@ const userDashboard = () => {
                             <Link className="nav-link" to="/cart">My Cart</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Link className="nav-link" to="/profile/update">Update Profile</Link>
+                            <Link className="nav-link" to={`/userProfile/${_id}`}>Update Profile</Link>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
@@ -28,7 +28,7 @@ const userDashboard = () => {
         )
     }
 
-    const userInfo = () => {
+    const userInformation = () => {
         return (
             <div>
                 <Card>
@@ -63,7 +63,7 @@ const userDashboard = () => {
             <Container>
                 <Row>
                     <Col sm={3}>{userLinks()} </Col>
-                    <Col sm={9}> {userInfo()} {userHistory()}</Col>
+                    <Col sm={9}> {userInformation()} {userHistory()}</Col>
                 </Row>
             </Container>
 

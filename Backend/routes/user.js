@@ -14,6 +14,7 @@ router.get('/secret/:id', controlSignin, authenticatedUser, userAdmin, (req, res
 
 router.get('/user/:id', controlSignin, authenticatedUser, listUserData);
 router.put('/user/:id', controlSignin, authenticatedUser, updateUserData);
+//router.get('/user/:id', controlSignin, authenticatedUser, listUserData);
 
 router.param('id', findUserById);
 
