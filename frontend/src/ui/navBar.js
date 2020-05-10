@@ -3,7 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
-
+import {itemTotal} from "./cartHandler";
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -23,6 +23,10 @@ function Menus({history}) {
                     <Nav.Link >
                         <Link style={isActive(history,"/")} to="/">Home  </Link>
                      </Nav.Link>
+
+                <Nav.Link >
+                    <Link style={isActive(history,"/cart")} to="/cart">Cart <sup><small>{itemTotal()}</small></sup> </Link>
+                </Nav.Link>
 
                 {isValidated() && isValidated().user.userType === "user" && (
                     <Nav.Link >

@@ -17,7 +17,9 @@ import Product from "./ui/Product";
 import AddProduct from "./storeManager/AddProduct"
 import ProductManagement from './storeManager/productManagement'
 import UpdateProduct from './storeManager/updateProduct'
+import Cart from "./ui/Cart";
 import UserProfile from './user/UserProfile'
+
 
 const Routes = () =>{
     return(
@@ -36,7 +38,9 @@ const Routes = () =>{
             <StoreManagerRoute path="/product/add" exact component={AddProduct}/>
             <StoreManagerRoute path="/storemanager/manageproducts" exact component={ProductManagement}/>
             <StoreManagerRoute path="/storemanager/edit/product/:productID" exact component={UpdateProduct}/>
+            <Route path="/cart" exact component={Cart}/>
             <UserRoute path="/UserProfile/:userId" exact component = {UserProfile}/>
+
         </Switch>
     </BrowserRouter>)
 
