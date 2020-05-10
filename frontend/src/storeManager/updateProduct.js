@@ -218,7 +218,7 @@ function UpdateProduct({match}) {
     );
 
     return (
-        <Layout title="Add a Product" description={`Hello ${user.firstName}, Let's Update a product`}
+        <Layout title="Update a Product" description={`Hello ${user.firstName}, Let's Update a product`}
                 className="container col-md-6 offset-md-3">
 
             <Container>

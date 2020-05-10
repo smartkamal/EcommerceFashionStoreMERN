@@ -30,7 +30,7 @@ const Routes = () =>{
             <AdminRoute path="/admin/admindashboard" exact component={AdminDashboard}/>
             <StoreManagerRoute path="/manager/managerdashboard" exact component={StoreManagerDashboard}/>
             <AdminRoute path="/category/add" exact component={AddCategory}/>
-            <StoreManagerRoute path="/product/add" exact component={AddProduct}/>
+            <StoreManagerRoute path="/products/add" exact component={AddProduct}/>
             <StoreManagerRoute path="/storemanager/manageproducts" exact component={ProductManagement}/>
             <StoreManagerRoute path="/storemanager/edit/product/:productID" exact component={UpdateProduct}/>
         </Switch>
