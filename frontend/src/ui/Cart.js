@@ -14,7 +14,7 @@ const Cart = () =>{
         setItems(getCart());
 
     },[run]);
-
+//display cart
     const displayItems=items=>{
         return(
             <div>

@@ -51,7 +51,7 @@ const ProductCard = ({
             return <Redirect to="/cart"/>
         }
     };
-
+//increament and decreament values
     const handleChange = productId => event =>{
         setRun(!run);
         setCount(event.target.value <1 ? 1: event.target.value)
