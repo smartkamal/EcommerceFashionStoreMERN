@@ -5,6 +5,7 @@ import {Alert, Col, Container, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {addProduct,getCategories} from "./storeManagerApi";
+import bsCustomFileInput from "bs-custom-file-input";
 
 function AddProduct() {
 
@@ -65,6 +66,7 @@ function AddProduct() {
 
     useEffect(() =>{
         load();
+        bsCustomFileInput.init();
     },[])
 
 
