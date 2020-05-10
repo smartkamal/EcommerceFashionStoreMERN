@@ -26,6 +26,11 @@ const productSchema = new mongoose.Schema({
             type: Number,
             default: 0
         },
+        totalDiscPrice: {
+            type: Number,
+            default: 0
+
+        },
         productDesc: {
             type: String,
             required: true,
@@ -44,11 +49,21 @@ const productSchema = new mongoose.Schema({
         shipping:{
             required:false,
             type:Boolean
-        }
+        },
+
+
 },
-    {timestamps: true}
+    {timestamps: true},
 
 );
 
+
+productSchema.pre('save', function (next) {
+
+    const val = this.productPrice * (this.productDisc/100)
+    this. totalDiscPrice = this.productPrice - val;
+
+    next();
+});
 
 module.exports = mongoose.model("Product",productSchema);
