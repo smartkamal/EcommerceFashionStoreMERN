@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import Layout from "./Layout";
 import {getProducts} from './apiCore'
 import {Col, Container, Row} from "react-bootstrap";
+import SearchComp from "./Search";
 import  Card from './proCard'
 
 
@@ -50,6 +51,7 @@ const Home=  () => {
     return (
         <Layout title="Home Page" description="E commerce store" className="container-fluid">
 
+            <SearchComp/>
 
             <h2 className="mb-4 ">Best Sellers</h2>
 
