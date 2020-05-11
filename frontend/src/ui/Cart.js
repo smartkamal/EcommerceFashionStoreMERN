@@ -19,6 +19,8 @@ const Cart = () =>{
         return(
             <div>
                 <h3>Items Quantity: {items.length}</h3>
+                <h3><Link className="btn-success" to="/">
+                    Continue Shopping>></Link></h3>
                 <hr/>
                 {items.map((product, i)=>(<Card
                     key={i}
