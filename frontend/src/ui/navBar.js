@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
 import {itemTotal,deleteCart} from "./cartHandler";
+import {itemWishTotal} from "./WishlistHandler";
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -31,12 +32,14 @@ function Menus({history}) {
                 {isValidated() && isValidated().user.userType === "user" && (
                     <Nav.Link >
                         <Link style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard  </Link>
+                        <Link style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup> </Link>
                     </Nav.Link>
                 )}
 
                 {isValidated() && isValidated().user.userType === "manager" && (
                     <Nav.Link >
                         <Link style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard  </Link>
+                        <Link style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup> </Link>
                     </Nav.Link>
                 )}
 
