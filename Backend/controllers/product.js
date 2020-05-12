@@ -244,3 +244,30 @@ exports.searchProd= (req, res) => {
             });
         });
 };
+
+exports.searchProdList = (req,res) =>{
+
+    //console.log('i run')
+    const query = {}
+
+    if(req.query.searchVal){
+        query.productName = {$regex: req.query.searchVal, $options:'i'}
+
+        if(req.query.aCategory && req.query.aCategory !== 'All' ){
+            query.productCat = req.query.aCategory
+
+        }
+
+        Product.find(query, (error, products) =>{
+            if(error){
+                return res.status(400).json({
+                    error:errorHandler(error)
+                })
+            }
+
+            res.json(products)
+            console.log( products)
+
+        }).select('-productImage')
+    }
+}

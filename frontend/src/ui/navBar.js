@@ -3,7 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
-import {itemTotal} from "./cartHandler";
+import {itemTotal,deleteCart} from "./cartHandler";
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -62,7 +62,7 @@ function Menus({history}) {
                     <Nav.Link >
                         <Link style={{cursor: 'pointer', color: '#ffffff'}} onClick={() => signOut(() => {
                             history.push('/')
-                        })}>Sign Out </Link>
+                        ;deleteCart()})}>Sign Out </Link>
                     </Nav.Link>
                 )}
             </Nav>
