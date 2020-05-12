@@ -3,12 +3,21 @@ import Layout from "./Layout";
 import {getUniquePro} from './apiCore'
 import {Col, Container, Row} from "react-bootstrap";
 import  Card from './proCard'
+import Comments from "./Comments";
+import axios from "axios";
+import {API} from "../Config";
+
 
 const Product = (props) =>{
 
     //hold product state
     const [product,giveProduct] = useState({})
     const [err,setError] = useState(false)
+    const [CommentLists, setCommentLists] = useState(false)
+
+    const productVariable = {
+        productId: props.match.params.productid
+    }
 
     const loadUniqueProduct = productId =>{
 
@@ -28,8 +37,21 @@ const Product = (props) =>{
         //product id from url
         const productId = props.match.params.productid
         loadUniqueProduct(productId)
+
+        axios.post(`${API}/comments/getComments`,productVariable)
+            .then(response => {
+                if (response.data.success){
+                    console.log(response.data.product)
+                    setCommentLists(response.data.comments)
+                }else{
+                    alert('Failed to get comments')
+                }
+            })
     },[])
 
+    const updateComment = (newComment) => {
+        setCommentLists(CommentLists.concat(newComment))
+    }
 
     return (
         <Layout title="Product Details"
@@ -48,6 +70,10 @@ const Product = (props) =>{
 
 
            </Row>
+
+            <div>
+                <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
+            </div>
 
         </Layout>
 

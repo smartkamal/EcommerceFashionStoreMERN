@@ -1,0 +1,38 @@
+const express = require('express');
+const router = express.Router();
+
+const {Like} = require('../models/Like')
+const {Dislike} = require('../models/Dislike')
+
+router.post("/like/getLikes",(req, res) => {
+    let variable = { }
+    if(req.body.productId) {
+        variable = {productId: req.body.productId}
+    }else{
+        variable = {commentId: req.body.commentId}
+    }
+
+    Like.find(variable)
+        .exec((err,likes) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({success: true,likes})
+        })
+})
+
+router.post("/like/getDislikes",(req, res) => {
+    let variable = { }
+    if(req.body.productId) {
+        variable = {productId: req.body.productId}
+    }else{
+        variable = {commentId: req.body.commentId}
+    }
+
+    Like.find(variable)
+        .exec((err,dislikes) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({success: true,dislikes})
+        })
+})
+
+
+module.exports = router;
