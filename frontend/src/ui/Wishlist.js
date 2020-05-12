@@ -1,19 +1,20 @@
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from './Layout';
-import {getCart} from './cartHandler';
+import {getWishlist} from './WishlistHandler';
 import Card from "./proCard";
-import Checkout from "./Checkout";
 
-const Cart = () =>{
+
+const Wishlist = () =>{
     const [items, setItems] = useState([]);
 
     const[run,setRun]=useState(false);
 
     useEffect(()=>{
-        setItems(getCart());
+        setItems(getWishlist());
+
     },[run]);
-//display cart
+//display wishlist
     const displayItems=items=>{
         return(
             <div>
@@ -24,11 +25,10 @@ const Cart = () =>{
                 {items.map((product, i)=>(<Card
                     key={i}
                     product={product}
-                    addToCartBtn={false}
+                    addToCartBtn={true}
+                    removeItemBtn={false}
+                    removeWishItemBtn={true}
                     addToWishListBtn={false}
-                    updateCartOpt={true}
-                    removeItemBtn={true}
-                    removeWishItemBtn={false}
                     setRun={setRun}
                     run={run}
 
@@ -38,27 +38,22 @@ const Cart = () =>{
     };
 
     const emptyItemMsg=()=>(
-        <h3>Your cart is empty. <br/> <Link to="/">
+        <h3>Your Wish List is empty. <br/> <Link to="/">
             Continue Shopping</Link></h3>
     );
     return(
         <Layout
-            title ="Shopping Cart"
-            description ="Manage Your Shopping Cart Items"
+            title ="Wish List"
+            description ="Manage Your Items"
         >
             <div className="row">
-              <div className="col-6">
-                  {items.length>0 ? displayItems(items):emptyItemMsg()}
-              </div>
-
-                <div className="col-5">
-                    <h2>Cart Summary</h2>
-                    <hr/>
-                    <Checkout products={items}/>
+                <div className="col-6">
+                    {items.length>0 ? displayItems(items):emptyItemMsg()}
                 </div>
+
             </div>
 
         </Layout>
     )
 };
-export default Cart;
+export default Wishlist;
