@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 
 import Card from "react-bootstrap/Card";
@@ -12,6 +12,9 @@ import Badge from "react-bootstrap/Badge";
 import {addItem,updateCartItem,removeCartItem} from "./cartHandler";
 import Redirect from "react-router-dom/es/Redirect";
 import {addWishItem, removeWishlistItem} from "./WishlistHandler";
+import axios from "axios";
+import Comments from "./Comments";
+
 
 
 
@@ -54,8 +57,8 @@ const ProductCard = ({
     //creating add to cart
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
-
     const [ wredirect, setWRedirect]= useState(false);
+
     const addToCart =()=>{
         addItem(product, ()=>{
                 setRedirect(true)
@@ -86,10 +89,14 @@ const ProductCard = ({
             updateCartItem(productId,event.target.value)
         }
     }
+
     function refreshPage() {
         window.location.reload(false);
     }
+
+
     return<div className="card-deck" style={{margin:25}}>
+
         <div className="shadow p-1 mb-1 bg-white rounded">
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
@@ -153,6 +160,10 @@ const ProductCard = ({
         </div>
 
     </div>
+
+
+
+
 }
 
 
