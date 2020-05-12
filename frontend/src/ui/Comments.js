@@ -40,7 +40,7 @@ function Comments(props) {
     return (
         <div>
             <br/>
-            <p> replies </p>
+            <p> Comments </p>
             <hr/>
             {console.log(props.CommentLists)}
 
