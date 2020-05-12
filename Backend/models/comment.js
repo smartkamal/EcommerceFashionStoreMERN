@@ -4,21 +4,21 @@ const Schema = mongoose.Schema;
 const commentSchema = mongoose.Schema({
     userTo: {
         type:Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     },
     postId: {
         type:Schema.Types.ObjectId,
-        ref: 'product'
+        ref: 'Product'
     },
     responseTo: {
         type:Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     },
     content: {
         type: String
     }
 },{timestamp: true})
 
-const comment = mongoose.model('comment', commentSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
-module.exports = {comment}
+module.exports = {Comment}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 
 import Card from "react-bootstrap/Card";
@@ -11,6 +11,8 @@ import moment from 'moment'
 import Badge from "react-bootstrap/Badge";
 import {addItem,updateCartItem,removeCartItem} from "./cartHandler";
 import Redirect from "react-router-dom/es/Redirect";
+import axios from "axios";
+import Comments from "./Comments";
 
 
 
@@ -52,6 +54,9 @@ const ProductCard = ({
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
 
+
+
+
     const addToCart =()=>{
         addItem(product, ()=>{
                 setRedirect(true)
@@ -71,7 +76,8 @@ const ProductCard = ({
         }
     }
 
-    return<div className="card-deck" style={{margin:25}}>
+    return<div>
+    <div className="card-deck" style={{margin:25}}>
         <div className="shadow p-1 mb-1 bg-white rounded">
             {userRedirect(redirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
@@ -124,6 +130,10 @@ const ProductCard = ({
         </div>
 
     </div>
+
+
+
+</div>
 }
 
 
