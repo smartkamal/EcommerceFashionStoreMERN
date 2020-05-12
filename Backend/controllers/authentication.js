@@ -1,23 +1,59 @@
+require('dotenv').config();
 const User = require('../models/user');
 const jwtoken = require('jsonwebtoken'); //generate signed token
 const expressJwt = require('express-jwt'); //check authorization
 const {errorHandler} = require("../helpers/dbErrorHandler");
+const nodemailer = require("nodemailer");
 
 exports.signup = (req,res) =>{
-    //console.log("req.body",req.body);
     const user = new User(req.body);
-    user.save((error,user)=>{
-        if (error){
+    user.save((error,user)=> {
+        if (error) {
             return res.status(400).json({
                 error: errorHandler(error)
             });
         }
+
         user.salt = undefined;
         user.hashed_password = undefined;
+
+
         res.json({
             user
+
+
         })
-    })
+
+            if(user.userType == 'manager') {
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.EMAIL,
+                        pass: process.env.PASSWORD
+                    }
+                });
+
+                // send mail with defined transport object
+                let mailOptions = {
+                    from: 'applicationframeworks123@gmail.com', // sender address
+                    to: user.email, // list of receivers
+                    subject: "Congratulations!", // Subject line
+                    html: `<p>Dear ${user.firstName}</p><br><b>Congratulations <br> You are our new store Manager!!
+                        </b> <br> Your username and password are attached below. <br> Username: ${user.email} <br> Password: ${user.password}`
+                };
+
+                transporter.sendMail(mailOptions, function (err, content) {
+                    if (err) {
+                        console.log("Error occured", err)
+                    } else {
+                        console.log("Email sent")
+                    }
+                })
+
+            }
+                })
+
+
 };
 
 exports.signin = (req, res) =>{

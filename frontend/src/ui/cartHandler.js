@@ -35,6 +35,12 @@ export const emptyCart = next => {
     }
 };
 
+export const deleteCart=x=>{
+    if (typeof window !== "undefined") {
+        localStorage.removeItem("cart");
+    }
+};
+
 export const getCart =() =>{
     if(typeof window!=='undefined') {
         if (localStorage.getItem('cart')) {
