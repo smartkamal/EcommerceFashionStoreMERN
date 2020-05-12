@@ -1,5 +1,7 @@
 import {API} from "../Config";
+import queryString from 'query-string'
 
+//retrieve all the products based on the order by condition
 export const getProducts = (orderBy) =>{
     return fetch(`${API}/products?sortBy=${orderBy}&order=desc&limit=6`,{
         method: "GET"
@@ -49,3 +51,18 @@ export const processPayment = (userId, token, paymentData) => {
         })
          .catch(err => console.log(err));
 };
+
+// retrieve item list depending on the condition passed from the search bar
+export const itemList = queryParams =>{
+    const searchQuery = queryString.stringify(queryParams)
+    console.log('searchQuery',searchQuery)
+    return fetch(`${API}/retrieveproduct/search?${searchQuery}`,{
+        method: "GET"
+    })
+        .then(response =>{
+            return response.json();
+
+        })
+        .catch(err=> console.log(err));
+
+}
