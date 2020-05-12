@@ -19,6 +19,7 @@ import ProductManagement from './storeManager/productManagement'
 import UpdateProduct from './storeManager/updateProduct'
 import Cart from "./ui/Cart";
 import UserProfile from './user/UserProfile'
+import StoreManagerUserProfile from './storeManager/updateStoreManager'
 
 
 const Routes = () =>{
@@ -40,6 +41,7 @@ const Routes = () =>{
             <StoreManagerRoute path="/storemanager/edit/product/:productID" exact component={UpdateProduct}/>
             <Route path="/cart" exact component={Cart}/>
             <UserRoute path="/UserProfile/:userId" exact component = {UserProfile}/>
+            <StoreManagerRoute path="/storemanager/updatepass/:userId" exact component={StoreManagerUserProfile}/>
 
         </Switch>
     </BrowserRouter>)

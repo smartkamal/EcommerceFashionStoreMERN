@@ -12,7 +12,7 @@ import {signIn, validate,isValidated} from "../validators";
 const SignIn=  () => {
     const [values, setValues] = useState({
         email: 'ush@gmail.com',
-        password:'ush1234',
+        password:'usha123',
         error:'',
         loading:false,
         redirectToRef: false,
