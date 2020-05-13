@@ -40,7 +40,7 @@ const Checkout = ({products}) => {
 
     const getTotal = () => {
         return products.reduce((currentValue, nextValue) => {
-            return currentValue + nextValue.count * nextValue.productPrice;
+            return currentValue + nextValue.count * nextValue.totalDiscPrice;
         }, 0);
     };
 
