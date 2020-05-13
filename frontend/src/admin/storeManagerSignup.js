@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {Alert} from "react-bootstrap";
+import {Alert, ListGroup} from "react-bootstrap";
 import {signUp} from "../validators";
 
 const MangerSignUp=  () => {
@@ -18,6 +18,7 @@ const MangerSignUp=  () => {
         error:'',
         success:false
     })
+    const [allManagers ,setManagers] = useState([]);
 
     const {firstName, lastName, email, password,userType, success, error} = values
 
@@ -51,9 +52,9 @@ const MangerSignUp=  () => {
 
     const signUpForm = () =>(
 
-        <Container >
+        <Container>
             <Row>
-                <Col >
+                <Col style={{marginLeft:-300}}>
                     <Form>
                         <Form.Group controlId="formBasicFName">
                             <Form.Label>First Name</Form.Label>
@@ -80,6 +81,20 @@ const MangerSignUp=  () => {
                             SignUp
                         </Button>
                     </Form>
+                </Col>
+
+                <Col>
+                    <ListGroup variant="flush">
+                        {allManagers.map((manager,index) =>(
+                            <ListGroup.Item
+                                key = {index}
+                                className="d-flex justify-content-between"
+                            >
+                                <strong>{manager.firstName}</strong>
+                                <strong>{manager.lastName}</strong>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
                 </Col>
 
             </Row>
