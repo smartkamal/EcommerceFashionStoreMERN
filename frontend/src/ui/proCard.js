@@ -14,9 +14,10 @@ import Redirect from "react-router-dom/es/Redirect";
 import {addWishItem, removeWishlistItem} from "./WishlistHandler";
 import axios from "axios";
 import Comments from "./Comments";
+import {signIn, validate,isValidated} from "../validators";
+const {user} = isValidated();
 
-
-
+console.log(user && user.userType);
 
 
 
@@ -59,6 +60,25 @@ const ProductCard = ({
     const [count, setCount]=useState(product.count);
     const [ wredirect, setWRedirect]= useState(false);
 
+    const addToWishListButton=(addWish)=>{
+        if(user && user.userType === 'user' ||  undefined ){
+            return(
+                addWish && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+            )
+
+        }
+    }
+
+    const addToCartButton=(addCart)=>{
+        if(user && user.userType === 'user'){
+            return(
+                addCart && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+            )
+
+        }
+    }
+
+
     const addToCart =()=>{
         addItem(product, ()=>{
                 setRedirect(true)
@@ -81,6 +101,8 @@ const ProductCard = ({
             return <Redirect to="/"/>
         }
     };
+
+
 //increament and decreament values
     const handleChange = productId => event =>{
         setRun(!run);
@@ -123,11 +145,15 @@ const ProductCard = ({
                         </Link>
 
                         {
-                            addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+                            addToWishListButton(addToWishListBtn)
+                            //addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+
                         }
 
                         {
-                            addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+                            addToCartButton(addToCartBtn)
+                            //addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+
                         }
 
                         {
