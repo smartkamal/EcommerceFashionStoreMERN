@@ -111,6 +111,7 @@ const ProductCard = ({
                     <p className="card-text">Rs.{product.productPrice}</p>
                     <p className="card-text">Category :{product.productCat && product.productCat.categoryName}</p>
                     <p className="card-text">Product: Added {moment(product.createdAt).fromNow()} </p>
+                    <Rating/>
                     <div className="card-footer bg-transparent border-danger">
 
                         {stockAvailabilty(product.productQuantity)}
