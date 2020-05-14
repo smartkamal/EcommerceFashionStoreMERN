@@ -18,8 +18,10 @@ import AddProduct from "./storeManager/AddProduct"
 import ProductManagement from './storeManager/productManagement'
 import UpdateProduct from './storeManager/updateProduct'
 import Cart from "./ui/Cart";
+import Wishlist from "./ui/Wishlist";
 import UserProfile from './user/UserProfile'
-import UpdateCategory from "./admin/CategoryManagement";
+import StoreManagerUserProfile from './storeManager/updateStoreManager'
+
 
 const Routes = () =>{
     return(
@@ -35,12 +37,13 @@ const Routes = () =>{
             <StoreManagerRoute path="/manager/managerdashboard" exact component={StoreManagerDashboard}/>
             <AdminRoute path="/category/add" exact component={CategoryManagement}/>
             <AdminRoute path="/create/storemanager" exact component={StoreManagerSignUp}/>
-            <StoreManagerRoute path="/product/add" exact component={AddProduct}/>
+            <StoreManagerRoute path="/products/add" exact component={AddProduct}/>
             <StoreManagerRoute path="/storemanager/manageproducts" exact component={ProductManagement}/>
             <StoreManagerRoute path="/storemanager/edit/product/:productID" exact component={UpdateProduct}/>
             <Route path="/cart" exact component={Cart}/>
+            <Route path="/wishlist" exact component={Wishlist}/>
             <UserRoute path="/UserProfile/:userId" exact component = {UserProfile}/>
-            <AdminRoute path="/category/update/:categoryid" exact component={UpdateCategory}/>
+            <StoreManagerRoute path="/storemanager/updatepass/:userId" exact component={StoreManagerUserProfile}/>
 
         </Switch>
     </BrowserRouter>)

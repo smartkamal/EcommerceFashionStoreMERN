@@ -12,7 +12,7 @@ import {signIn, validate,isValidated} from "../validators";
 const SignIn=  () => {
     const [values, setValues] = useState({
         email: 'ush@gmail.com',
-        password:'ush1234',
+        password:'usha123',
         error:'',
         loading:false,
         redirectToRef: false,
@@ -41,8 +41,13 @@ const SignIn=  () => {
                             redirectToRef: true
                         });
                     } );
+                    refreshPage();
                 }
             });
+    }
+
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     const signInForm = () =>(
@@ -89,7 +94,7 @@ const SignIn=  () => {
     const userRedirect = () => {
         if (redirectToRef){
             if (user && user.userType === "admin"){
-                return <Redirect to ="/admin/admindashboard"></Redirect>
+                return <Redirect to ="/admin/admindashboard" ></Redirect>
             }
             else if (user && user.userType === "manager"){
                 return <Redirect to ="/manager/managerdashboard"></Redirect>

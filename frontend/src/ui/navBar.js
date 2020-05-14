@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
 import {itemTotal,deleteCart} from "./cartHandler";
+import {itemWishTotal} from "./WishlistHandler";
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -12,31 +13,45 @@ const isActive = (history,path) => {
         return {color:'#fafafa' , textDecoration: 'none'}
     }
 }
+function refreshPage() {
+    window.location.reload(false);
+}
 
 
 function Menus({history}) {
 
     return (
         <Navbar bg="dark" variant="dark" className=" py-3">
-            <Navbar.Brand href="#home">Home</Navbar.Brand>
+
             <Nav className="mr-auto  py-0">
                     <Nav.Link >
                         <Link style={isActive(history,"/")} to="/">Home  </Link>
                      </Nav.Link>
 
+                {isValidated() && isValidated().user.userType === "user" && (
                 <Nav.Link >
                     <Link style={isActive(history,"/cart")} to="/cart">Cart <sup><small>{itemTotal()}</small></sup> </Link>
                 </Nav.Link>
+                )}
 
                 {isValidated() && isValidated().user.userType === "user" && (
                     <Nav.Link >
                         <Link style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard  </Link>
+
+                    </Nav.Link>
+                )}
+
+                {isValidated() && isValidated().user.userType === "user" && (
+                    <Nav.Link >
+
+                        <Link style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup> </Link>
                     </Nav.Link>
                 )}
 
                 {isValidated() && isValidated().user.userType === "manager" && (
                     <Nav.Link >
                         <Link style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard  </Link>
+
                     </Nav.Link>
                 )}
 
@@ -60,9 +75,9 @@ function Menus({history}) {
 
                 {isValidated() && (
                     <Nav.Link >
-                        <Link style={{cursor: 'pointer', color: '#ffffff'}} onClick={() => signOut(() => {
+                        <Link style={{cursor: 'pointer', color: '#ffffff',textDecoration: 'none'}} onClick={() => signOut(() => {
                             history.push('/')
-                        ;deleteCart()})}>Sign Out </Link>
+                        ;deleteCart();refreshPage()})}>Sign Out </Link>
                     </Nav.Link>
                 )}
             </Nav>

@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const User = require('../models/user');
+const {errorHandler} = require("../helpers/dbErrorHandler");
 
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
@@ -17,14 +18,6 @@ exports.listUserData = (req, res) => {
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
     return res.json(req.profile);
-};
-
-exports.listStoreManagerData = (req, res) => {
-    if (User.userType === 'manager'){
-        req.profile.hashed_password = undefined;
-        req.profile.salt = undefined;
-        return res.json(req.profile);
-    }
 };
 
 exports.updateUserData = (req, res) => {
@@ -72,5 +65,43 @@ exports.updateUserData = (req, res) => {
             res.json(user);
         });
     })
-}
+};
 
+exports.listManagers = (req, res) => {
+    User.find( { userType: 'manager' } ).exec((error, content) => {
+        if(error){
+            return res.status(400).json({
+                error: errorHandler(error)
+            });
+        }
+        res.json(content);
+    });
+};
+
+exports.findManagerById = (req,res,next,id) =>{
+
+    User.findById(id).exec((err, resManager) =>{
+        if(err || !resManager){
+            return res.status(400).json({
+                error: "Manager not available"
+            });
+        }
+        req.user = resManager;
+        next();
+    })
+};
+
+exports.deleteManager = (req,res) =>{
+    let resManager = req.user;
+
+    resManager.remove((err, deletedManager) =>{
+        if(err){
+            return res.status(400).json({
+                error: errorHandler(err)
+            })
+        }
+        res.json({
+            message: "Manager deleted successfully"
+        })
+    })
+};

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 
 import Card from "react-bootstrap/Card";
@@ -11,8 +11,13 @@ import moment from 'moment'
 import Badge from "react-bootstrap/Badge";
 import {addItem,updateCartItem,removeCartItem} from "./cartHandler";
 import Redirect from "react-router-dom/es/Redirect";
+import {addWishItem, removeWishlistItem} from "./WishlistHandler";
+import axios from "axios";
+import Comments from "./Comments";
+import {signIn, validate,isValidated} from "../validators";
+const {user} = isValidated();
 
-
+console.log(user && user.userType);
 
 
 
@@ -45,23 +50,59 @@ const ProductCard = ({
                          addToCartBtn=true,
                          updateCartOpt=false,
                          removeItemBtn=false,
+                         addToWishListBtn=true,
+                         removeWishItemBtn=false,
                          setRun =f=>f,
                          run=undefined
 }) =>{
     //creating add to cart
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
+    const [ wredirect, setWRedirect]= useState(false);
+
+    const addToWishListButton=(addWish)=>{
+        if(user && user.userType === 'user' ||  undefined ){
+            return(
+                addWish && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+            )
+
+        }
+    }
+
+    const addToCartButton=(addCart)=>{
+        if(user && user.userType === 'user'){
+            return(
+                addCart && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+            )
+
+        }
+    }
+
 
     const addToCart =()=>{
         addItem(product, ()=>{
                 setRedirect(true)
         })
    };
-    const userRedirect = redirect=>{
+
+    const addToWishList =()=>{
+        addWishItem(product, ()=>{
+            setWRedirect(true)
+        })
+    };
+    const userCartRedirect = redirect=>{
         if(redirect){
             return <Redirect to="/cart"/>
         }
     };
+
+    const userWishRedirect = wredirect=>{
+        if(wredirect){
+            return <Redirect to="/"/>
+        }
+    };
+
+
 //increament and decreament values
     const handleChange = productId => event =>{
         setRun(!run);
@@ -71,9 +112,16 @@ const ProductCard = ({
         }
     }
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
+
     return<div className="card-deck" style={{margin:25}}>
+
         <div className="shadow p-1 mb-1 bg-white rounded">
-            {userRedirect(redirect)}
+            {userCartRedirect(redirect)}
+            {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
             <img className="card-img-top" style={{maxHeight:"50%" }} src={`${API}/product/image/${product._id}`} alt="Card image cap"/>
                 <div className="card-body">
@@ -91,18 +139,26 @@ const ProductCard = ({
 
                         <Link to={`/product/${product._id}`}>
                             {
-                                viewProductBtn &&    <Button variant="outline-primary" style={{ margin: 15}}>View Product</Button>
+                                viewProductBtn &&    <Button className="form-control m-2" variant="outline-primary" >View Product</Button>
                             }
 
                         </Link>
 
                         {
-                            addToCartBtn && <Button variant="outline-success" onClick={addToCart}>Add to cart</Button>
+                            addToWishListButton(addToWishListBtn)
+                            //addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+
                         }
 
                         {
-                            removeItemBtn && <Button variant="outline-danger"
-                                                     onClick={()=>{removeCartItem(product._id);setRun(!run);}}>
+                            addToCartButton(addToCartBtn)
+                            //addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+
+                        }
+
+                        {
+                            removeItemBtn && <Button className="form-control m-2" variant="outline-danger"
+                                                     onClick={()=>{removeCartItem(product._id);setRun(!run);refreshPage()}}>
                                 Remove</Button>
                         }
 
@@ -112,9 +168,15 @@ const ProductCard = ({
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">Adjust Quantity</span>
                                     </div>
-                                    <input type="number" className="form-control" value={count} onChange={handleChange(product._id)}/>
+                                    <input type="number" className="form-control m-2" value={count} onChange={handleChange(product._id)}/>
                                 </div>
                             </div>
+                        }
+
+                        {
+                            removeWishItemBtn && <Button className="form-control m-2" variant="outline-danger"
+                                                     onClick={()=>{removeWishlistItem(product._id);setRun(!run);refreshPage()}}>
+                                Remove</Button>
                         }
 
                     </div>
@@ -124,6 +186,10 @@ const ProductCard = ({
         </div>
 
     </div>
+
+
+
+
 }
 
 
