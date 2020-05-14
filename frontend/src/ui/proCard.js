@@ -14,10 +14,12 @@ import Redirect from "react-router-dom/es/Redirect";
 import {addWishItem, removeWishlistItem} from "./WishlistHandler";
 import axios from "axios";
 import Comments from "./Comments";
+import Rating from "./Rating";
+
 import {signIn, validate,isValidated} from "../validators";
 const {user} = isValidated();
 
-console.log(user && user.userType);
+
 
 
 
@@ -78,7 +80,6 @@ const ProductCard = ({
         }
     }
 
-
     const addToCart =()=>{
         addItem(product, ()=>{
                 setRedirect(true)
@@ -101,8 +102,6 @@ const ProductCard = ({
             return <Redirect to="/"/>
         }
     };
-
-
 //increament and decreament values
     const handleChange = productId => event =>{
         setRun(!run);
@@ -145,15 +144,13 @@ const ProductCard = ({
                         </Link>
 
                         {
-                            addToWishListButton(addToWishListBtn)
                             //addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
-
+                            addToWishListButton(addToWishListBtn)
                         }
 
                         {
-                            addToCartButton(addToCartBtn)
                             //addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
-
+                            addToCartButton(addToCartBtn)
                         }
 
                         {

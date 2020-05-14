@@ -52,7 +52,7 @@ function SingleComment(props) {
         <div>
             <Comment
                 actions={actions}
-                author="PRIYAN"
+                author="USER"
                 avatar={
                     <Avatar
                         src="dw"
