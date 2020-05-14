@@ -16,6 +16,8 @@ import axios from "axios";
 import Comments from "./Comments";
 import Rating from "./Rating";
 
+import {signIn, validate,isValidated} from "../validators";
+const {user} = isValidated();
 
 
 
@@ -109,7 +111,6 @@ const ProductCard = ({
                     <p className="card-text">Rs.{product.productPrice}</p>
                     <p className="card-text">Category :{product.productCat && product.productCat.categoryName}</p>
                     <p className="card-text">Product: Added {moment(product.createdAt).fromNow()} </p>
-                    <Rating/>
                     <div className="card-footer bg-transparent border-danger">
 
                         {stockAvailabilty(product.productQuantity)}

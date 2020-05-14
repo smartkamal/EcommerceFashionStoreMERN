@@ -7,6 +7,8 @@ import {isValidated} from "../validators";
 import {API} from "../Config";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
+import {Col, Container, Row} from "react-bootstrap";
+import Layout from "./Layout";
 
 function Comments(props) {
 
@@ -53,7 +55,7 @@ function Comments(props) {
                 )
             ))}
 
-            <form style={{display: 'flex',marginBottom: '50px'}} onSubmit={onSubmit}>
+            <form style={{display: 'flex'}} onSubmit={onSubmit}>
                 <TextArea
                     style={{width: '100%' , borderRadius: '5px'}}
                     onChange={handleChange}
