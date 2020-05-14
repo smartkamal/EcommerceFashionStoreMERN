@@ -40,6 +40,9 @@ function Comments(props) {
     }
 
     return (
+        <Container>
+            <Row>
+                <Col xs={12}>
         <div>
             <br/>
             <p> Comments </p>
@@ -57,7 +60,7 @@ function Comments(props) {
 
             <form style={{display: 'flex'}} onSubmit={onSubmit}>
                 <TextArea
-                    style={{width: '100%' , borderRadius: '5px'}}
+                    style={{width: '100%' , borderRadius: '5px',marginBottom:30}}
                     onChange={handleChange}
                     value={Comment}
                     placeholder = "write a comment"
@@ -65,6 +68,9 @@ function Comments(props) {
                     <Button style={{width: '20%',height: '52px'}} onClick={onSubmit}>Submit</Button>
             </form>
         </div>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
