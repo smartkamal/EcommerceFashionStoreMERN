@@ -62,6 +62,24 @@ const ProductCard = ({
     const [count, setCount]=useState(product.count);
     const [ wredirect, setWRedirect]= useState(false);
 
+    const addToWishListButton=(addWish)=>{
+        if(user && user.userType === 'user' ||  undefined ){
+            return(
+                addWish && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+            )
+
+        }
+    }
+
+    const addToCartButton=(addCart)=>{
+        if(user && user.userType === 'user'){
+            return(
+                addCart && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+            )
+
+        }
+    }
+
     const addToCart =()=>{
         addItem(product, ()=>{
                 setRedirect(true)
@@ -127,11 +145,13 @@ const ProductCard = ({
                         </Link>
 
                         {
-                            addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+                            //addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+                            addToWishListButton(addToWishListBtn)
                         }
 
                         {
-                            addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+                            //addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+                            addToCartButton(addToCartBtn)
                         }
 
                         {
