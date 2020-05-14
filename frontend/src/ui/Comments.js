@@ -53,7 +53,7 @@ function Comments(props) {
                 )
             ))}
 
-            <form style={{display: 'flex'}} onSubmit={onSubmit}>
+            <form style={{display: 'flex',marginBottom: '50px'}} onSubmit={onSubmit}>
                 <TextArea
                     style={{width: '100%' , borderRadius: '5px'}}
                     onChange={handleChange}

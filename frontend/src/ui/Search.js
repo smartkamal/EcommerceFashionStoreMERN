@@ -103,7 +103,7 @@ const searchForm = () =>(
             <div className="input-group input-group-sm">
                 <div className="input-group-prepend">
                      <Form.Control as="select"  className="mr-2" style={{height:50}} onChange={handleChange('aCategory')}>
-                            <option value="All ">All Categories</option>
+                            <option value="All">All Categories</option>
                                  {allCategories.map((category,index)=>(
                                              <option key={index} value={category._id}>{category.categoryName}</option>
                                 ))}

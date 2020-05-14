@@ -55,7 +55,7 @@ const Home=  () => {
 
             <h2 className="mb-4 ">Best Sellers</h2>
 
-                <Row   >
+                <Row>
                     {soldProducts.map((product,index) =>(
                         <Card key={index} product={product}/>
                     ))}
