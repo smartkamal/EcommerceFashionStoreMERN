@@ -17,7 +17,7 @@ import Comments from "./Comments";
 import Rating from "./Rating";
 
 import {signIn, validate,isValidated} from "../validators";
-const {user} = isValidated();
+const {user, token} = isValidated();
 
 
 
@@ -61,11 +61,14 @@ const ProductCard = ({
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
     const [ wredirect, setWRedirect]= useState(false);
+    // const [success, setSuccess] = useState(false)
+    // const [error, setError] = useState(false)
 
     const addToWishListButton=(addWish)=>{
         if(user && user.userType === 'user' ||  undefined ){
             return(
-                addWish && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+                addWish && <Button className="form-control m-2" variant="outline-success" id="productID" onClick={addToWishList} >Add to Wish List</Button>
+            //onClick={addToWishList(productId)}
             )
 
         }
@@ -90,6 +93,20 @@ const ProductCard = ({
         addWishItem(product, ()=>{
             setWRedirect(true)
         })
+
+        // setError('');
+        // setSuccess(false);
+        // addUserWishList({productID},user._id,token,)
+        //     .then(content => {
+        //     if (content.error){
+        //         setError(true);
+        //     }
+        //     else {
+        //         setError('');
+        //         setSuccess(true);
+        //         setWRedirect(true)
+        //     }
+        // })
     };
     const userCartRedirect = redirect=>{
         if(redirect){

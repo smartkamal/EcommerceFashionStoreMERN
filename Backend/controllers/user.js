@@ -1,5 +1,9 @@
+
+
 const User = require('../models/user');
+const Product = require('../models/product')
 const _ = require('lodash');
+const ObjectID = require("mongoose");
 
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
@@ -66,3 +70,41 @@ exports.updateUserData = (req, res) => {
     })
 };
 
+// exports.addToWishList = (req,res) =>{
+//
+//
+//     console.log('req',req.body.productID)
+//     const id = req.body.productID;
+//     const uid = req.params.id;
+//      console.log("product",id)
+//     console.log("user",uid)
+//
+//     console.log(id.objectId)
+//
+//     User.findOne({_id: req.params.id}, (error, user) => {
+//         if (error || !user) {
+//             return res.status(400).json({
+//                 error: 'User not found'
+//             });
+//         }
+//         User.update(
+//             {_id: req.params.id},
+//             {$addToSet: {wishList: id}},
+//             console.log('i run')
+//         )
+//
+//         user.save((error, user) => {
+//             if (error){
+//                 return res.status(400).json({
+//                     error: 'Cannot perform action'
+//                 });
+//             }
+//             res.json(user);
+//         });
+//     })
+//
+//         // res.json({
+//         //     message: "Added Succesfully"
+//         // })
+//
+// }

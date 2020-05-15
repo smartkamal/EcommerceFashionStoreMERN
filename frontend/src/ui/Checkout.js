@@ -111,11 +111,22 @@ const Checkout = ({products}) => {
         </div>
     );
 
-    const showSuccess = success => (
-        <div className="alert alert-info" style={{display: success ? '' : 'none'}}>
+    const showSuccess = success => {
+        return(<div className="alert alert-info" style={{display: success ? '' : 'none'}}>
             Thanks! Your payment was successful!
-        </div>
-    );
+        </div>)
+    }
+
+        const refreshPage = success =>{
+            if(success){
+
+                    window.location.reload(false);
+
+            }
+        }
+
+
+
 
     const showLoading = (loading) => loading && <h2>Loading...</h2>
 
@@ -124,6 +135,7 @@ const Checkout = ({products}) => {
             <h2>Total: ${getTotal()}</h2>
             {showLoading(data.loading)}
             {showSuccess(data.success)}
+            {refreshPage(data.success)}
             {showError(data.error)}
             {showCheckout()}
         </div>
