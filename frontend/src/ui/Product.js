@@ -6,6 +6,8 @@ import  Card from './proCard'
 import Comments from "./Comments";
 import axios from "axios";
 import {API} from "../Config";
+import LikesDislikes from "./LikeDislikes";
+import Rating from "./Rating";
 
 
 const Product = (props) =>{
@@ -14,6 +16,7 @@ const Product = (props) =>{
     const [product,giveProduct] = useState({})
     const [err,setError] = useState(false)
     const [CommentLists, setCommentLists] = useState(false)
+    const productId = props.match.params.productId
 
     const productVariable = {
         productId: props.match.params.productid
@@ -53,6 +56,10 @@ const Product = (props) =>{
         setCommentLists(CommentLists.concat(newComment))
     }
 
+    const actions = [
+        <Rating product productId={productId} userId={localStorage.getItem('userId')} />
+            ]
+
     return (
         <Layout title="Product Details"
                 description={null}
@@ -70,6 +77,10 @@ const Product = (props) =>{
 
 
            </Row>
+
+            <div>
+                <Rating/>
+            </div>
 
             <div>
                 <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
