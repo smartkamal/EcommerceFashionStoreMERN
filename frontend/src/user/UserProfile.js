@@ -5,6 +5,7 @@ import {isValidated} from "../validators";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {Redirect} from "react-router-dom";
+import {Col, Container, Row} from "react-bootstrap";
 
 const UserProfile = ({match}) => {
     const [values, setValues] = useState({
@@ -59,27 +60,34 @@ const UserProfile = ({match}) => {
     }
 
     const updateUserProfile = (firstName,lastName,email,password) => (
-        <Form>
-            <Form.Group controlId="formBasicFName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control onChange={handleChanges('firstName')} type="text" value={firstName}/>
-            </Form.Group>
-            <Form.Group controlId="formBasicLName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control onChange={handleChanges('lastName')} type="text" value={lastName}/>
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control onChange={handleChanges('email')} type="email" value={email}/>
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control onChange={handleChanges('password')} type="password" value={password}/>
-            </Form.Group>
-            <Button variant="success" type="submit" onClick={submitForm}>
-                Update
-            </Button>
-        </Form>
+        <Container>
+            <Row>
+                <Col>
+                    <Form>
+                        <Form.Group controlId="formBasicFName">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control onChange={handleChanges('firstName')} type="text" value={firstName}/>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicLName">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control onChange={handleChanges('lastName')} type="text" value={lastName}/>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control disabled onChange={handleChanges('email')}  type="email" value={email} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control onChange={handleChanges('password')} type="password" value={password}/>
+                        </Form.Group>
+                        <Button variant="success" type="submit" onClick={submitForm}>
+                            Update
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+
     )
 
     return (
