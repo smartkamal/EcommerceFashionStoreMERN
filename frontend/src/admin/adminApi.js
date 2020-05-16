@@ -1,7 +1,6 @@
 import {API} from "../Config";
 
 export const addCategory = (userId,token,productCategory) => {
-
     return fetch(`${API}/category/add/${userId}`, {
         method: "POST",
         headers: {
@@ -17,8 +16,35 @@ export const addCategory = (userId,token,productCategory) => {
         .catch(error => {
             console.log(error);
         })
+
 };
 
+export const getManagers = () =>{
+    return fetch(`${API}/list/storemanager`,{
+        method: "GET"
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err=> console.log(err));
+}
+
+export const deleteManager = (managerId,userId ,token) =>{
+    return fetch(`${API}/user/storemanager/delete/${managerId}/${userId}`,{
+        method: "DELETE",
+        headers :{
+            Accept: "application/json",
+            "Content-Type":"application/json",
+            Authorization: `Bearer ${token}`
+        },
+
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err => console.log(err));
+
+};
 export const ordersList=(userId,token)=>{
     return fetch(`${API}/order/list/${userId}`,{
         method: "GET",
@@ -63,4 +89,5 @@ export const updateStates=(userId,token,orderId,newState)=>{
             return response.json();
         })
         .catch(err=>console.log(err));
-};
+
+}

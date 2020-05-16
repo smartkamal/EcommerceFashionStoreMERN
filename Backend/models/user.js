@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
+const crypto = require('crypto'); //Hashes the password
 const uuidv1 = require('uuid/v1');
 
 const usersSchema = new mongoose.Schema(

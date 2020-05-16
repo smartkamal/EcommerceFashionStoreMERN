@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
 import {Badge, Col, Container, ListGroup, Row} from "react-bootstrap";
-import Card from "../ui/proCard";
 import {getProducts, deleteProduct}from './storeManagerApi'
 import {Link} from "react-router-dom";
 
