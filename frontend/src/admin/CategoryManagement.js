@@ -1,18 +1,19 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
-import {Alert, Col, Container, Row} from "react-bootstrap";
+import {Alert, Badge, Col, Container,Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {addCategory} from "./adminApi";
 import {Link} from "react-router-dom";
 
-const AddCategory = () => {
+const CategoryManagement = () => {
     const [categoryName, setName] = useState('')
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
 
     const {user, token} = isValidated();
+
 
     const handleChange = (e) => {
         setError('');
@@ -38,22 +39,21 @@ const AddCategory = () => {
     }
 
     const categoryForm = () => (
-        <Container>
-            <Row>
-                <Col >
-                    <Form onSubmit={submitForm}>
-                        <Form.Group controlId="formBasicName">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control onChange={handleChange}  type="text" placeholder="Enter Name" value={categoryName} required/>
-                        </Form.Group>
-                        <Button variant="outline-success" type="submit">
-                            Create Category
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-
+            <Container>
+                <Row>
+                    <Col>
+                        <Form onSubmit={submitForm}>
+                            <Form.Group controlId="formBasicName">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control onChange={handleChange}  type="text" placeholder="Enter Name" value={categoryName} required/>
+                            </Form.Group>
+                            <Button variant="outline-success" type="submit">
+                                Create Category
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
 
     );
 
@@ -92,7 +92,7 @@ const AddCategory = () => {
 
 
     return (
-        <Layout title="Create Category" description={`Hello ${user.firstName}, Let's add a new category`}
+        <Layout title="Category Dashboard" description={`Hello ${user.firstName}`}
                 className="container col-md-6 offset-md-3">
 
             <Container>
@@ -110,4 +110,4 @@ const AddCategory = () => {
     )
 }
 
-export default AddCategory;
+export default CategoryManagement;
