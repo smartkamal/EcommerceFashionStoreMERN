@@ -15,8 +15,7 @@ function LikesDislikes(props) {
 
     let variable = {
         commentId:props.commentId,
-        userId:props.userId,
-        firstName:props.firstName
+        userId:props.userId
     };
 
     useEffect(() => {
@@ -86,7 +85,7 @@ function LikesDislikes(props) {
             Axios.post(`${API}/like/undislike`,variable)
                 .then(response => {
                     if(response.data.success){
-                        setDislikes(Likes-1)
+                        setDislikes(Dislikes-1)
                         setDislikeAction(null)
                     }else {
                         alert('Failed to decrease dislike')
@@ -121,8 +120,8 @@ function LikesDislikes(props) {
                 </span>&nbsp;&nbsp;
                 <span key="comment-basic-dislike">
                     <span key="comment-basic-like">
-                        <Tooltip title="like">
-                            {LikeAction === 'liked'? <DislikeFilled/> : <DislikeOutlined onClick={onDislike}/>}
+                        <Tooltip title="dislikes">
+                            {DislikeAction === 'disliked'? <DislikeFilled/> : <DislikeOutlined onClick={onDislike}/>}
                         </Tooltip>
                     <span style={{paddingLeft:'8px', cursor:'auto'}}>{Dislikes}</span>
                 </span>&nbsp;&nbsp;

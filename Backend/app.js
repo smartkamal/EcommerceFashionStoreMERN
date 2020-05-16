@@ -17,6 +17,7 @@ const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
 const commentRoutes = require('./routes/comment');
 const likeRoutes = require('./routes/like');
+const ratingRoutes = require('./routes/rating');
 
 //app
 const app  = express();
@@ -44,6 +45,7 @@ app.use("/api",userRoutes);
 app.use("/api",categoryRoutes);
 app.use("/api",commentRoutes);
 app.use("/api",likeRoutes);
+app.use("/api",ratingRoutes);
 
 const port = process.env.PORT || 8000;
 

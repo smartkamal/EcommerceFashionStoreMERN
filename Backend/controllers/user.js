@@ -1,9 +1,8 @@
 
-
 const User = require('../models/user');
 const Product = require('../models/product')
 const _ = require('lodash');
-const ObjectID = require("mongoose");
+
 
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
