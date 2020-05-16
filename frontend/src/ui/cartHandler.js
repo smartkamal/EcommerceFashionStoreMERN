@@ -27,10 +27,13 @@ export const itemTotal =() =>{
     }
 return 0;
 };
-
+function refreshPage() {
+    window.location.reload(false);
+}
 export const emptyCart = next => {
     if (typeof window !== "undefined"){
         localStorage.removeItem("cart");
+        refreshPage();
         next();
     }
 };

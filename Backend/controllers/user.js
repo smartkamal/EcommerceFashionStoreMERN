@@ -1,5 +1,5 @@
-const _ = require('lodash');
 const User = require('../models/user');
+const _ = require('lodash');
 const {errorHandler} = require("../helpers/dbErrorHandler");
 
 exports.findUserById = (req, res, next, id) => {
@@ -66,7 +66,35 @@ exports.updateUserData = (req, res) => {
         });
     })
 };
+exports.addOrderToHistory =(req,res,next)=>{
+    let history = []
 
+    req.body.order.products.forEach((item)=>{
+        history.push({
+            _id:item._id,
+            name:item.productName,
+            description:item.productDesc,
+            category:item.productCat,
+            quantity:item.count,
+            transaction_id:req.body.order.transaction_id,
+            amount:req.body.order.amount
+        })
+    })
+
+    User.findOneAndUpdate(
+        {_id:req.profile._id},
+        {$push:{userHistory:history}},
+        {new:true},
+        (error,data)=>{
+            if(error){
+                return res.status(400).json({
+                    error:"Unable to update your purchase history"
+                })
+            }
+            next();
+        }
+        );
+};
 exports.listManagers = (req, res) => {
     User.find( { userType: 'manager' } ).exec((error, content) => {
         if(error){
@@ -105,3 +133,4 @@ exports.deleteManager = (req,res) =>{
         })
     })
 };
+

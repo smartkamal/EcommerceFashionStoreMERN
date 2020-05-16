@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Layout from './Layout';
-import {getProducts, getBraintreeClientToken, processPayment} from './apiCore';
+import {
+    getProducts,
+    getBraintreeClientToken,
+    processPayment,
+    createOrder
+} from './apiCore';
 import {emptyCart} from "./cartHandler";
 import Card from "./proCard";
 import {isValidated} from '../validators';
@@ -54,6 +59,8 @@ const Checkout = ({products}) => {
         );
     };
 
+    const delAddress=data.address;
+
     const buy = () => {
         setData({loading: true});
         // send the nonce to your server
@@ -73,13 +80,23 @@ const Checkout = ({products}) => {
                 processPayment(userId, token, paymentData)
                     .then(response => {
                         //console.log(response);
-                        setData({...data, success: response.success});
-                        emptyCart(() => {
-                            console.log('payment success and empty cart');
-                            setData({loading: false,success: true});
-                        })
                         //empty cart
                         //create order
+                        const createOrderData={
+                            products:products,
+                            amount:response.transaction.amount,
+                            address:delAddress
+                        }
+
+                        createOrder(userId,token,createOrderData)
+                            .then(response=>{
+                                emptyCart(() => {
+                                    console.log('payment success and empty cart');
+                                    setData({loading: false,success: true});
+                            })
+
+
+                        })
                     })
                     .catch(error => {
                         console.log(error)
@@ -96,6 +113,15 @@ const Checkout = ({products}) => {
         <div onBlur={() => setData({...data, error: ""})}>
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
+                    <div className="form-group mb-3">
+                        <label className="text-muted">Delivery Address:</label>
+                        <textarea
+                            onChange={handleAddress}
+                            className="form-control"
+                            value={data.address}
+                            placeholder="Enter your delivery address here...."
+                        />
+                    </div>
                     <DropIn options={{
                         authorization: data.clientToken,
                     }}onInstance={instance => data.instance = instance}/>
@@ -112,9 +138,10 @@ const Checkout = ({products}) => {
     );
 
     const showSuccess = success => (
-        <div className="alert alert-info" style={{display: success ? '' : 'none'}}>
+        <div className="alert alert-info" style={{display: success ? '': 'none'}} >
             Thanks! Your payment was successful!
         </div>
+
     );
 
     const showLoading = (loading) => loading && <h2>Loading...</h2>
