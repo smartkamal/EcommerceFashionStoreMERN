@@ -47,7 +47,7 @@ const Orders=()=>{
     };
 
     const handleStateChange=(e,oId)=>{
-        console.log("update");
+        //console.log("update");
         updateStates(user._id,token,oId, e.target.value).then(
             data=>{
             if(data.error){
