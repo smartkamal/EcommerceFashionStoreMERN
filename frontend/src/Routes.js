@@ -12,7 +12,7 @@ import AdminDashboard from "./user/AdminDashboard";
 import StoreManagerDashboard from "./user/StoreManagerDashboard";
 import StoreManagerRoute from "./validators/StoreManagerRoute";
 import StoreManagerSignUp from './admin/storeManagerSignup.js'
-import AddCategory from "./admin/AddCategory";
+import CategoryManagement from "./admin/CategoryManagement";
 import Product from "./ui/Product";
 import AddProduct from "./storeManager/AddProduct"
 import ProductManagement from './storeManager/productManagement'
@@ -21,7 +21,7 @@ import Cart from "./ui/Cart";
 import Wishlist from "./ui/Wishlist";
 import UserProfile from './user/UserProfile'
 import StoreManagerUserProfile from './storeManager/updateStoreManager'
-
+import Orders from "./admin/orders";
 
 const Routes = () =>{
     return(
@@ -35,7 +35,7 @@ const Routes = () =>{
             <UserRoute path="/user/userdashboard" exact component={userDashboard}/>
             <AdminRoute path="/admin/admindashboard" exact component={AdminDashboard}/>
             <StoreManagerRoute path="/manager/managerdashboard" exact component={StoreManagerDashboard}/>
-            <AdminRoute path="/category/add" exact component={AddCategory}/>
+            <AdminRoute path="/category/add" exact component={CategoryManagement}/>
             <AdminRoute path="/create/storemanager" exact component={StoreManagerSignUp}/>
             <StoreManagerRoute path="/products/add" exact component={AddProduct}/>
             <StoreManagerRoute path="/storemanager/manageproducts" exact component={ProductManagement}/>
@@ -44,7 +44,7 @@ const Routes = () =>{
             <Route path="/wishlist" exact component={Wishlist}/>
             <UserRoute path="/UserProfile/:userId" exact component = {UserProfile}/>
             <StoreManagerRoute path="/storemanager/updatepass/:userId" exact component={StoreManagerUserProfile}/>
-
+            <AdminRoute path="/admin/orders" exact component={Orders}/>
         </Switch>
     </BrowserRouter>)
 

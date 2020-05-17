@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../ui/Layout";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {Alert} from "react-bootstrap";
+import {Alert, Badge, ListGroup} from "react-bootstrap";
 import {signUp} from "../validators";
+import {getManagers, deleteManager} from "./adminApi";
+import {isValidated} from "../validators";
+import {Link} from "react-router-dom";
 
 const MangerSignUp=  () => {
     const [values, setValues] = useState({
@@ -19,7 +22,37 @@ const MangerSignUp=  () => {
         success:false
     })
 
+    const {user, token} = isValidated();
+    const [allManagers ,setManagers] = useState([]);
+
     const {firstName, lastName, email, password,userType, success, error} = values
+
+    const getAllManagers = () =>{
+        getManagers().then(res =>{
+            if(res.error){
+                console.log(res.error)
+            }else{
+                setManagers(res);
+            }
+        })
+    }
+
+    const removeManager = managerID =>{
+        deleteManager(managerID,user._id,token).then(
+            res =>{
+                if(res.error){
+                    console.log(res.error);
+                }else{
+                    getAllManagers();
+                }
+            }
+        )
+    }
+
+    useEffect(() =>{
+        getAllManagers()
+    }, [])
+
 
     const handleChange = val => e =>{
         setValues({...values,error: false,[val]: e.target.value})
@@ -46,14 +79,19 @@ const MangerSignUp=  () => {
                         success: true
                     })
                 }
+                refreshPage()
             })
+    }
+
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     const signUpForm = () =>(
 
-        <Container >
+        <Container>
             <Row>
-                <Col >
+                <Col style={{marginLeft:-300}}>
                     <Form>
                         <Form.Group controlId="formBasicFName">
                             <Form.Label>First Name</Form.Label>
@@ -82,6 +120,24 @@ const MangerSignUp=  () => {
                     </Form>
                 </Col>
 
+                <Col style={{marginTop:50,marginRight: -300}}>
+                    <ListGroup variant="flush">
+                        {allManagers.map((manager,index) =>(
+                            <ListGroup.Item
+                                key = {index}
+                                className="d-flex justify-content-between"
+                            >
+                                <strong>{manager.firstName} &nbsp;</strong>
+                                <strong>{manager.lastName}</strong>
+
+                            <Link>
+                                <span className="cursor-pointer" onClick={() => removeManager(manager._id)}>
+                                <Badge variant="danger">Remove</Badge></span>
+                            </Link>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                </Col>
             </Row>
 
         </Container>
@@ -102,7 +158,7 @@ const MangerSignUp=  () => {
 
 
     return (
-        <Layout title="Create Store Manager" description=""
+        <Layout title="Store Manager Management" description=""
                 className="container col-md-6 offset-md-3">
 
             {errorMessage()}

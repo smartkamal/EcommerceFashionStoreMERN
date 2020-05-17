@@ -271,3 +271,23 @@ exports.searchProdList = (req,res) =>{
         }).select('-productImage')
     }
 }
+
+exports.updateQuantityDetails=(req,res,next)=>{
+    let bulkOps=req.body.order.products.map((item)=>{
+        return{
+            updateOne:{
+                filter:{_id:item._id},
+                update:{$inc:{productQuantity:-item.count,soldQuantity:+item.count}}
+            }
+        };
+
+    });
+    Product.bulkWrite(bulkOps,{},(error,products)=>{
+        if(error){
+            return res.status(400).json({
+                error:"Unable to update the product"
+            });
+        }
+        next();
+    });
+}
