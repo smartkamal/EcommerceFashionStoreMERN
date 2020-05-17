@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const _ = require('lodash');
 const {errorHandler} = require("../helpers/dbErrorHandler");
+const{Order}=require('../models/order');
 
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
@@ -134,3 +135,16 @@ exports.deleteManager = (req,res) =>{
     })
 };
 
+exports.userHistory=(req,res)=>{
+    Order.find({user:req.profile._id})
+        .populate('user','_id firstName')
+        .sort('-created')
+        .exec((err,orders)=>{
+            if(err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                })
+            }
+            res.json(orders);
+    })
+}

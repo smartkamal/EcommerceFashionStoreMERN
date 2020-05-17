@@ -1,13 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {getUserHistory} from "./apiUser"
+import moment from "moment";
 
-const userDashboard = () => {
+const UserDashboard = () => {
 
-    const {user: {_id,firstName,lastName,email,userType}} = isValidated()
+    const [history,setHistory]=useState([]);
+
+    const {user: {_id,firstName,lastName,email,userType}} = isValidated();
+
+    const token=isValidated().token;
+
+    const init=(userId,token)=>{
+        getUserHistory(userId,token)
+            .then(data=>{
+                if(data.error){
+                    console.log(data.error)
+                }else{
+                    setHistory(data)
+                }
+            })
+    }
+
+    useEffect(()=>{
+        init(_id,token);
+    },[])
 
     const userLinks = () => {
         return(
@@ -45,13 +66,33 @@ const userDashboard = () => {
         )
     }
 
-    const userHistory = () => {
+    const userHistory = (history) => {
         return (
             <div>
                 <Card>
                     <Card.Header className="text-center">Purchase History</Card.Header>
                     <ListGroup>
-                        <ListGroup.Item>history</ListGroup.Item>
+                        <ListGroup.Item>
+                            {history.map((h, i) => {
+                                return (
+                                    <div>
+                                        <hr />
+                                        {h.products.map((p, i) => {
+                                            return (
+                                                <div key={i}>
+                                                    <h6>Product name: {p.productName}</h6>
+                                                    <h6>Product price: ${p.productPrice}</h6>
+                                                    <h6>
+                                                        Purchased date:{" "}
+                                                        {moment(p.createdAt).fromNow()}
+                                                    </h6>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                );
+                            })}
+                        </ListGroup.Item>
                     </ListGroup>
                 </Card>
             </div>
@@ -63,7 +104,7 @@ const userDashboard = () => {
             <Container>
                 <Row>
                     <Col sm={3}>{userLinks()} </Col>
-                    <Col sm={9}> {userInformation()} {userHistory()}</Col>
+                    <Col sm={9}> {userInformation()} {userHistory(history)}</Col>
                 </Row>
             </Container>
 
@@ -71,4 +112,4 @@ const userDashboard = () => {
     )
 }
 
-export default userDashboard;
+export default UserDashboard;

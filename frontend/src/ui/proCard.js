@@ -66,7 +66,7 @@ const ProductCard = ({
     const addToWishListButton=(addWish)=>{
         if(user && user.userType === 'user' ||  undefined ){
             return(
-                addWish && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
+                addWish && <Button className="form-control m-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>
             )
 
         }
@@ -117,9 +117,9 @@ const ProductCard = ({
     }
 
 
-    return<div className="card-deck" style={{margin:25}}>
+    return<div className="form-group" style={{margin:25}}>
 
-        <div className="shadow p-1 mb-1 bg-white rounded">
+        <div className="shadow p-1 mb-1 bg-light rounded">
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>

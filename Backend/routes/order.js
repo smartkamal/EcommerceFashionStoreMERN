@@ -35,7 +35,7 @@ router.get(
 
 //PUT Methods
 router.put(
-    '/order/:orderId/state/:id',
+    '/order/:orderId/newState/:id',
     controlSignin,
     authenticatedUser,
     userAdmin,

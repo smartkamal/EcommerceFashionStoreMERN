@@ -3,7 +3,7 @@ const{errorHandler}=require('../helpers/dbErrorHandler');
 
 exports.findOrderById =(req,res,next,id)=>{
     Order.findById(id)
-        .populate('products')
+        .populate('products','ProductName productPrice')
         .exec((err,order)=>{
             if(err||!order){
                 return res.status(400).json({
@@ -32,7 +32,7 @@ exports.create=(req,res)=>{
 exports.ordersList=(req,res)=>{
     Order.find()
         .populate('user',"_id firstName lastName address")
-        .sort("-createdAt")
+        .sort("-created")
         .exec((err,orders)=>{
             if(err){
                 return res.status(400).json({
