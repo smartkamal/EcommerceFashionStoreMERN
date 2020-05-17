@@ -51,6 +51,7 @@ const Home=  () => {
     return (
         <Layout title="Home Page" description="E commerce store" className="container-fluid">
 
+
             <SearchComp/>
 
             <h2 className="mb-4 ">Best Sellers</h2>

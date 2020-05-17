@@ -70,8 +70,9 @@ const ProductCard = ({
     const addToWishListButton=(addWish)=>{
         if(user && user.userType === 'user' ||  undefined ){
             return(
-                addWish && <Button className="form-control m-2" variant="outline-success" id="productID" onClick={addToWishList} >Add to Wish List</Button>
-            //onClick={addToWishList(productId)}
+
+                addWish && <Button className="form-control m-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>
+
             )
 
         }
@@ -136,9 +137,9 @@ const ProductCard = ({
     }
 
 
-    return<div className="card-deck" style={{margin:25}}>
+    return<div className="form-group" style={{margin:25}}>
 
-        <div className="shadow p-1 mb-1 bg-white rounded">
+        <div className="shadow p-1 mb-1 bg-light rounded">
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
@@ -152,10 +153,14 @@ const ProductCard = ({
                     <DisplayRating/>
                     <div className="card-footer bg-transparent border-danger">
 
-                        {stockAvailabilty(product.productQuantity)}
+                        <div className="d-flex flex-row">
+
+                            <div className="p-2">{stockAvailabilty(product.productQuantity)}</div>
+                           {checkDiscount(product.productDisc, product.totalDiscPrice)}
+
+                        </div>
                         <br/><br/>
-                        {checkDiscount(product.productDisc, product.totalDiscPrice)}
-                        <br/><br/>
+
 
                         <Link to={`/product/${product._id}`}>
                             {

@@ -13,7 +13,7 @@ export const listUserData = (id, token) =>{
             return response.json();
         })
         .catch(err=> console.log(err));
-}
+};
 
 
 export const updateUserData = (id, token, user) =>{
@@ -30,7 +30,7 @@ export const updateUserData = (id, token, user) =>{
             return response.json();
         })
         .catch(err=> console.log(err));
-}
+};
 
 export const userUpdate = (user, next) => {
     if (typeof window !== 'undefined'){
@@ -41,4 +41,19 @@ export const userUpdate = (user, next) => {
             next()
         }
     }
+};
+
+export const getUserHistory = (id, token) =>{
+    return fetch(`${API}/orders/by/user/${id}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err=> console.log(err));
 }

@@ -5,7 +5,8 @@ const {controlSignin, authenticatedUser, userAdmin} = require('../controllers/au
 
 
 
-const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById} = require('../controllers/user');
+const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById,userHistory} = require('../controllers/user');
+
 
 router.get('/secret/:id', controlSignin, authenticatedUser, userAdmin, (req, res) => {
     res.json({
@@ -18,6 +19,7 @@ router.put('/user/:id', controlSignin, authenticatedUser, updateUserData);
 
 router.get('/list/storemanager',listManagers);
 router.delete('/user/storemanager/delete/:managerID/:id',controlSignin, authenticatedUser,userAdmin, deleteManager);
+router.get('/orders/by/user/:id', controlSignin, authenticatedUser, userHistory);
 
 // router.post("/user/wishlist/add/:id", controlSignin,authenticatedUser,addToWishList) ;
 
