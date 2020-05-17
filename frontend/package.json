@@ -20,8 +20,10 @@
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-slick": "^0.26.1",
     "react-star-ratings": "^2.3.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
