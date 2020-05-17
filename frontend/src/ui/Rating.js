@@ -6,25 +6,56 @@ import {Tooltip} from "antd";
 import {LikeFilled, LikeOutlined, StarFilled, StarOutlined} from "@ant-design/icons";
 import {Col, Container, Row} from "react-bootstrap";
 
+const Star = ({ starId, rating, onMouseEnter, onMouseLeave, onClick }) => {
+    let styleClass = "star-rating-blank";
+    if (rating && rating >= starId) {
+        styleClass = "star-rating-filled";
+    }
+
+    return (
+        <div
+            className="star"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onClick={onClick}
+        >
+            <svg
+                height="55px"
+                width="53px"
+                class={styleClass}
+                viewBox="0 0 25 23"
+                data-rating="1"
+            >
+                <polygon
+                    stroke-width="0"
+                    points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78"
+                />
+            </svg>
+        </div>
+    );
+};
+
 function Rating(props) {
-    const [Rating,setRating] = useState(0)
+    const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
+    const stars = [1, 2, 3, 4, 5];
+    const [Ratings,setRatings] = useState(0)
     const [RatingAction,setRatingAction] = useState(null)
-    const [rating] = useState(null)
-    const [hover,setHover] = useState(null)
 
     let variable = {
         productId:props.productId,
         userId:props.userId,
-    }
+        noOfStars:props.noOfStars,
+    };
 
     useEffect(() => {
-        Axios.post(`{API}/ratings/getRatings`,variable)
+        Axios.post(`${API}/rating/getRatings`,variable)
             .then(response => {
                 if (response.data.success) {
-                    setRating(response.data.likes.length)
+                    setRatings(response.data.ratings.length)
 
-                    response.data.likes.map(rating => {
-                        if (rating.userId === props.userId) {
+                    response.data.ratings.map(like => {
+                        if (like.userId === props.userId){
                             setRatingAction('rated')
                         }
                     })
@@ -35,14 +66,14 @@ function Rating(props) {
     },[])
 
     const onRate = () => {
-        if (RatingAction == null){
-            Axios.post(`{API}/like/uplike`)
+        if (RatingAction ===null){
+            Axios.post(`${API}/rating/uprate`,variable)
                 .then(response => {
-                    if (response.data.success) {
-                        setRating(Rating+1)
+                    if (response.data.success){
+                        setRatings(Ratings+1)
                         setRatingAction('rated')
                     }else{
-                        alert('Failed to get increase the rating')
+                        alert("failed to increase the rating")
                     }
                 })
         }
@@ -57,22 +88,21 @@ function Rating(props) {
                             <br/>
                             <p> Rate this prodouct </p>
                             <hr/>
-                            {[...Array(5)].map((star, i) => {
-                                const ratingValue = i+1;
-
-                    return(
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="rating"
-                                    style={{display: 'none'}}
-                                    value={ratingValue}
-                                    onClick={() => setRating(ratingValue)}
-                                />
-                                <FaStar className="star" color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"} size={25}/>
-                            </label>
-                        ) ;
-                })}
+                            <div>
+                                <span>{Ratings} users has rated this product</span>
+                            </div>
+                                <div className="flex-container">
+                                    {stars.map((star, i) => (
+                                        <Star
+                                            key={i}
+                                            starId={i}
+                                            rating={hoverRating || rating}
+                                            onMouseEnter={() => setHoverRating(i)}
+                                            onMouseLeave={() => setHoverRating(0)}
+                                            onClick={onRate}
+                                        />
+                                    ))}
+                                </div>
                         </div>
                     </Col>
                 </Row>

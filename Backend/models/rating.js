@@ -9,6 +9,10 @@ const ratingSchema = mongoose.Schema({
     productId: {
         type: Schema.Types.ObjectId,
         ref: 'Product'
+    },
+    noOfStars: {
+        type: Number,
+        default: 0
     }
 },{timestamp: true})
 
