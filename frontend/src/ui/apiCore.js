@@ -52,6 +52,23 @@ export const processPayment = (userId, token, paymentData) => {
          .catch(err => console.log(err));
 };
 
+//create order
+export const createOrder = (userId, token, createOrderData) => {
+    return fetch(`${API}/order/create/${userId}`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({order:createOrderData})
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
 // retrieve item list depending on the condition passed from the search bar
 export const itemList = queryParams =>{
     const searchQuery = queryString.stringify(queryParams)
