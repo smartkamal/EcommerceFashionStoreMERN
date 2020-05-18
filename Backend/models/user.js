@@ -34,7 +34,11 @@ const usersSchema = new mongoose.Schema(
         userHistory: {
             type: Array,
             default: []
-        }
+        },
+        // wishList:{
+        //     type: Array,
+        //     default: []
+        // }
     },
     {timestamps : true}
     );

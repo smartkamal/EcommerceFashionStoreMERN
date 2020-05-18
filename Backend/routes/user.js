@@ -4,7 +4,9 @@ const router = express.Router();
 const {controlSignin, authenticatedUser, userAdmin} = require('../controllers/authentication');
 
 
+
 const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById,userHistory} = require('../controllers/user');
+
 
 router.get('/secret/:id', controlSignin, authenticatedUser, userAdmin, (req, res) => {
     res.json({
@@ -14,9 +16,12 @@ router.get('/secret/:id', controlSignin, authenticatedUser, userAdmin, (req, res
 
 router.get('/user/:id', controlSignin, authenticatedUser, listUserData);
 router.put('/user/:id', controlSignin, authenticatedUser, updateUserData);
+
 router.get('/list/storemanager',listManagers);
 router.delete('/user/storemanager/delete/:managerID/:id',controlSignin, authenticatedUser,userAdmin, deleteManager);
 router.get('/orders/by/user/:id', controlSignin, authenticatedUser, userHistory);
+
+// router.post("/user/wishlist/add/:id", controlSignin,authenticatedUser,addToWishList) ;
 
 router.param('id', findUserById);
 router.param('managerID', findManagerById)

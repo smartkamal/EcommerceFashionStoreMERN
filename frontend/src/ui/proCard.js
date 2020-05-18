@@ -17,8 +17,10 @@ import Comments from "./Comments";
 import Rating from "./Rating";
 
 import {signIn, validate,isValidated} from "../validators";
+
 import DisplayRating from "./DisplayRating";
-const {user} = isValidated();
+const {user, token} = isValidated();
+
 
 
 
@@ -62,11 +64,15 @@ const ProductCard = ({
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
     const [ wredirect, setWRedirect]= useState(false);
+    // const [success, setSuccess] = useState(false)
+    // const [error, setError] = useState(false)
 
     const addToWishListButton=(addWish)=>{
         if(user && user.userType === 'user' ||  undefined ){
             return(
+
                 addWish && <Button className="form-control m-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>
+
             )
 
         }
@@ -91,6 +97,20 @@ const ProductCard = ({
         addWishItem(product, ()=>{
             setWRedirect(true)
         })
+
+        // setError('');
+        // setSuccess(false);
+        // addUserWishList({productID},user._id,token,)
+        //     .then(content => {
+        //     if (content.error){
+        //         setError(true);
+        //     }
+        //     else {
+        //         setError('');
+        //         setSuccess(true);
+        //         setWRedirect(true)
+        //     }
+        // })
     };
     const userCartRedirect = redirect=>{
         if(redirect){
@@ -133,10 +153,14 @@ const ProductCard = ({
                     <DisplayRating/>
                     <div className="card-footer bg-transparent border-danger">
 
-                        {stockAvailabilty(product.productQuantity)}
+                        <div className="d-flex flex-row">
+
+                            <div className="p-2">{stockAvailabilty(product.productQuantity)}</div>
+                           {checkDiscount(product.productDisc, product.totalDiscPrice)}
+
+                        </div>
                         <br/><br/>
-                        {checkDiscount(product.productDisc, product.totalDiscPrice)}
-                        <br/><br/>
+
 
                         <Link to={`/product/${product._id}`}>
                             {

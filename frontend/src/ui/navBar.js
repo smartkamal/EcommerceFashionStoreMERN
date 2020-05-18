@@ -75,9 +75,9 @@ function Menus({history}) {
 
                 {isValidated() && (
                     <Nav.Link >
-                        <Link style={{cursor: 'pointer', color: '#ffffff',textDecoration: 'none'}} onClick={() => signOut(() => {
-                            history.push('/')
-                        ;deleteCart();refreshPage()})}>Sign Out </Link>
+                        <Link to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
+                            // history.push('/')
+                        deleteCart();})}>Sign Out </Link>
                     </Nav.Link>
                 )}
             </Nav>

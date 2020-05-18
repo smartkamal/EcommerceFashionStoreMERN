@@ -13,7 +13,7 @@ function Slider() {
             </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img className="img-fluid d-block w-100 h-100" src={poster1} alt="First slide"/>
+                    <img className="img-fluid d-block w-100 " src={poster1} alt="First slide"/>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block w-100" src={poster2} alt="Second slide"/>

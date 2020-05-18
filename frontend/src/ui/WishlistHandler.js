@@ -1,3 +1,4 @@
+import {API} from "../Config";
 
 export const addWishItem = (item,next) =>{
 
@@ -67,3 +68,31 @@ export  const removeWishlistItem =(productId)=>{
     }
     return wishlist;
 };
+
+
+// export const addUserWishList = (productID,userId,token) => {
+//
+//     console.log(JSON.stringify(productID))
+//     console.log(JSON.stringify(userId))
+//     return fetch(`${API}/user/wishlist/add/${userId}`, {
+//         method: "POST",
+//         headers: {
+//             Accept: 'application/json',
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${token}`
+//         },
+//         body: JSON.stringify(productID)
+//
+//
+//     })
+//         .then(response => {
+//             console.log('res',response)
+//             return response.json()
+//
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         })
+//
+//
+// }
