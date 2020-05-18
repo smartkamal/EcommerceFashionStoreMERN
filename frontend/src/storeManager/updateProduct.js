@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
-import {Alert, Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {getCategories,getAProduct,updateProduct} from "./storeManagerApi";

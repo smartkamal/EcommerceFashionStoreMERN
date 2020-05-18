@@ -97,7 +97,7 @@ const SignUp=  () => {
 
 
     return (
-        <Layout title="Sign Up" description="E commerce store"
+        <Layout title="Sign Up" description="Welcome to Aubrella"
         className="container col-md-6 offset-md-3">
 
             {errorMessage()}
