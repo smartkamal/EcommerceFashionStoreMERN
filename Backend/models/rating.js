@@ -6,10 +6,12 @@ const ratingSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
     },
-    rateVal:{
-        type:Number,
-        default:0
+    noOfStars: {
+        type: Number,
+        default: 0
+
     }
+
 },{timestamp: true})
 
 const Rating = mongoose.model('Rating', ratingSchema);

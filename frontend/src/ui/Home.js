@@ -4,7 +4,7 @@ import {getProducts} from './apiCore'
 import {Col, Container, Row} from "react-bootstrap";
 import SearchComp from "./Search";
 import  Card from './proCard'
-
+import Slider from "./Slider";
 
 
 const Home=  () => {
@@ -49,9 +49,11 @@ const Home=  () => {
 
 
     return (
-        <Layout title="Home Page" description="E commerce store" className="container-fluid">
 
-
+<div>
+            <div className="img-fluid mb-5">
+                <Slider/>
+            </div>
             <SearchComp/>
 
             <h2 className="mb-4 ">Best Sellers</h2>
@@ -71,9 +73,9 @@ const Home=  () => {
                     <Card  key={index} product={product}/>
                 ))}
             </Row>
+</div>
 
 
-        </Layout>
 
     );
 }

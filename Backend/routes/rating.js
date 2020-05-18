@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {Rating} = require('../models/rating')
 
-router.post("/ratings/getRatings",(req, res) => {
+router.post("/rating/getRatings",(req, res) => {
     let variable = { }
     if(req.body.productId) {
         variable = {productId: req.body.productId}
@@ -16,6 +16,17 @@ router.post("/ratings/getRatings",(req, res) => {
             if (err) return res.status(400).send(err);
             res.status(200).json({success: true,ratings})
         })
+})
+
+
+router.post("/rating/uprate",(req, res) => {
+    let variable = {}
+    if (req.body.productId) {
+        variable = {productId: req.body.productId, userId: req.body.userId, noOfStars: req.body.noOfStars}
+    } else {
+        variable = {commentId: req.body.commentId, userId: req.body.userId, noOfStars: req.body.noOfStars}
+    }
+
 })
 
 // router.post("/like/uplike",(req, res) => {

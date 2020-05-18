@@ -4,11 +4,15 @@ import "../styles.css"
 
 
 
+
 const Layout=  ({title="Title",description="Description",className,children}) => {
 
 
     return (
         <div>
+        {/*<div className="img-fluid mb-5">*/}
+        {/*    <Slider/>*/}
+        {/*</div>*/}
         <div className="jumbotron">
             <h2>{title}</h2>
             <p className="lead">{description}</p>

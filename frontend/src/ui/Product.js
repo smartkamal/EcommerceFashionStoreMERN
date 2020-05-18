@@ -56,10 +56,6 @@ const Product = (props) =>{
         setCommentLists(CommentLists.concat(newComment))
     }
 
-    const actions = [
-        <Rating product productId={productId} userId={localStorage.getItem('userId')} />
-            ]
-
     return (
         <Layout title="Product Details"
                 description={null}
@@ -79,7 +75,7 @@ const Product = (props) =>{
            </Row>
 
             <div>
-                <Rating/>
+                <Rating product productId={product._id} userId={localStorage.getItem('userId')} />
             </div>
 
             <div>
