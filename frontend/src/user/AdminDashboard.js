@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 const AdminDashboard = () => {
 
-    const {user: {_id,firstName,lastName,email,userType}} = isValidated()
+    const {user: {firstName,lastName,email,userType}} = isValidated()
 
     const adminLinks = () => {
         return(

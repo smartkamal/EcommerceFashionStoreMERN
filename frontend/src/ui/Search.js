@@ -1,12 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import {getCategories}from '../storeManager/storeManagerApi'
 import {itemList}from './apiCore'
-import {Col, Container, Row} from "react-bootstrap";
-import  Card from './proCard'
+import {Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import ProductCard from "./proCard";
 
 
@@ -42,6 +40,8 @@ const SearchComp = () =>{
     //function returning a function
     const handleChange = (val) => e =>{
         setValues({...values,[val]:e.target.value, didSearch: false})
+
+
     }
 
     //when form is submitted

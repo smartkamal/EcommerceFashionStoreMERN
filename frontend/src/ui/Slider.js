@@ -12,13 +12,13 @@ function Slider() {
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div className="carousel-inner">
-                <div className="carousel-item active">
+                <div className="carousel-item active" data-interval="1000">
                     <img className="img-fluid d-block w-100 " src={poster1} alt="First slide"/>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item" data-interval="1000">
                     <img className="d-block w-100" src={poster2} alt="Second slide"/>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item" data-interval="1000">
                     <img className="d-block w-100" src={poster8} alt="Third slide"/>
                 </div>
             </div>
