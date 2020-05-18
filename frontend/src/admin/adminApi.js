@@ -91,3 +91,13 @@ export const updateStates=(userId,token,orderId,newState)=>{
         .catch(err=>console.log(err));
 
 }
+
+export const getCategories = () =>{
+    return fetch(`${API}/categoryList`,{
+        method: "GET"
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err=> console.log(err));
+}
