@@ -110,7 +110,7 @@ const SignIn=  () => {
 
 
     return (
-        <Layout title="Sign In" description="E commerce store"
+        <Layout title="Sign In" description="Welcome to Aubrella"
                 className="container col-md-6 offset-md-3">
 
             {errorMessage()}

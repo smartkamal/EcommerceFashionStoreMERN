@@ -18,7 +18,7 @@ const UserProfile = ({match}) => {
     })
 
     const {token} = isValidated()
-    const {firstName,lastName,email,password,error,success} = values
+    const {firstName,lastName,email,password,success} = values
 
     const init = (userId) => {
         listUserData(userId,token).then(content => {

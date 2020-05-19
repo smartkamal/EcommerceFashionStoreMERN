@@ -100,7 +100,7 @@ const UserDashboard = () => {
     }
 
     return (
-        <Layout title="Dashboard" description={`Hello ${firstName}`} className="container">
+        <Layout title="Welcome to Aubrella" description={`Hello ${firstName}`} className="container">
             <Container>
                 <Row>
                     <Col sm={3}>{userLinks()} </Col>

@@ -1,25 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {Link} from 'react-router-dom'
-
-import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import GetImage from './ImageComp'
 import {API} from "../Config";
 import moment from 'moment'
 import Badge from "react-bootstrap/Badge";
 import {addItem,updateCartItem,removeCartItem} from "./cartHandler";
 import Redirect from "react-router-dom/es/Redirect";
 import {addWishItem, removeWishlistItem} from "./WishlistHandler";
-import axios from "axios";
-import Comments from "./Comments";
-import Rating from "./Rating";
 
-import {signIn, validate,isValidated} from "../validators";
+
+import {isValidated} from "../validators";
 
 import DisplayRating from "./DisplayRating";
-const {user, token} = isValidated();
+const {user} = isValidated();
 
 
 
@@ -68,7 +61,7 @@ const ProductCard = ({
     // const [error, setError] = useState(false)
 
     const addToWishListButton=(addWish)=>{
-        if(user && user.userType === 'user' ||  undefined ){
+        if(user && user.userType === 'user'  ){
             return(
 
                 addWish && <Button className="form-control m-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>

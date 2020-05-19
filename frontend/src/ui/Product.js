@@ -1,12 +1,12 @@
 import React,{useEffect,useState} from 'react';
 import Layout from "./Layout";
 import {getUniquePro} from './apiCore'
-import {Col, Container, Row} from "react-bootstrap";
+import { Row} from "react-bootstrap";
 import  Card from './proCard'
 import Comments from "./Comments";
 import axios from "axios";
 import {API} from "../Config";
-import LikesDislikes from "./LikeDislikes";
+
 import Rating from "./Rating";
 
 
@@ -16,7 +16,7 @@ const Product = (props) =>{
     const [product,giveProduct] = useState({})
     const [err,setError] = useState(false)
     const [CommentLists, setCommentLists] = useState(false)
-    const productId = props.match.params.productId
+    //const productId = props.match.params.productId
 
     const productVariable = {
         productId: props.match.params.productid
@@ -27,7 +27,7 @@ const Product = (props) =>{
         //method to get one product using API
         getUniquePro(productId).then(data =>{
             if(data.err){
-                setError(data.errs)
+                setError(data.err)
             }else{
                 giveProduct(data)
             }

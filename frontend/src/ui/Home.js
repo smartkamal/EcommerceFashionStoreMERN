@@ -1,10 +1,9 @@
 import React,{useEffect,useState} from 'react';
-import Layout from "./Layout";
 import {getProducts} from './apiCore'
-import {Col, Container, Row} from "react-bootstrap";
+import { Row} from "react-bootstrap";
 import SearchComp from "./Search";
 import  Card from './proCard'
-import Slider from "./Slider";
+import SlideShow from '../slideshow/SlideShow'
 
 
 const Home=  () => {
@@ -50,9 +49,9 @@ const Home=  () => {
 
     return (
 
-<div>
+<div >
             <div className="img-fluid mb-5">
-                <Slider/>
+            <SlideShow/>
             </div>
             <SearchComp/>
 
