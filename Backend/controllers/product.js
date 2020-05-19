@@ -203,11 +203,11 @@ exports.searchProd= (req, res) => {
     let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
     let order = req.body.order ? req.body.order : "desc";
     let limit = req.body.limit ? parseInt(req.body.limit) : 100;
-    let more= parseInt(req.body.skip);
+    let skip= parseInt(req.body.skip);
     let searchArgs = {};
 
-    // console.log(order, sortBy, limit, skip, req.body.filters);
-    // console.log("findArgs", findArgs);
+
+
 
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
@@ -221,28 +221,56 @@ exports.searchProd= (req, res) => {
                 };
             } else {
                 searchArgs[key] = req.body.filters[key];
+
             }
         }
     }
 
-    Product.find(searchArgs)
-        .select("-productImage")
-        .populate("productCat")
-        .sort([[sortBy, order]])
-        .skip(more)
-        .limit(limit)
-        .exec((err, result) => {
-            if (err) {
-                return res.status(400).json({
-                    error: "Products unavailable"
-                });
-            }
+    if(searchArgs.category == null){
+        Product.find(searchArgs)
+            .select("-productImage")
+            .populate("productCat")
+            .sort([[sortBy, order]])
+            .skip(skip)
+            .limit(limit)
+            .exec((err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: "Products unavailable"
+                    });
+                }
 
-            res.json({
-                size: result.length,
-                result
+                res.json({
+                    size: result.length,
+                    result
+                });
+
+
             });
-        });
+    }else{
+        console.log("findArgs", searchArgs.category);
+        Product.find({productCat:searchArgs.category})
+            .select("-productImage")
+            .populate("productCat")
+            .sort([[sortBy, order]])
+            .skip(skip)
+            .limit(limit)
+            .exec((err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: "Products unavailable"
+                    });
+                }
+
+                res.json({
+                    size: result.length,
+                    result
+                });
+
+
+            });
+    }
+
 };
 
 exports.searchProdList = (req,res) =>{
@@ -270,6 +298,26 @@ exports.searchProdList = (req,res) =>{
 
         }).select('-productImage')
     }
+
+
+    // if(req.query.aCategory && req.query.searchVal === undefined && req.query.aCategory !== 'All'){
+    //     query.productCat = {$regex: req.query.aCategory, $options:'i'}
+    //
+    //     console.log('query',query)
+    //     Product.find(query, (error, products) =>{
+    //         if(error){
+    //             return res.status(400).json({
+    //                 error:errorHandler(error)
+    //             })
+    //         }
+    //
+    //         res.json(products)
+    //         console.log("producta", products)
+    //
+    //     }).select('-productImage')
+    //
+    //
+    // }
 }
 
 exports.updateQuantityDetails=(req,res,next)=>{

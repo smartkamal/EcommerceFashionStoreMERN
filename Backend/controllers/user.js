@@ -154,41 +154,84 @@ exports.userHistory=(req,res)=>{
 }
 
 
-// exports.addToWishList = (req,res) =>{
-//
-//
-//     console.log('req',req.body.productID)
-//     const id = req.body.productID;
-//     const uid = req.params.id;
-//      console.log("product",id)
-//     console.log("user",uid)
-//
-//     console.log(id.objectId)
-//
-//     User.findOne({_id: req.params.id}, (error, user) => {
-//         if (error || !user) {
-//             return res.status(400).json({
-//                 error: 'User not found'
-//             });
-//         }
-//         User.update(
-//             {_id: req.params.id},
-//             {$addToSet: {wishList: id}},
-//             console.log('i run')
-//         )
-//
-//         user.save((error, user) => {
-//             if (error){
-//                 return res.status(400).json({
-//                     error: 'Cannot perform action'
-//                 });
-//             }
-//             res.json(user);
-//         });
-//     })
-//
-//         // res.json({
-//         //     message: "Added Succesfully"
-//         // })
-//
-// }
+exports.addToWishList = (req,res) =>{
+
+    console.log(req.profile._id)
+    console.log(req.body.pid)
+    User.findOne({_id:req.profile._id}
+    ,(err, user) =>{
+
+            if (err || !user) {
+                return res.status(400).json({
+                    error: 'User not found'
+                });
+            }
+
+            console.log(user.userType)
+        let duplicate = false;
+            user.wishList.forEach((wish) =>{
+                if(wish.id === req.body.pid){
+                    duplicate=true;
+                }
+            })
+
+            if(duplicate){
+                User.findOneAndUpdate(
+                    {_id:req.params.userId, "wish.id":req.body.pid},
+                    {$inc:{"wish.$.quantity":1}},
+                    {new:true},
+                    () =>{
+                        if(err) return res.json({success:false,err});
+                        res.status(200).json(user.wishList)
+                    }
+                    )
+            }else{
+                User.findOneAndUpdate(
+                    {_id:req.profile._id},
+                    {
+                        $push:{
+                            wishList:{
+                                id:req.body.pid,
+                                quantity:1,
+                                date:Date.now()
+                            }
+                        }
+                    },
+                    {new:true},
+                    (err,profile) =>{
+                        if(err) return res.json({success:false, err});
+                        res.status(200).json(profile.wishList)
+                    }
+                )
+            }
+        })
+
+}
+
+
+exports.retrieveAllWishList= (req,res) =>{
+
+    let type= req.query.type;
+    let productIdList = req.query.cartIDs
+
+    if(type === "array"){
+        let ids = req.query.cartIDs.split(',');
+        productIdList = [];
+        productIdList = ids.map(item =>{
+            return item
+        })
+    }
+
+    Product.findById({'_id':{$in:productIdList}})
+        .populate("productCat")
+        .exec((err, product) =>{
+        if(err) return req.status(400).send(err)
+            return res.status(200).send(product)
+    })
+
+
+};
+
+
+
+

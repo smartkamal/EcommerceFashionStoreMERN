@@ -29,24 +29,14 @@ function Menus({history}) {
                         as={Link} style={isActive(history,"/")} to="/"> Home
                      </Nav.Link>
 
-
-                {isValidated() && isValidated().user.userType === "user" && (
                 <Nav.Link
-                    as={Link}style={isActive(history,"/cart")} to="/cart">Cart <sup><small>{itemTotal()}</small></sup>
+                    as={Link} style={isActive(history,"/productshop")} to="/productshop"> Store
                 </Nav.Link>
-                )}
 
                 {isValidated() && isValidated().user.userType === "user" && (
                     <Nav.Link
                         as={Link} style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard
 
-                    </Nav.Link>
-                )}
-
-                {isValidated() && isValidated().user.userType === "user" && (
-                    <Nav.Link
-
-                        as={Link} style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup>
                     </Nav.Link>
                 )}
 
@@ -62,6 +52,23 @@ function Menus({history}) {
                         as={Link} style={isActive(history,"/admin/admindashboard")} to="/admin/admindashboard">Dashboard
                     </Nav.Link>
                 )}
+
+                {isValidated() && isValidated().user.userType === "user" && (
+                <Nav.Link
+                    as={Link}style={isActive(history,"/cart")} to="/cart">Cart <sup><small>{itemTotal()}</small></sup>
+                </Nav.Link>
+                )}
+
+
+
+                {isValidated() && isValidated().user.userType === "user" && (
+                    <Nav.Link
+
+                        as={Link} style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup>
+                    </Nav.Link>
+                )}
+
+
 
 
 

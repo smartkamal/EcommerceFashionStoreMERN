@@ -35,10 +35,10 @@ const usersSchema = new mongoose.Schema(
             type: Array,
             default: []
         },
-        // wishList:{
-        //     type: Array,
-        //     default: []
-        // }
+        wishList:{
+            type: Array,
+            default: []
+        }
     },
     {timestamps : true}
     );

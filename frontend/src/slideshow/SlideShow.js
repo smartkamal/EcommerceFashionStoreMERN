@@ -1,14 +1,19 @@
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
-import poster1 from './Image/poster1.jpg'
-import poster2 from './Image/poster2.jpg'
+import poster11 from './Image/poster11.jpg'
+import poster10 from './Image/poster10.png'
 import poster8 from './Image/poster8.jpg'
+import poster9 from './Image/poster9.png'
+import poster12 from './Image/poster12.jpg'
 import './slide.css'
 
 const fadeImages = [
-    poster1,
-    poster2,
+    poster11,
+    poster10,
     poster8,
+    poster9,
+    poster12
+
 ];
 
 const zoomOutProperties = {

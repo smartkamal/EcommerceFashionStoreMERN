@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react'
+import React, {useState} from 'react'
 import {FaStar} from 'react-icons/fa'
 
 function DisplayRating(props) {
@@ -11,8 +11,9 @@ function DisplayRating(props) {
                 const ratingValue = i+1;
 
                 return(
-                    <label>
+                    <label  key={i}>
                         <input
+
                             type="radio"
                             name="rating"
                             style={{display: 'none'}}
