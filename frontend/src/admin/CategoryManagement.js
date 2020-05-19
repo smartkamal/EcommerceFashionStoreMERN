@@ -1,18 +1,33 @@
 import React, {useState, useEffect} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
-import {Alert, Badge, Col, Container,Row} from "react-bootstrap";
+import {Alert, Col, Container, ListGroup, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {addCategory} from "./adminApi";
-import {Link} from "react-router-dom";
+import {addCategory, getCategories} from "./adminApi";
+
 
 const CategoryManagement = () => {
     const [categoryName, setName] = useState('')
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
+    const [allCategories, setCategories] = useState([]);
 
     const {user, token} = isValidated();
+
+    const getAllCategories = () =>{
+        getCategories().then(res =>{
+            if(res.error){
+                console.log(res.error)
+            }else{
+                setCategories(res);
+            }
+        })
+    }
+
+    useEffect(() =>{
+        getAllCategories()
+    }, [])
 
 
     const handleChange = (e) => {
@@ -34,23 +49,45 @@ const CategoryManagement = () => {
                 else {
                     setError('');
                     setSuccess(true);
+                    setName('');
+
                 }
+                refreshPage();
             })
+
+    }
+
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     const categoryForm = () => (
             <Container>
                 <Row>
-                    <Col>
+                    <Col style={{marginTop:50,marginLeft:-300}}>
                         <Form onSubmit={submitForm}>
                             <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control onChange={handleChange}  type="text" placeholder="Enter Name" value={categoryName} required/>
+                                <Form.Control onChange={handleChange} type="text" placeholder="Enter Name" value={categoryName} required/>
                             </Form.Group>
                             <Button variant="outline-success" type="submit">
                                 Create Category
                             </Button>
                         </Form>
+                    </Col>
+
+                    <Col style={{marginTop:50,marginRight: -300}}>
+                        <ListGroup variant="flush">
+                            {allCategories.map((category,index) =>(
+                                <ListGroup.Item
+                                    key = {index}
+
+                                >
+                                    {category.categoryName}
+
+                                </ListGroup.Item>
+                            ))}
+                        </ListGroup>
                     </Col>
                 </Row>
             </Container>
@@ -71,24 +108,14 @@ const CategoryManagement = () => {
         if(success){
             return(
                 <Alert variant="success">
-                    {categoryName} is created
+                    Category created successfully
                 </Alert>
+
             )
+
         }
+
     }
-
-    const backButton = () => (
-        <div style={{marginTop:50,marginLeft:20}}>
-            <Container>
-                <Row>
-                        <Link to="/admin/admindashboard">
-                            Back to Dashboard
-                        </Link>
-                </Row>
-            </Container>
-        </div>
-
-    )
 
 
     return (
@@ -102,7 +129,6 @@ const CategoryManagement = () => {
                         {successMessage()}
                         {errorMessage()}
                         {categoryForm()}
-                        {backButton()}
                     </Col>
                 </Row>
             </Container>
