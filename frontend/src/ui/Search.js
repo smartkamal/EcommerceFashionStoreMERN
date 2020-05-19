@@ -102,13 +102,13 @@ const searchForm = () =>(
         <span className="input-group-text" style={{ backgroundColor:'#eceff1'}}>
             <div className="input-group input-group-sm">
                 <div className="input-group-prepend">
-                     <Form.Control as="select"  className="mr-2" style={{height:50}} onChange={handleChange('aCategory')}>
-                            <option value="All">All Categories</option>
-                                 {allCategories.map((category,index)=>(
-                                             <option key={index} value={category._id}>{category.categoryName}</option>
-                                ))}
+                     {/*<Form.Control as="select"  className="mr-2" style={{height:50}} onChange={handleChange('aCategory')}>*/}
+                     {/*       /!*<option value="All">All Categories</option>*!/*/}
+                     {/*       /!*     {allCategories.map((category,index)=>(*!/*/}
+                     {/*       /!*                 <option key={index} value={category._id}>{category.categoryName}</option>*!/*/}
+                     {/*       /!*    ))}*!/*/}
 
-                     </Form.Control>
+                     {/*</Form.Control>*/}
                      <FormControl type="text" placeholder="All Your Fashion Needs Under One Roof" className="mr-2" style={{height:50, width:400}} onChange={handleChange('searchVal')} />
                      <Button className="text-light bg-dark" type="submit">Search</Button>
                 </div>

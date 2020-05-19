@@ -5,7 +5,7 @@ const {controlSignin, authenticatedUser, userAdmin} = require('../controllers/au
 
 
 
-const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById,userHistory} = require('../controllers/user');
+const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById,userHistory,addToWishList,retrieveAllWishList} = require('../controllers/user');
 
 
 router.get('/secret/:id', controlSignin, authenticatedUser, userAdmin, (req, res) => {
@@ -22,6 +22,8 @@ router.delete('/user/storemanager/delete/:managerID/:id',controlSignin, authenti
 router.get('/orders/by/user/:id', controlSignin, authenticatedUser, userHistory);
 
 // router.post("/user/wishlist/add/:id", controlSignin,authenticatedUser,addToWishList) ;
+router.post("/cart/addtocart/:id",controlSignin,authenticatedUser,addToWishList);
+router.get("/wishlist/getall",retrieveAllWishList);
 
 router.param('id', findUserById);
 router.param('managerID', findManagerById)

@@ -55,9 +55,9 @@ const Home=  () => {
             </div>
             <SearchComp/>
 
-            <h2 className="mb-4 ">Best Sellers</h2>
+            <h2 className="mb-4 ml-4">Best Sellers</h2>
 
-                <Row>
+                <Row className="mb-5 ml-5">
                     {soldProducts.map((product,index) =>(
                         <Card key={index} product={product}/>
                     ))}
@@ -66,8 +66,8 @@ const Home=  () => {
 
 <br/><br/><br/>
 
-            <h2 className="mb-4">New Arrivals</h2>
-            <Row>
+            <h2 className="mb-4  ml-4">New Arrivals</h2>
+            <Row className="mb-5 ml-5">
                 {productsArrival.map((product,index) =>(
                     <Card  key={index} product={product}/>
                 ))}
