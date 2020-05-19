@@ -21,7 +21,7 @@ import Cart from "./ui/Cart";
 import Wishlist from "./ui/Wishlist";
 import UserProfile from './user/UserProfile'
 import StoreManagerUserProfile from './storeManager/updateStoreManager'
-import Orders from "./admin/orders";
+import Orders from "./storeManager/orders";
 import ProductShop from './Store/ProductShop'
 
 
@@ -46,7 +46,7 @@ const Routes = () =>{
             <Route path="/wishlist" exact component={Wishlist}/>
             <UserRoute path="/UserProfile/:userId" exact component = {UserProfile}/>
             <StoreManagerRoute path="/storemanager/updatepass/:userId" exact component={StoreManagerUserProfile}/>
-            <AdminRoute path="/admin/orders" exact component={Orders}/>
+            <StoreManagerRoute path="/storemanager/orders" exact component={Orders}/>
             <Route path="/productshop" exact component={ProductShop}/>
 
 

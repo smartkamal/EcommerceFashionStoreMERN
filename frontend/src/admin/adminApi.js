@@ -45,52 +45,6 @@ export const deleteManager = (managerId,userId ,token) =>{
         .catch(err => console.log(err));
 
 };
-export const ordersList=(userId,token)=>{
-    return fetch(`${API}/order/list/${userId}`,{
-        method: "GET",
-        headers: {
-            Accept: 'application/json',
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    })
-        .then(response=>{
-            return response.json();
-        })
-        .catch(err=>console.log(err));
-};
-
-export const getStates=(userId,token)=>{
-    return fetch(`${API}/order/state/${userId}`,{
-        method: "GET",
-        headers: {
-            Accept: 'application/json',
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    })
-        .then(response=>{
-            return response.json();
-        })
-        .catch(err=>console.log(err));
-};
-
-export const updateStates=(userId,token,orderId,newState)=>{
-    return fetch(`${API}/order/${orderId}/state/${userId}`,{
-        method: "PUT",
-        headers: {
-            Accept: 'application/json',
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body:JSON.stringify({newState,orderId})
-    })
-        .then(response=>{
-            return response.json();
-        })
-        .catch(err=>console.log(err));
-
-}
 
 export const getCategories = () =>{
     return fetch(`${API}/categoryList`,{
