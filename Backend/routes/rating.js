@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const {errorHandler} = require("../helpers/dbErrorHandler");
 const {Rating} = require('../models/rating')
 
 router.post("/rating/getRatings",(req, res) => {
@@ -18,42 +18,33 @@ router.post("/rating/getRatings",(req, res) => {
         })
 })
 
-
 router.post("/rating/uprate",(req, res) => {
-    let variable = {}
-    if (req.body.productId) {
-        variable = {productId: req.body.productId, userId: req.body.userId, noOfStars: req.body.noOfStars}
-    } else {
-        variable = {commentId: req.body.commentId, userId: req.body.userId, noOfStars: req.body.noOfStars}
+    let variable = { }
+    if(req.body.productId) {
+        variable = {productId: req.body.productId,UserId:req.body.UserId,noOfStars:req.body.noOfStars}
+    }else{
+        variable = {commentId: req.body.commentId,UserId:req.body.UserId,noOfStars:req.body.noOfStars}
     }
 
+    const rate = new Rating(variable)
+    rate.save((err,rateResult) => {
+        if (err) return res.json({success:false,err});
+    })
 })
 
-// router.post("/like/uplike",(req, res) => {
-//     let variable = { }
-//     if(req.body.productId) {
-//         variable = {productId: req.body.productId,firstName:req.body.firstName}
-//     }else{
-//         variable = {commentId: req.body.commentId,firstName:req.body.firstName}
-//     }
-//
-//     const rate = new Rating(variable)
-//     rate.save((err,rateResult) => {
-//         if (err) return res.json({success:false,err});
-//     })
-// })
+router.get("/rating/getAll",(req,res) =>{
 
-// router.post("/ratings/add",(req, res) => {
-//     let rate = req.body;
-//     let pID = req.body
-//
-//     Rating.find(
-//         {productId:pID},
-//         {rateVal}
-//         )
-//
-//
-//
-// })
+    Rating.aggregate
+    ([{$group:{_id:'$productId',count:{$sum:1},avg:{$avg:'$noOfStars'}}},
+        {$project:{_id:1,count:1,avg:{$round:['$avg',1]}}}], (error,data) => {
+            if(error){
+                return res.status(400).json({
+                    error: errorHandler(error)
+                });
+            }
+            res.json(data);
+            console.log(data);
+        })
+})
 
 module.exports = router;
