@@ -21,9 +21,7 @@ const AdminDashboard = () => {
                         <ListGroup.Item>
                             <Link className="nav-link" to="/create/storemanager">Store Manager Management</Link>
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                            <Link className="nav-link" to="/admin/orders">View Orders</Link>
-                        </ListGroup.Item>
+
                     </ListGroup>
                 </Card>
                 <br/>

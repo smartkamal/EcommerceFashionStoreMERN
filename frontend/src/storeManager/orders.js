@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
-import {ordersList,getStates,updateStates} from "./adminApi";
+import {ordersList,getStates,updateStates} from "./storeManagerApi";
 import moment from "moment";
 
 

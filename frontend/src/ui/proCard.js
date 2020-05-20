@@ -12,7 +12,7 @@ import {addWishItem, removeWishlistItem} from "./WishlistHandler";
 import {isValidated} from "../validators";
 
 import DisplayRating from "./DisplayRating";
-const {user} = isValidated();
+
 
 
 
@@ -57,14 +57,16 @@ const ProductCard = ({
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
     const [ wredirect, setWRedirect]= useState(false);
-    // const [success, setSuccess] = useState(false)
-    // const [error, setError] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [error, setError] = useState(false)
+    const {user,token} = isValidated();
 
     const addToWishListButton=(addWish)=>{
         if(user && user.userType === 'user'  ){
             return(
 
-                addWish && <Button className="form-control m-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>
+                addWish && <Button className="form-control m-2" variant="warning" onClick={addToWishList}>Add to Wish List</Button>
+                //addWish && <Button className="form-control m-2" variant="outline-warning" onClick={() => addWishList(pid)}>Add to Wish List</Button>
 
             )
 
@@ -74,7 +76,7 @@ const ProductCard = ({
     const addToCartButton=(addCart)=>{
         if(user && user.userType === 'user'){
             return(
-                addCart && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
+                addCart && <Button className="form-control m-2" variant="success" onClick={addToCart}>Add to cart</Button>
             )
 
         }
@@ -85,6 +87,20 @@ const ProductCard = ({
                 setRedirect(true)
         })
    };
+
+    // const addWishList = (pid) =>{
+    //
+    //     addProToWishList({pid},user._id,token)
+    //         .then(content => {
+    //             if (content.error){
+    //                console.log(error)
+    //             }
+    //             else {
+    //
+    //             }
+    //         })
+    // }
+
 
     const addToWishList =()=>{
         addWishItem(product, ()=>{
@@ -136,7 +152,7 @@ const ProductCard = ({
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
-            <img className="card-img-top" style={{maxHeight:"50%" }} src={`${API}/product/image/${product._id}`} alt="Card image cap"/>
+            <img className="card-img-top" style={{maxHeight:"50%" }} src={`${API}/product/image/${product._id}`} alt="productImage"/>
                 <div className="card-body">
                     <h5 className="card-title">{product.productName}</h5>
                     <p className="card-text">{product.productDesc.substring(0,100)}</p>
@@ -155,7 +171,7 @@ const ProductCard = ({
 
                         <Link to={`/product/${product._id}`}>
                             {
-                                viewProductBtn &&    <Button className="form-control m-2" variant="outline-primary" >View Product</Button>
+                                viewProductBtn &&    <Button className="form-control m-2" variant="primary" >View Product</Button>
                             }
 
                         </Link>
@@ -163,6 +179,7 @@ const ProductCard = ({
                         {
                             //addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
                             addToWishListButton(addToWishListBtn)
+                            //addToWishListButton(addToWishListBtn,product._id)
                         }
 
                         {

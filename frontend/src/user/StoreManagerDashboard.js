@@ -29,6 +29,11 @@ const StoreManagerDashboard = () => {
                             <Link className="nav-link" to={`/storemanager/updatepass/${_id}`}>Edit Profile</Link>
                         </ListGroup.Item>
                     </ListGroup>
+                    <ListGroup>
+                       <ListGroup.Item>
+                          <Link className="nav-link" to="/storemanager/orders">View Orders</Link>
+                      </ListGroup.Item>
+                    </ListGroup>
                 </Card>
                 <br/>
             </div>

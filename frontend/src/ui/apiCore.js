@@ -83,3 +83,29 @@ export const itemList = queryParams =>{
         .catch(err=> console.log(err));
 
 }
+
+export const getCheckedResults = (skip,limit,filters={}) => {
+
+    const bodyData = {
+       skip,limit,filters
+    }
+
+
+    return fetch(`${API}/products/search`, {
+        method: "POST",
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify(bodyData)
+
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+};
