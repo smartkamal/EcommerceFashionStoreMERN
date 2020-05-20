@@ -109,10 +109,10 @@ const searchForm = () =>(
                      {/*       /!*    ))}*!/*/}
 
                      {/*</Form.Control>*/}
-                     <FormControl type="text" placeholder="All Your Fashion Needs Under One Roof" className="mr-2" style={{height:50, width:400}} onChange={handleChange('searchVal')} />
-                     <Button className="text-light bg-dark" type="submit">Search</Button>
-                </div>
+                     <FormControl type="text" placeholder="All Your Fashion Needs Under One Roof" className="ml-3 mr-3" style={{height:30, width:500}} onChange={handleChange('searchVal')} />
 
+                </div>
+                    <Button className="btn btn-secondary btn-lg mr-3" type="submit">Search</Button>
             </div>
 
         </span>

@@ -65,7 +65,7 @@ const ProductCard = ({
         if(user && user.userType === 'user'  ){
             return(
 
-                addWish && <Button className="form-control m-2" variant="warning" onClick={addToWishList}>Add to Wish List</Button>
+                addWish && <Button className="form-control mt-2 mr-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>
                 //addWish && <Button className="form-control m-2" variant="outline-warning" onClick={() => addWishList(pid)}>Add to Wish List</Button>
 
             )
@@ -76,7 +76,7 @@ const ProductCard = ({
     const addToCartButton=(addCart)=>{
         if(user && user.userType === 'user'){
             return(
-                addCart && <Button className="form-control m-2" variant="success" onClick={addToCart}>Add to cart</Button>
+                addCart && <Button className="form-control mt-2 mr-2" variant="success" onClick={addToCart}>Add to cart</Button>
             )
 
         }
@@ -148,7 +148,7 @@ const ProductCard = ({
 
     return<div className="form-group" style={{margin:25}}>
 
-        <div className="shadow p-1 mb-1 bg-light rounded">
+        <div className="shadow bg-light rounded">
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
@@ -171,7 +171,7 @@ const ProductCard = ({
 
                         <Link to={`/product/${product._id}`}>
                             {
-                                viewProductBtn &&    <Button className="form-control m-2" variant="primary" >View Product</Button>
+                                viewProductBtn &&    <Button className="form-control mr-2" variant="outline-dark" >View Product</Button>
                             }
 
                         </Link>
@@ -188,7 +188,7 @@ const ProductCard = ({
                         }
 
                         {
-                            removeItemBtn && <Button className="form-control m-2" variant="outline-danger"
+                            removeItemBtn && <Button className="form-control mt-2 mr-2" variant="danger"
                                                      onClick={()=>{removeCartItem(product._id);setRun(!run);refreshPage()}}>
                                 Remove</Button>
                         }
@@ -205,7 +205,7 @@ const ProductCard = ({
                         }
 
                         {
-                            removeWishItemBtn && <Button className="form-control m-2" variant="outline-danger"
+                            removeWishItemBtn && <Button className="form-control mt-2" variant="danger"
                                                      onClick={()=>{removeWishlistItem(product._id);setRun(!run);refreshPage()}}>
                                 Remove</Button>
                         }

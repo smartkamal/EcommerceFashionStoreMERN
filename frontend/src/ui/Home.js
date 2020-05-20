@@ -63,7 +63,7 @@ const Home=  () => {
                     ))}
 
                 </Row>
-
+    <hr/>
 <br/><br/><br/>
 
             <h2 className="mb-4  ml-4">New Arrivals</h2>
