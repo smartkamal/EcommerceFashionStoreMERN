@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Layout from './Layout';
 import {getWishlist} from './WishlistHandler';
 import Card from "./proCard";
+import {Col, Row} from "react-bootstrap";
 
 
 const Wishlist = () =>{
@@ -17,11 +18,11 @@ const Wishlist = () =>{
 //display wishlist
     const displayItems=items=>{
         return(
-            <div>
+            <div >
                 <h3>Items Quantity: {items.length}</h3>
                 <h3><Link className="btn-success" to="/">
                     Continue Shopping>></Link></h3>
-                <hr/>
+                <Col className="mb-5 ml-5">
                 {items.map((product, i)=>(<Card
                     key={i}
                     product={product}
@@ -33,6 +34,7 @@ const Wishlist = () =>{
                     run={run}
 
                 />))}
+                </Col>
             </div>
         )
     };
@@ -44,10 +46,10 @@ const Wishlist = () =>{
     return(
         <Layout
             title ="Wish List"
-            description ="Manage Your Items"
-        >
-            <div className="row">
-                <div className="col-6">
+            description ="Manage Your Items">
+
+            <div className="col ml-5 w-25">
+                <div className="align-content-center">
                     {items.length>0 ? displayItems(items):emptyItemMsg()}
                 </div>
 

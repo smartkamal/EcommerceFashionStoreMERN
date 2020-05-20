@@ -22,9 +22,9 @@ function Menus({history}) {
         <div  >
 
 
-        <Navbar   className="py-3 dark bg-dark"  style={{height:60,}}>
+        <Navbar   className="py-3 dark bg-dark"  style={{height:60}}>
 
-            <Nav className="mr-auto  py-0">
+            <Nav className="mr-auto  py-0 ">
                     <Nav.Link
                         as={Link} style={isActive(history,"/")} to="/"> Home
                      </Nav.Link>
@@ -75,7 +75,7 @@ function Menus({history}) {
 
 
                 <Nav.Link
-                    as={Link} style={{color:'#fafafa' , textDecoration: 'none' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
+                    as={Link} style={{color:'#fafafa' , textDecoration: 'none',fontSize:'2rem' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
                 </Nav.Link>
             </Nav>
 

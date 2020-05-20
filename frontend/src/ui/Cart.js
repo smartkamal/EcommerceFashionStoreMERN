@@ -16,11 +16,15 @@ const Cart = () =>{
 //display cart
     const displayItems=items=>{
         return(
-            <div>
+            <div className="ml-5 w-50">
+                <div className="ml-5 w-auto">
                 <h3>Items Quantity: {items.length}</h3>
                 <h3><Link className="btn-success" to="/">
                     Continue Shopping>></Link></h3>
-                <hr/>
+               </div>
+
+            <div>
+
                 {items.map((product, i)=>(<Card
                     key={i}
                     product={product}
@@ -33,6 +37,7 @@ const Cart = () =>{
                     run={run}
 
                 />))}
+            </div>
             </div>
         )
     };
@@ -50,10 +55,10 @@ const Cart = () =>{
               <div className="col-6">
                   {items.length>0 ? displayItems(items):emptyItemMsg()}
               </div>
-
+                <vr/>
                 <div className="col-5">
                     <h2>Cart Summary</h2>
-                    <hr/>
+
                     <Checkout products={items}/>
                 </div>
             </div>
