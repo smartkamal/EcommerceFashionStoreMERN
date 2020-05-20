@@ -5,51 +5,21 @@ import {API} from "../Config";
 import {Tooltip} from "antd";
 import {LikeFilled, LikeOutlined, StarFilled, StarOutlined} from "@ant-design/icons";
 import {Col, Container, Row} from "react-bootstrap";
-
-const Star = ({ starId, rating, onMouseEnter, onMouseLeave, onClick }) => {
-    let styleClass = "star-rating-blank";
-    if (rating && rating >= starId) {
-        styleClass = "star-rating-filled";
-    }
-
-    return (
-        <div
-            className="star"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={onClick}
-        >
-            <svg
-                height="55px"
-                width="53px"
-                class={styleClass}
-                viewBox="0 0 25 23"
-                data-rating="1"
-            >
-                <polygon
-                    stroke-width="0"
-                    points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78"
-                />
-            </svg>
-        </div>
-    );
-};
+import {isValidated} from "../validators";
+import StarRatingComponent from 'react-star-rating-component';
 
 function Rating(props) {
-    const [rating, setRating] = useState(0);
-    const [hoverRating, setHoverRating] = useState(0);
-    const stars = [1, 2, 3, 4, 5];
+    const [Rating,setRating] = useState(0)
     const [Ratings,setRatings] = useState(0)
     const [RatingAction,setRatingAction] = useState(null)
+    const {user, token} = isValidated();
 
-    let variable = {
+    let variables = {
         productId:props.productId,
-        userId:props.userId,
-        noOfStars:props.noOfStars,
     };
 
     useEffect(() => {
-        Axios.post(`${API}/rating/getRatings`,variable)
+        Axios.post(`${API}/rating/getRatings`,variables)
             .then(response => {
                 if (response.data.success) {
                     setRatings(response.data.ratings.length)
@@ -65,7 +35,15 @@ function Rating(props) {
             })
     },[])
 
-    const onRate = () => {
+    const onRate = (nextValue, prevValue, name) => {
+        let variable = {
+            productId:props.productId,
+            userId:user._id,
+            noOfStars:Rating
+        };
+
+        console.log(variable)
+        setRating(nextValue);
         if (RatingAction ===null){
             Axios.post(`${API}/rating/uprate`,variable)
                 .then(response => {
@@ -79,35 +57,35 @@ function Rating(props) {
         }
     }
 
+
     return(
-        (
+        <React.Fragment>
             <Container style={{marginBottom: '30px'}}>
                 <Row>
                     <Col xs={12}>
                         <div>
                             <br/>
-                            <p> Rate this prodouct </p>
+                            <p> Rate this prodouct {Ratings}</p>
                             <hr/>
                             <div>
-                                <span>{Ratings} users has rated this product</span>
                             </div>
-                                <div className="flex-container">
-                                    {stars.map((star, i) => (
-                                        <Star
-                                            key={i}
-                                            starId={i}
-                                            rating={hoverRating || rating}
-                                            onMouseEnter={() => setHoverRating(i)}
-                                            onMouseLeave={() => setHoverRating(0)}
-                                            onClick={onRate}
-                                        />
-                                    ))}
+                            <div>
+                                <div>
+                                    <h2>Rating from state: </h2>
+                                    <StarRatingComponent
+                                        name="rate1"
+                                        starCount={5}
+                                        size="5"
+                                        value={Rating}
+                                        onStarClick={onRate}
+                                    />
                                 </div>
+                            </div>
                         </div>
                     </Col>
                 </Row>
             </Container>
-        )
+        </React.Fragment>
     )
 }
 
