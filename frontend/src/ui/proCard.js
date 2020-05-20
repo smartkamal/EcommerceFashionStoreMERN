@@ -159,14 +159,12 @@ const ProductCard = ({
                     <p className="card-text">Rs.{product.productPrice}</p>
                     <p className="card-text">Category :{product.productCat && product.productCat.categoryName}</p>
                     <p className="card-text">Product: Added {moment(product.createdAt).fromNow()} </p>
-                    <DisplayRating/>
+                    <DisplayRating pID />
                     <div className="card-footer bg-transparent border-danger">
-
                         <div className="d-flex flex-row">
 
                             <div className="p-2">{stockAvailabilty(product.productQuantity)}</div>
                            {checkDiscount(product.productDisc, product.totalDiscPrice)}
-
                         </div>
                         <br/><br/>
 
