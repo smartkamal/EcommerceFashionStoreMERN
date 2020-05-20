@@ -117,7 +117,7 @@ export const getStates=(userId,token)=>{
 };
 
 export const updateStates=(userId,token,orderId,newState)=>{
-    return fetch(`${API}/order/${orderId}/state/${userId}`,{
+    return fetch(`${API}/order/${orderId}/newState/${userId}`,{
         method: "PUT",
         headers: {
             Accept: 'application/json',
