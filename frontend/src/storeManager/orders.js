@@ -88,7 +88,7 @@ const Orders=()=>{
                                        {disState(o)}
                                    </li>
                                    <li className="list-group-item">
-                                       Amount: ${o.amount}
+                                       Amount: Rs:{o.amount}
                                    </li>
                                    <li className="list-group-item">
                                        Ordered by:{o.user.firstName}

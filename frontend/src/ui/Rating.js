@@ -33,17 +33,23 @@ function Rating(props) {
                     alert('Failed to get ratings')
                 }
             })
-    },[])
+
+
+    },[Rating])
+
 
     const onRate = (nextValue, prevValue, name) => {
+
+        setRating(nextValue)
+
         let variable = {
             productId:props.productId,
             userId:user._id,
-            noOfStars:Rating
+            noOfStars:nextValue
         };
 
         console.log(variable)
-        setRating(nextValue);
+
         if (RatingAction ===null){
             Axios.post(`${API}/rating/uprate`,variable)
                 .then(response => {
@@ -71,7 +77,8 @@ function Rating(props) {
                             </div>
                             <div>
                                 <div>
-                                    <h2>Rating from state: </h2>
+
+
                                     <StarRatingComponent
                                         name="rate1"
                                         starCount={5}
