@@ -12,7 +12,7 @@ import Layout from "./Layout";
 
 function Comments(props) {
 
-    const user = isValidated() && isValidated().user._id
+    const user = isValidated() && isValidated().user.firstName;
     const [Comment, setComment] = useState("");
 
     const handleChange = (e) => {

@@ -68,7 +68,7 @@ function Rating(props) {
                     <Col xs={12}>
                         <div>
                             <br/>
-                            <p> Rate this prodouct {Ratings}</p>
+                            <p> Rate this prodouct</p>
                             <hr/>
                             <div>
                             </div>
