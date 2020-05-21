@@ -15,7 +15,8 @@ const Wishlist = () =>{
         setItems(getWishlist());
 
     },[run]);
-//display wishlist
+
+//display wishlist items
     const displayItems=items=>{
         return(
             <div >
@@ -39,6 +40,7 @@ const Wishlist = () =>{
         )
     };
 
+    // display the empty msg when the list is empty
     const emptyItemMsg=()=>(
         <h3>Your Wish List is empty. <br/> <Link to="/">
             Continue Shopping</Link></h3>
