@@ -28,8 +28,7 @@ const StoreManagerUserProfile = ({match}) => {
             else{
                 setValues({...values,firstName: content.firstName, lastName: content.lastName,email: content.email, })
             }
-        })
-    }
+        })    }
 
     useEffect(() => {
         init(match.params.userId)

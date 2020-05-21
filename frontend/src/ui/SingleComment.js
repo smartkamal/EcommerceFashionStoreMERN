@@ -9,10 +9,11 @@ import LikesDislikes from "./LikeDislikes";
 const {TextArea} = Input;
 
 function SingleComment(props) {
-    const user = isValidated() && isValidated().user._id
+    const {user,token} = isValidated();
     const [CommentValue, setCommentValue] = useState("")
     const [OpenReply, setOpenReply] = useState(false)
 
+    console.log(props)
     const openReply = () => {
         setOpenReply(!OpenReply)
     }
@@ -21,7 +22,7 @@ function SingleComment(props) {
         e.preventDefault();
 
         const variables = {
-            writer: user,
+            userTo: user,
             postId: props.postId,
             responseTo: props.comment._id,
             content: CommentValue

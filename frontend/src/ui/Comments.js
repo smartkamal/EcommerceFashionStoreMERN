@@ -12,7 +12,7 @@ import Layout from "./Layout";
 
 function Comments(props) {
 
-    const user = isValidated() && isValidated().user._id
+    const {user,token} = isValidated();
     const [Comment, setComment] = useState("");
 
     const handleChange = (e) => {
@@ -24,7 +24,7 @@ function Comments(props) {
 
         const variables = {
             content: Comment,
-            writer: user,
+            writer: user._id,
             postId: props.postId,
         }
 
@@ -32,6 +32,7 @@ function Comments(props) {
             .then(response => {
                 if (response.data.success) {
                     setComment("")
+                    console.log(response)
                     props.refreshFunction(response.data.result)
                 }else {
                     alert('Failed to save comment')
@@ -52,7 +53,7 @@ function Comments(props) {
             {props.CommentLists && props.CommentLists.map((comment, index) => (
                 (!comment.responseTo &&
                     <React.Fragment>
-                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
+                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction}  />
                         <ReplyComment CommentLists={props.CommentLists} postId={props.postId} parentCommentId={comment._id} refreshFunction={props.refreshFunction} />
                     </React.Fragment>
                 )

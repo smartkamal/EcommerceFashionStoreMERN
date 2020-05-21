@@ -16,7 +16,7 @@ const Product = (props) =>{
     const [product,giveProduct] = useState({})
     const [err,setError] = useState(false)
     const [CommentLists, setCommentLists] = useState(false)
-    //const productId = props.match.params.productId
+
 
     const productVariable = {
         productId: props.match.params.productid
@@ -57,32 +57,31 @@ const Product = (props) =>{
     }
 
     return (
-        <Layout title="Product Details"
-                description={null}
-                className="container-fluid"
-        >
-
-            <h2 className="mb-1"> {product && product.productName}</h2>
-           <Row>
-               <div  style={{margin:'auto'}}>
-                   {
-                       product &&  product.productDesc && <Card product={product}
-                       viewProductBtn={false}/>
-                   }
-               </div>
+        <div className="mt-3">
+                    <h2 className="mb-1 ml-4"> {product && product.productName}</h2>
+                    <Row>
+                        <div  style={{margin:'auto'}}>
+                            {
+                                product &&  product.productDesc && <Card product={product}
+                                                                         viewProductBtn={false}/>
+                            }
+                        </div>
 
 
-           </Row>
+                    </Row>
 
-            <div>
-                <Rating product productId={product._id} userId={localStorage.getItem('userId')} />
-            </div>
+                    <div>
+                        <Rating product productId={product._id} userId={localStorage.getItem('userId')} />
+                    </div>
 
-            <div>
-                <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
-            </div>
+                    <div>
+                        <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
+                    </div>
 
-        </Layout>
+
+        </div>
+
+
 
     );
 }

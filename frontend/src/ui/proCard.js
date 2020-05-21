@@ -148,7 +148,7 @@ const ProductCard = ({
 
     return<div className="form-group" style={{margin:25}}>
 
-        <div className="shadow p-1 mb-1 bg-light rounded">
+        <div className="shadow p-0 mb-1 bg-light rounded">
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
