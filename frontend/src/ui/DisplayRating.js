@@ -30,30 +30,41 @@ function DisplayRating(props) {
 
     useEffect(() => {
         loadRatings();
-        console.log('prop',props.pID)
+
     },[])
 
 
     return(
 
-        ids.map((pid, index) =>(
+
                 <div>
 
-                    {allRatings.map((ratings, index ) => (
-                        <div key={index}>
-                            <StarRatingComponent
-                                name="rate1"
-                                starCount={5}
-                                size="10"
-                                value={ratings.avg}
-                                className="mr-5"
-                                pid={ratings._id}
+                    {allRatings.map((ratings, index ) => {
 
-                            />
-                        </div>
-                    ))}
+                        if(ratings._id === props.pID){
+
+                                return(
+                                    <div key={index}>
+                                        <StarRatingComponent
+                                            name="rate1"
+                                            starCount={5}
+                                            size="10"
+                                            value={ratings.avg}
+                                            className="mr-5"
+                                        />
+                                    </div>
+                                )
+
+                        }
+
+                        
+
+
+
+
+                    })}
                 </div>
-        ))
+
 
 
     )

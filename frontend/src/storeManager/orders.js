@@ -46,7 +46,7 @@ const Orders=()=>{
     };
 
     const handleStateChange=(e,oId)=>{
-        //console.log("update");
+
         updateStates(user._id,token,oId, e.target.value).then(
             data=>{
             if(data.error){
@@ -88,7 +88,7 @@ const Orders=()=>{
                                        {disState(o)}
                                    </li>
                                    <li className="list-group-item">
-                                       Amount: ${o.amount}
+                                       Amount: Rs:{o.amount}
                                    </li>
                                    <li className="list-group-item">
                                        Ordered by:{o.user.firstName}
