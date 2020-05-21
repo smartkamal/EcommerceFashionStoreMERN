@@ -1,5 +1,4 @@
-import {API} from "../Config";
-
+//add to wishlist with creating in local storage
 export const addWishItem = (item,next) =>{
 
     let wishlist =[];
@@ -20,7 +19,7 @@ export const addWishItem = (item,next) =>{
         next();
     }
 };
-
+//return the item count in the wishlist
 export const itemWishTotal =() =>{
     if(typeof window!=='undefined') {
         if (localStorage.getItem('wishlist')) {
@@ -29,20 +28,14 @@ export const itemWishTotal =() =>{
     }
     return 0;
 };
-
-export const emptyWishlist = next => {
-    if (typeof window !== "undefined"){
-        localStorage.removeItem("wishlist");
-        next();
-    }
-};
-
+//delete the wishlist from local storage
 export const deleteWishlist=x=>{
     if (typeof window !== "undefined") {
         localStorage.removeItem("wishlist");
     }
 };
 
+//getting wishlist items
 export const getWishlist =() =>{
     if(typeof window!=='undefined') {
         if (localStorage.getItem('wishlist')) {
@@ -52,7 +45,7 @@ export const getWishlist =() =>{
     return [];
 };
 
-
+//To delete the respective item in the wishlist
 export  const removeWishlistItem =(productId)=>{
     let wishlist=[];
     if (typeof window !='undefined'){
@@ -68,31 +61,3 @@ export  const removeWishlistItem =(productId)=>{
     }
     return wishlist;
 };
-
-
-// export const addUserWishList = (productID,userId,token) => {
-//
-//     console.log(JSON.stringify(productID))
-//     console.log(JSON.stringify(userId))
-//     return fetch(`${API}/user/wishlist/add/${userId}`, {
-//         method: "POST",
-//         headers: {
-//             Accept: 'application/json',
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`
-//         },
-//         body: JSON.stringify(productID)
-//
-//
-//     })
-//         .then(response => {
-//             console.log('res',response)
-//             return response.json()
-//
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         })
-//
-//
-// }

@@ -20,7 +20,7 @@ const Cart = () =>{
                 <h3>Items Quantity: {items.length}</h3>
                 <h3><Link className="btn-success" to="/">
                     Continue Shopping>></Link></h3>
-                <hr/>
+
                 {items.map((product, i)=>(<Card
                     key={i}
                     product={product}
@@ -46,18 +46,24 @@ const Cart = () =>{
             title ="Shopping Cart"
             description ="Manage Your Shopping Cart Items"
         >
-            <div className="row">
-              <div className="col-6">
+            <body data-spy="scroll" data-target=".row" data-offset="10">
+            <div className="row" >
+                <div className="col-sm-1" >
+                </div>
+              <div className="col-sm-3" >
                   {items.length>0 ? displayItems(items):emptyItemMsg()}
-              </div>
 
-                <div className="col-5">
+              </div>
+                <div className="col-sm-2" >
+                </div>
+
+                <div className="col-sm-4 ">
                     <h2>Cart Summary</h2>
                     <hr/>
                     <Checkout products={items}/>
                 </div>
             </div>
-
+            </body>
         </Layout>
     )
 };
