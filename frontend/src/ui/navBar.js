@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
 import {itemTotal,deleteCart} from "./cartHandler";
-import {itemWishTotal} from "./WishlistHandler";
+import {deleteWishlist, itemWishTotal} from "./WishlistHandler";
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -19,10 +19,10 @@ const isActive = (history,path) => {
 function Menus({history}) {
 
     return (
-        <div  >
+        <div>
 
 
-        <Navbar   className="py-3 dark bg-dark"  style={{height:60,}}>
+        <Navbar   className="py-3 dark bg-dark fixed-top"  style={{height:60,}}>
 
             <Nav className="mr-auto  py-0">
                     <Nav.Link
@@ -95,7 +95,8 @@ function Menus({history}) {
                 <Nav.Link
                     as={Link} to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
                         // history.push('/')
-                        deleteCart();})}>Sign Out
+                        deleteCart();
+                    deleteWishlist()})}>Sign Out
                 </Nav.Link>
             )}
         </Navbar>
