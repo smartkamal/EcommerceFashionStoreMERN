@@ -36,7 +36,7 @@ const Cart = () =>{
             </div>
         )
     };
-
+//empty Massage and link to home page
     const emptyItemMsg=()=>(
         <h3>Your cart is empty. <br/> <Link to="/">
             Continue Shopping</Link></h3>
