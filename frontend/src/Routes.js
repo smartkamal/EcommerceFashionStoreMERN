@@ -23,6 +23,7 @@ import UserProfile from './user/UserProfile'
 import StoreManagerUserProfile from './storeManager/updateStoreManager'
 import Orders from "./storeManager/orders";
 import ProductShop from './Store/ProductShop'
+import UpdateAdmin from "./admin/updateAdmin";
 
 
 const Routes = () =>{
@@ -48,7 +49,7 @@ const Routes = () =>{
             <StoreManagerRoute path="/storemanager/updatepass/:userId" exact component={StoreManagerUserProfile}/>
             <StoreManagerRoute path="/storemanager/orders" exact component={Orders}/>
             <Route path="/productshop" exact component={ProductShop}/>
-
+            <AdminRoute path="/admin/update/:userId" exact component={UpdateAdmin}/>
 
         </Switch>
     </BrowserRouter>)
