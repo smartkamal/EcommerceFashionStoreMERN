@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 const AdminDashboard = () => {
 
-    const {user: {firstName,lastName,email,userType}} = isValidated()
+    const {user: {_id,firstName,lastName,email,userType}} = isValidated()
 
     const adminLinks = () => {
         return(
@@ -20,6 +20,9 @@ const AdminDashboard = () => {
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Link className="nav-link" to="/create/storemanager">Store Manager Management</Link>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Link className="nav-link" to={`/admin/update/${_id}`}>Update Profile</Link>
                         </ListGroup.Item>
 
                     </ListGroup>
