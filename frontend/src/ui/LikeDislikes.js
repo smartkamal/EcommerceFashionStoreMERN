@@ -8,6 +8,7 @@ import DislikeFilled from "@ant-design/icons/lib/icons/DislikeFilled";
 import DislikeOutlined from "@ant-design/icons/lib/icons/DislikeOutlined";
 
 function LikesDislikes(props) {
+    //hold state
     const [Likes,setLikes] = useState(0)
     const [Dislikes,setDislikes] = useState(0)
     const [LikeAction,setLikeAction] = useState(null)
@@ -18,6 +19,7 @@ function LikesDislikes(props) {
         userId:props.userId
     };
 
+    //checking and getting comments
     useEffect(() => {
         Axios.post(`${API}/like/getLikes`,variable)
             .then(response => {
@@ -50,6 +52,7 @@ function LikesDislikes(props) {
             })
     },[])
 
+    //like action
     const onLike = () => {
         if (LikeAction ===null){
             Axios.post(`${API}/like/uplike`,variable)
@@ -79,6 +82,7 @@ function LikesDislikes(props) {
         }
     }
 
+    //dislike action
     const onDislike = () => {
         if (DislikeAction !== null){
 
