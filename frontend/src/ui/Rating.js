@@ -1,9 +1,6 @@
 import React, {useEffect,useState} from 'react'
-import {FaStar} from 'react-icons/fa'
 import Axios from "axios";
 import {API} from "../Config";
-import {Tooltip} from "antd";
-import {LikeFilled, LikeOutlined, StarFilled, StarOutlined} from "@ant-design/icons";
 import {Col, Container, Row} from "react-bootstrap";
 import {isValidated} from "../validators";
 import StarRatingComponent from 'react-star-rating-component';

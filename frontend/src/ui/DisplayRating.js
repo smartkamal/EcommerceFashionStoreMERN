@@ -6,8 +6,6 @@ function DisplayRating(props) {
 
     const [allRatings, setRatings] = useState([]);
 
-    const ids = [props.pID]
-
      const getRatings = () =>{
         return fetch(`${API}/rating/getAll`,{
             method: "GET"
