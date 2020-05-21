@@ -50,6 +50,7 @@
   "devDependencies": {
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
-    "react-redux": "^7.2.0"
+    "react-redux": "^7.2.0",
+    "react-star-rating-component": "^1.4.1"
   }
 }
