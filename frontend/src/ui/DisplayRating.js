@@ -4,8 +4,10 @@ import {API} from "../Config";
 
 function DisplayRating(props) {
 
+    //hold state
     const [allRatings, setRatings] = useState([]);
 
+    //get added ratings
      const getRatings = () =>{
         return fetch(`${API}/rating/getAll`,{
             method: "GET"
@@ -16,6 +18,7 @@ function DisplayRating(props) {
             .catch(err=> console.log(err));
     }
 
+    //load the rating
     const loadRatings = () =>{
          getRatings().then(content => {
              if(content.error){

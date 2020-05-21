@@ -6,6 +6,7 @@ import {isValidated} from "../validators";
 import StarRatingComponent from 'react-star-rating-component';
 
 function Rating(props) {
+    //hold state
     const [Rating,setRating] = useState(0)
     const [Ratings,setRatings] = useState(0)
     const [RatingAction,setRatingAction] = useState(null)
@@ -15,6 +16,7 @@ function Rating(props) {
         productId:props.productId,
     };
 
+    //checking and getting ratings
     useEffect(() => {
         Axios.post(`${API}/rating/getRatings`,variables)
             .then(response => {
@@ -35,6 +37,7 @@ function Rating(props) {
     },[Rating])
 
 
+    //rating action
     const onRate = (nextValue, prevValue, name) => {
 
         setRating(nextValue)

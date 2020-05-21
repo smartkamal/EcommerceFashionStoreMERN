@@ -3,8 +3,11 @@ import SingleComment from './SingleComment';
 
 function ReplyComment(props) {
 
+    //hold state
     const [ChildCommentNumber, setChildCommentNumber] = useState(0)
     const [OpenReplyComments, setOpenReplyComments] = useState(false)
+
+    //reply count
     useEffect(() => {
 
         let commentNumber = 0;
@@ -30,6 +33,7 @@ function ReplyComment(props) {
             </React.Fragment>
         ))
 
+    //get reply comment
     const handleChange = () => {
         setOpenReplyComments(!OpenReplyComments)
     }
