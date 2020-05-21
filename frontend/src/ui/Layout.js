@@ -13,7 +13,7 @@ const Layout=  ({title="Title",description="Description",className,children}) =>
         {/*<div className="img-fluid mb-5">*/}
         {/*    <Slider/>*/}
         {/*</div>*/}
-        <div className="jumbotron" style={{paddingTop:20, paddingBottom:2}}>
+        <div className="jumbotron mt-5" style={{paddingTop:30, paddingBottom:2}}>
             <h2>{title}</h2>
             <p className="lead">{description}</p>
         </div>

@@ -1,14 +1,12 @@
 import React, {useEffect,useState} from 'react'
-import {FaStar} from 'react-icons/fa'
 import Axios from "axios";
 import {API} from "../Config";
-import {Tooltip} from "antd";
-import {LikeFilled, LikeOutlined, StarFilled, StarOutlined} from "@ant-design/icons";
 import {Col, Container, Row} from "react-bootstrap";
 import {isValidated} from "../validators";
 import StarRatingComponent from 'react-star-rating-component';
 
 function Rating(props) {
+    //hold state
     const [Rating,setRating] = useState(0)
     const [Ratings,setRatings] = useState(0)
     const [RatingAction,setRatingAction] = useState(null)
@@ -19,6 +17,7 @@ function Rating(props) {
         productId:props.productId,
     };
 
+    //checking and getting ratings
     useEffect(() => {
         Axios.post(`${API}/rating/getRatings`,variables)
             .then(response => {
@@ -40,6 +39,7 @@ function Rating(props) {
     },[Rating])
 
 
+    //rating action
     const onRate = (nextValue, prevValue, name) => {
 
         setRating(nextValue)
@@ -76,7 +76,9 @@ function Rating(props) {
                     <Col xs={12}>
                         <div>
                             <br/>
+
                             <p> Rate this product </p>
+
                             <hr/>
                             <div>
                             </div>

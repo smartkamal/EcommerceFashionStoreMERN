@@ -49,8 +49,8 @@ const Home=  () => {
 
     return (
 
-<div >
-            <div className="img-fluid mb-5">
+<div>
+            <div className="img-fluid mt-5 mb-5">
             <SlideShow/>
             </div>
             <SearchComp/>
