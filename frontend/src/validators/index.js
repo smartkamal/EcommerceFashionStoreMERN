@@ -1,8 +1,6 @@
 import {API} from "../Config";
 
 export const signUp = (user) => {
-    //console.log(firstName,lastName,email,password)
-
     return fetch(`${API}/signup`, {
         method: "POST",
         headers: {
@@ -12,7 +10,7 @@ export const signUp = (user) => {
         body: JSON.stringify(user)
     })
         .then(response => {
-            return response.json()
+            return response.json() //Return response when object found
         })
         .catch(error => {
             console.log(error);
@@ -20,8 +18,6 @@ export const signUp = (user) => {
 }
 
 export const signIn = user => {
-    //console.log(firstName,lastName,email,password)
-
     return fetch(`${API}/signin`, {
         method: "POST",
         headers: {
@@ -40,7 +36,7 @@ export const signIn = user => {
 
 export const signOut = (next) => {
     if (typeof window !== 'undefined'){
-        localStorage.removeItem('jwt');
+        localStorage.removeItem('jwt'); //Remove token from localstorage when the window is not empty
         next();
         return fetch(`${API}/signout`, {
             method: "GET",
@@ -52,6 +48,7 @@ export const signOut = (next) => {
     }
 }
 
+//Save user data on local storage when a user sign in
 export const validate = (content, next) => {
     if (typeof window !== 'undefined') {
         localStorage.setItem('jwt', JSON.stringify(content));
@@ -59,6 +56,7 @@ export const validate = (content, next) => {
     }
 }
 
+//Hide signin, signout, signup links based on jwt
 export const isValidated = () => {
     if (typeof window == 'undefined') {
         return false;

@@ -11,7 +11,6 @@ router.put("/category/:catId/:id", controlSignin,authenticatedUser,userAdmin,upd
 router.delete("/category/:catId/:id", controlSignin,authenticatedUser,userAdmin,deleteCategory);
 router.get("/categoryList", listCategories);
 
-
 router.param('id', findUserById);
 router.param('catId', findCategoryById);
 

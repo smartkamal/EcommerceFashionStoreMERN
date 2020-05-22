@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const {errorHandler} = require("../helpers/ErrorHandler");
 const {Rating} = require('../models/rating')
 
 router.post("/rating/getRatings",(req, res) => {
@@ -18,6 +18,7 @@ router.post("/rating/getRatings",(req, res) => {
         })
 })
 
+//add rating
 router.post("/rating/uprate",(req, res) => {
     let variable = { }
     if(req.body.productId) {
@@ -32,6 +33,7 @@ router.post("/rating/uprate",(req, res) => {
     })
 })
 
+//get average rating
 router.get("/rating/getAll",(req,res) =>{
 
     Rating.aggregate

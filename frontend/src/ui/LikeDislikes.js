@@ -3,7 +3,6 @@ import { Tooltip } from 'antd';
 import Axios from "axios";
 import {API} from "../Config";
 import {LikeFilled, LikeOutlined} from "@ant-design/icons";
-import Icon from "@ant-design/icons/es";
 import DislikeFilled from "@ant-design/icons/lib/icons/DislikeFilled";
 import DislikeOutlined from "@ant-design/icons/lib/icons/DislikeOutlined";
 

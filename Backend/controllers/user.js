@@ -1,11 +1,10 @@
-
 const User = require('../models/user');
 const Product = require('../models/product')
 const _ = require('lodash');
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const {errorHandler} = require("../helpers/ErrorHandler");
 const{Order}=require('../models/order');
 
-
+//Find a particular user based on the id
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
         if (error || !user) {
@@ -13,6 +12,7 @@ exports.findUserById = (req, res, next, id) => {
                 error: 'User not found'
             });
         }
+        //If user is found, add the data to req.profile
         req.profile = user;
         next();
     });
@@ -153,84 +153,6 @@ exports.userHistory=(req,res)=>{
     })
 }
 
-
-exports.addToWishList = (req,res) =>{
-
-    console.log(req.profile._id)
-    console.log(req.body.pid)
-    User.findOne({_id:req.profile._id}
-    ,(err, user) =>{
-
-            if (err || !user) {
-                return res.status(400).json({
-                    error: 'User not found'
-                });
-            }
-
-            console.log(user.userType)
-        let duplicate = false;
-            user.wishList.forEach((wish) =>{
-                if(wish.id === req.body.pid){
-                    duplicate=true;
-                }
-            })
-
-            if(duplicate){
-                User.findOneAndUpdate(
-                    {_id:req.params.userId, "wish.id":req.body.pid},
-                    {$inc:{"wish.$.quantity":1}},
-                    {new:true},
-                    () =>{
-                        if(err) return res.json({success:false,err});
-                        res.status(200).json(user.wishList)
-                    }
-                    )
-            }else{
-                User.findOneAndUpdate(
-                    {_id:req.profile._id},
-                    {
-                        $push:{
-                            wishList:{
-                                id:req.body.pid,
-                                quantity:1,
-                                date:Date.now()
-                            }
-                        }
-                    },
-                    {new:true},
-                    (err,profile) =>{
-                        if(err) return res.json({success:false, err});
-                        res.status(200).json(profile.wishList)
-                    }
-                )
-            }
-        })
-
-}
-
-
-exports.retrieveAllWishList= (req,res) =>{
-
-    let type= req.query.type;
-    let productIdList = req.query.cartIDs
-
-    if(type === "array"){
-        let ids = req.query.cartIDs.split(',');
-        productIdList = [];
-        productIdList = ids.map(item =>{
-            return item
-        })
-    }
-
-    Product.findById({'_id':{$in:productIdList}})
-        .populate("productCat")
-        .exec((err, product) =>{
-        if(err) return req.status(400).send(err)
-            return res.status(200).send(product)
-    })
-
-
-};
 
 
 

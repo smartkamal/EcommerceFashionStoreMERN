@@ -28,14 +28,13 @@ mongoose.connect(process.env.DATABASE,{
     useCreateIndex:true,
     useUnifiedTopology:true,
     useFindAndModify: false
-
 }).then(() => console.log("Database connected"));
 
 //middlewares
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(expressValidator());
+app.use(morgan('dev')); //HTTP request logger
+app.use(bodyParser.json()); //converts POST data to JSON
+app.use(cookieParser()); //Parses cookies attached to client request object
+app.use(expressValidator()); //Server side validation
 app.use(cors());
 
 //routes

@@ -40,7 +40,7 @@ const UserDashboard = () => {
                             <Link className="nav-link" to="/cart">My Cart</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Link className="nav-link" to={`/admin/update/${_id}`}>Update Profile</Link>
+                            <Link className="nav-link" to={`/UserProfile/${_id}`}>Update Profile</Link>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
