@@ -29,7 +29,7 @@ exports.create=(req,res)=>{
         res.json(data);
     })
 };
-// Listing order of the users
+// Listing order of each user
 exports.ordersList=(req,res)=>{
     Order.find()
         .populate('user',"_id firstName lastName address")
