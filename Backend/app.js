@@ -51,9 +51,9 @@ app.use("/api",ratingRoutes);
 const port = process.env.PORT || 8000;
 
 //custom variable inside heroku
-// if(process.env.NODE_ENV ){
-//     app.use(express.static('frontend/build'));
-// }
+if(process.env.NODE_ENV ){
+    app.use(express.static('frontend/build'));
+}
 
 app.listen(port, () =>{
     console.log(`Server running on ${port}`);
