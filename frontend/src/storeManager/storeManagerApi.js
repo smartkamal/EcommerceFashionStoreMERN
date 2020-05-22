@@ -85,7 +85,7 @@ export const deleteProduct = (productId , userId , token) =>{
         })
         .catch(err => console.log(err));
 };
-
+//Get the order list
 export const ordersList=(userId,token)=>{
     return fetch(`${API}/order/list/${userId}`,{
         method: "GET",
@@ -100,7 +100,7 @@ export const ordersList=(userId,token)=>{
         })
         .catch(err=>console.log(err));
 };
-
+//get state of the relevant user
 export const getStates=(userId,token)=>{
     return fetch(`${API}/order/state/${userId}`,{
         method: "GET",
@@ -115,7 +115,7 @@ export const getStates=(userId,token)=>{
         })
         .catch(err=>console.log(err));
 };
-
+//Send the new state
 export const updateStates=(userId,token,orderId,newState)=>{
     return fetch(`${API}/order/${orderId}/newState/${userId}`,{
         method: "PUT",

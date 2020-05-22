@@ -9,7 +9,7 @@ const Orders=()=>{
     const [orders,setOrders]=useState([]);
     const [states,setStates]=useState([]);
     const {user,token}=isValidated();
-
+//Load th eorder from the DB
     const load=()=>{
         ordersList(user._id,token).then(data=>{
             if(data.error){
@@ -19,7 +19,7 @@ const Orders=()=>{
             }
         });
     };
-
+//Getting state of the relevant order
     const stateVals=()=>{
         getStates(user._id,token).then(data=>{
             if(data.error){
@@ -33,7 +33,7 @@ const Orders=()=>{
         load();
         stateVals();
     },[]);
-
+//Get the number of orders
     const ordersLength = ()=>{
       if(orders.length>0){
           return(
@@ -44,10 +44,10 @@ const Orders=()=>{
 
       }
     };
+//Use handler to update the state
+    const handleStateChange=(e,orderId)=>{
 
-    const handleStateChange=(e,oId)=>{
-
-        updateStates(user._id,token,oId, e.target.value).then(
+        updateStates(user._id,token,orderId, e.target.value).then(
             data=>{
             if(data.error){
                 console.log("State update failed");
