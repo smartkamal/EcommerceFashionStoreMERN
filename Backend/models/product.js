@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {ObjectId} = mongoose.Schema;
 
-
+//collection model for products
 const productSchema = new mongoose.Schema({
 
         productName: {

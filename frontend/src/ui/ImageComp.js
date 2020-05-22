@@ -11,9 +11,7 @@ const GetImage = ({product , url}) =>(
 
         />
 
-
     </div>
-
 )
 
 export default GetImage;

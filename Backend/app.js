@@ -4,14 +4,13 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
-var cors = require('cors');
+const cors = require('cors');
 
 require('dotenv').config();
 
 //require routes
 const authenticationRoutes = require('./routes/authentication');
 const productRoutes = require("./routes/product");
-
 const checkoutRoutes = require('./routes/checkout');
 const orderRoutes = require('./routes/order');
 const userRoutes = require('./routes/user');

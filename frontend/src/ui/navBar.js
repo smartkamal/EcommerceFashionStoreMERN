@@ -15,14 +15,12 @@ const isActive = (history,path) => {
 }
 
 
-
 function Menus({history}) {
 
     return (
         <div>
 
-
-        <Navbar   className="py-3 dark bg-dark fixed-top"  style={{height:60,}}>
+        <Navbar   className="py-3 dark bg-dark fixed-top"  style={{height:50}}>
 
             <Nav className="mr-auto  py-0">
                     <Nav.Link
@@ -60,19 +58,12 @@ function Menus({history}) {
                 )}
 
 
-
                 {isValidated() && isValidated().user.userType === "user" && (
                     <Nav.Link
 
                         as={Link} style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup>
                     </Nav.Link>
                 )}
-
-
-
-
-
-
 
                 <Nav.Link
                     as={Link} style={{color:'#fafafa' , textDecoration: 'none' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
@@ -94,7 +85,6 @@ function Menus({history}) {
             {isValidated() && (
                 <Nav.Link
                     as={Link} to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
-                        // history.push('/')
                         deleteCart();
                     deleteWishlist()})}>Sign Out
                 </Nav.Link>

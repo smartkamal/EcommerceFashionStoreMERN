@@ -1,12 +1,10 @@
 import React,{useEffect,useState} from 'react';
-import Layout from "./Layout";
 import {getUniquePro} from './apiCore'
 import { Row} from "react-bootstrap";
 import  Card from './proCard'
 import Comments from "./Comments";
 import axios from "axios";
 import {API} from "../Config";
-
 import Rating from "./Rating";
 
 
@@ -67,7 +65,6 @@ const Product = (props) =>{
                             }
                         </div>
 
-
                     </Row>
 
                     <div>
@@ -78,10 +75,7 @@ const Product = (props) =>{
                         <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
                     </div>
 
-
         </div>
-
-
 
     );
 }

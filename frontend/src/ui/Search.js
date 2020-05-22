@@ -31,7 +31,7 @@ const SearchComp = () =>{
         })
     }
 
-    //on componentmount run the below method and populates state
+    //on componentdidmount run the below method and populates state
     useEffect(() =>{
         getAllCategories();
     },[])
@@ -51,7 +51,7 @@ const SearchComp = () =>{
         retrieveData();
     }
 
-
+    //method to pass the query and retrieve data
     const retrieveData = () =>{
         console.log(searchVal,aCategory)
         if(!didSearch){
@@ -83,7 +83,6 @@ const SearchComp = () =>{
         )
     }
 
-
     const informUser = (didSearch, resultData) =>{
         if(didSearch && resultData.length > 0 && resultData.length < 2){
             return `Found ${resultData.length} Product`
@@ -113,7 +112,6 @@ const searchForm = () =>(
     </Form>
 );
 
-
     return(
 
       <div>
@@ -124,13 +122,6 @@ const searchForm = () =>(
               {displaySearched(resultData)}
           </div>
       </div>
-
-
-
-
-
-
-
     )
 }
 
