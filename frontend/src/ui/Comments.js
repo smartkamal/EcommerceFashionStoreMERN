@@ -50,7 +50,6 @@ function Comments(props) {
                         <br/>
                         <p> Comments </p>
                         <hr/>
-                        {console.log(props.CommentLists)}
 
                         {props.CommentLists && props.CommentLists.map((comment, index) => (
                             (!comment.responseTo &&
