@@ -33,12 +33,14 @@ exports.signup = (req,res) =>{
 
             // send mail with defined transport object
             let mailOptions = {
-                from: 'applicationframeworks123@gmail.com', // sender address
+                from: 'aubrellafashions@gmail.com', // sender address
                 to: user.email, // list of receivers
                 subject: "Congratulations!", // Subject line
                 html: `<p>Dear ${user.firstName}</p><br><b>Congratulations <br> You are our new store Manager!!
                       </b> <br> Your username and password are attached below. <br> Username: ${user.email}
-                       <br> Password: ${user.password}`
+                       <br> Password: ${user.password}
+                        <br> You can change your password once you log in to the system`
+
                 };
 
             transporter.sendMail(mailOptions, function (err, content) {
