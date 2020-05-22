@@ -32,6 +32,7 @@ export const updateUserData = (id, token, user) =>{
         .catch(err=> console.log(err));
 };
 
+//Update user data in localstorage
 export const userUpdate = (user, next) => {
     if (typeof window !== 'undefined'){
         if (localStorage.getItem('jwt')){

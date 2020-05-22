@@ -1,11 +1,10 @@
-
 const User = require('../models/user');
 const Product = require('../models/product')
 const _ = require('lodash');
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const {errorHandler} = require("../helpers/ErrorHandler");
 const{Order}=require('../models/order');
 
-
+//Find a particular user based on the id
 exports.findUserById = (req, res, next, id) => {
     User.findById(id).exec((error,user) => {
         if (error || !user) {
@@ -13,6 +12,7 @@ exports.findUserById = (req, res, next, id) => {
                 error: 'User not found'
             });
         }
+        //If user is found, add the data to req.profile
         req.profile = user;
         next();
     });

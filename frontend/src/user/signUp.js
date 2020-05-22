@@ -21,12 +21,13 @@ const SignUp=  () => {
 
     const {firstName, lastName, email, password, success, error} = values
 
+    //Update state data from form
     const handleChange = val => e =>{
          setValues({...values,error: false,[val]: e.target.value})
     }
 
     const submitForm = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //Prevent browser from reloading
         setValues({...values,error: false});
 
         signUp({firstName,lastName,email,password})
@@ -35,7 +36,7 @@ const SignUp=  () => {
                     setValues({...values,error: content.error, success: false})
                 }
                 else{
-                    setValues({
+                    setValues({ //Reset values in form
                         ...values,
                         firstName: '',
                         lastName: '',
@@ -49,7 +50,6 @@ const SignUp=  () => {
     }
 
     const signUpForm = () =>(
-
         <Container >
             <Row>
             <Col >
@@ -58,10 +58,12 @@ const SignUp=  () => {
                     <Form.Label>First Name</Form.Label>
                     <Form.Control onChange={handleChange('firstName')} type="text" placeholder="Enter First Name" value={firstName}  />
                 </Form.Group>
+
                 <Form.Group controlId="formBasicLName">
                     <Form.Label>Last Name</Form.Label>
                     <Form.Control onChange={handleChange('lastName')}  type="text" placeholder="Enter Last Name" value={lastName}/>
                 </Form.Group>
+
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control onChange={handleChange('email')}  type="email" placeholder="Enter email" value={email}/>
@@ -71,16 +73,14 @@ const SignUp=  () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control onChange={handleChange('password')}  type="password" placeholder="Password" value={password}/>
                 </Form.Group>
+
                 <Button variant="success" type="submit" onClick={submitForm}>
                     SignUp
                 </Button>
             </Form>
             </Col>
-
         </Row>
-
         </Container>
-
     );
 
     const errorMessage = () => (
@@ -95,15 +95,12 @@ const SignUp=  () => {
         </Alert>
     );
 
-
     return (
         <Layout title="Sign Up" description="Welcome to Aubrella"
         className="container col-md-6 offset-md-3">
-
             {errorMessage()}
             {successMessage()}
             {signUpForm()}
-
         </Layout>
     );
 }

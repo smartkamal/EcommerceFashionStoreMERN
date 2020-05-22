@@ -1,5 +1,5 @@
 const{Order,CartItems}=require('../models/order');
-const{errorHandler}=require('../helpers/dbErrorHandler');
+const{errorHandler}=require('../helpers/ErrorHandler');
 
 //find the order using order ID
 exports.findOrderById =(req,res,next,id)=>{

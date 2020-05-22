@@ -56,6 +56,7 @@ usersSchema.virtual('password')
 
 usersSchema.methods = {
 
+    //Return true if the encrypted password matches the hashed_password when sign in
     authenticateUser: function(text){
         return this.encryptPassword(text) === this.hashed_password
     },

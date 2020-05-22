@@ -1,8 +1,8 @@
 require('dotenv').config();
 const User = require('../models/user');
-const jwtoken = require('jsonwebtoken'); //generate signed token
-const expressJwt = require('express-jwt'); //check authorization
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const jwt = require('jsonwebtoken'); //generate signed token which is uniques for each user
+const expressJwt = require('express-jwt'); //check authorization by validating JWTs
+const {errorHandler} = require("../helpers/ErrorHandler");
 const nodemailer = require("nodemailer");
 
 exports.signup = (req,res) =>{
@@ -14,46 +14,42 @@ exports.signup = (req,res) =>{
             });
         }
 
+        //Hide the salt and hashed_password from user
         user.salt = undefined;
         user.hashed_password = undefined;
 
-
         res.json({
             user
-
-
         })
 
-            if(user.userType == 'manager') {
-                let transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                        user: process.env.EMAIL,
-                        pass: process.env.PASSWORD
-                    }
-                });
+        if(user.userType == 'manager') {
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
+                }
+            });
 
-                // send mail with defined transport object
-                let mailOptions = {
-                    from: 'applicationframeworks123@gmail.com', // sender address
-                    to: user.email, // list of receivers
-                    subject: "Congratulations!", // Subject line
-                    html: `<p>Dear ${user.firstName}</p><br><b>Congratulations <br> You are our new store Manager!!
-                        </b> <br> Your username and password are attached below. <br> Username: ${user.email} <br> Password: ${user.password}`
+            // send mail with defined transport object
+            let mailOptions = {
+                from: 'applicationframeworks123@gmail.com', // sender address
+                to: user.email, // list of receivers
+                subject: "Congratulations!", // Subject line
+                html: `<p>Dear ${user.firstName}</p><br><b>Congratulations <br> You are our new store Manager!!
+                      </b> <br> Your username and password are attached below. <br> Username: ${user.email}
+                       <br> Password: ${user.password}`
                 };
 
-                transporter.sendMail(mailOptions, function (err, content) {
-                    if (err) {
-                        console.log("Error occured", err)
-                    } else {
-                        console.log("Email sent")
-                    }
-                })
-
-            }
-                })
-
-
+            transporter.sendMail(mailOptions, function (err, content) {
+                if (err) {
+                    console.log("Error occured", err)
+                } else {
+                    console.log("Email sent")
+                }
+            })
+        }
+    })
 };
 
 exports.signin = (req, res) =>{
@@ -71,9 +67,9 @@ exports.signin = (req, res) =>{
                 error: 'Email or password invalid'
             });
         };
-        //generate signed token
-        const token = jwtoken.sign({_id: user._id}, process.env.JWT_SECRET)
-        //keep the token as 'tn' in cookie with expiry date
+        //generate signed token with id and secret key
+        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET)
+        //keep the token as 'tn' in cookie with expiry time of 9999 seconds
         res.cookie('tn',token,{expire: new Date()+9999})
         //return response with user and token
         const {_id, firstName, lastName, userType} = user
@@ -86,11 +82,13 @@ exports.signout = (req,res) => {
     res.json({message: 'Signed out successfully'})
 };
 
+//Only logged in user have access to purchase items
 exports.controlSignin = expressJwt({
     secret: process.env.JWT_SECRET,
     userProperty: "auth"
 });
 
+//Checks if user is authenticated. The user can only access their profile
 exports.authenticatedUser = (req, res, next) => {
     let user = req.profile && req.auth && req.profile._id == req.auth._id
     if (!user) {
@@ -101,6 +99,7 @@ exports.authenticatedUser = (req, res, next) => {
     next();
 };
 
+//Does not allow users to access the admin profile
 exports.userAdmin = (req, res, next) => {
     if (req.profile.userType === "user" ){
         return res.status(403).json({

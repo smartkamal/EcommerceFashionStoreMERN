@@ -27,13 +27,14 @@ exports.errorHandler = error => {
         switch (error.code) {
             case 11000:
             case 11001:
-                errorMessage = uniqueErrorMessage(error);
+                errorMessage = uniqueErrorMessage(error); //Generates a unique message if above mentioned errors
                 break;
             default:
                 errorMessage = "Something went wrong";
         }
     } else {
         for (let errorName in error.errors) {
+            //For any other message, grab the error and populate the errorMessage variable with that error
             if (error.errors[errorName].message)
                 errorMessage = error.errors[errorName].message;
         }

@@ -1,6 +1,5 @@
 import React from "react";
 import {BrowserRouter,Route,Switch} from "react-router-dom";
-
 import signIn from './user/SignIn'
 import signUp from './user/signUp'
 import Home from './ui/Home'
@@ -24,7 +23,6 @@ import StoreManagerUserProfile from './storeManager/updateStoreManager'
 import Orders from "./storeManager/orders";
 import ProductShop from './Store/ProductShop'
 import UpdateAdmin from "./admin/updateAdmin";
-
 
 const Routes = () =>{
     return(
@@ -50,10 +48,8 @@ const Routes = () =>{
             <StoreManagerRoute path="/storemanager/orders" exact component={Orders}/>
             <Route path="/productshop" exact component={ProductShop}/>
             <AdminRoute path="/admin/update/:userId" exact component={UpdateAdmin}/>
-
         </Switch>
     </BrowserRouter>)
-
 }
 
 export default Routes;
