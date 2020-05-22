@@ -3,7 +3,7 @@ import {Comment, Avatar, Button, Input} from 'antd'
 import axios from 'axios';
 import {API} from "../Config";
 import LikesDislikes from "./LikeDislikes";
-
+import {isValidated} from "../validators";
 
 const {TextArea} = Input;
 
