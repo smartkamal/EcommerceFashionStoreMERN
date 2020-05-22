@@ -44,22 +44,4 @@ exports.ordersList=(req,res)=>{
         })
 
 };
-//getting the order status
-exports.getState=(req,res)=>{
-    res.json(Order.schema.path('state').enumValues);
-};
-// update status in DB
-exports.updateStates=(req,res)=>{
-    Order.update(
-        {_id:req.body.orderId},
-        {$set:{state:req.body.state}},
-        (err,order)=>{
-            if(err){
-                return res.status(400).json({
-                    error:'Unable to change the state'
-                });
-            }
-            res.json(order);
-        }
-        )
-};
+

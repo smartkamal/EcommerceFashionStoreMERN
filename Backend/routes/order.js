@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {controlSignin, authenticatedUser,userAdmin} = require("../controllers/authentication");
 const {findUserById,addOrderToHistory} = require("../controllers/user");
-const {create,ordersList,getState,findOrderById, updateStates} = require("../controllers/order");
+const {create,ordersList,findOrderById} = require("../controllers/order");
 const { updateQuantityDetails} = require("../controllers/product");
 
 //POST methods
@@ -30,17 +30,8 @@ router.get(
     controlSignin,
     authenticatedUser,
     userAdmin,
-    getState
 );
 
-//PUT Methods
-router.put(
-    '/order/:orderId/newState/:id',
-    controlSignin,
-    authenticatedUser,
-    userAdmin,
-    updateStates
-);
 
 router.param('id',findUserById);
 router.param('orderId',findOrderById);
