@@ -4,6 +4,7 @@ const router = express.Router();
 const {Like} = require('../models/Like')
 const {Dislike} = require('../models/Dislike')
 
+//get likes
 router.post("/like/getLikes",(req, res) => {
     let variable = { }
     if(req.body.productId) {
@@ -19,6 +20,7 @@ router.post("/like/getLikes",(req, res) => {
         })
 })
 
+//get dislikes
 router.post("/like/getDislikes",(req, res) => {
     let variable = { }
     if(req.body.productId) {
@@ -34,6 +36,7 @@ router.post("/like/getDislikes",(req, res) => {
         })
 })
 
+//increase likes
 router.post("/like/uplike",(req, res) => {
     let variable = { }
     if(req.body.productId) {
@@ -53,6 +56,7 @@ router.post("/like/uplike",(req, res) => {
     })
 })
 
+//decrease likes
 router.post("/like/unlike",(req, res) => {
     let variable = { }
     if(req.body.productId) {
@@ -68,6 +72,7 @@ router.post("/like/unlike",(req, res) => {
     })
 })
 
+//increase dislike
 router.post("/like/undislike",(req, res) => {
     let variable = { }
     if(req.body.productId) {
@@ -82,6 +87,7 @@ router.post("/like/undislike",(req, res) => {
         })
 })
 
+//decrease dislike
 router.post("/like/updislike",(req, res) => {
     let variable = { }
     if(req.body.productId) {
