@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 
+
 require('dotenv').config();
 
 //require routes
@@ -51,7 +52,7 @@ app.use("/api",ratingRoutes);
 const port = process.env.PORT || 8000;
 
 if(process.env.NODE_ENV){
-    app.use(express.static('../../frontend/build'))
+    app.use(express.static('./frontend/build'))
 }
 
 app.listen(port, () =>{
