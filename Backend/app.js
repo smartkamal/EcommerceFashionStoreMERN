@@ -50,6 +50,9 @@ app.use("/api",ratingRoutes);
 
 const port = process.env.PORT || 8000;
 
+if(process.env.NODE_ENV){
+    app.use(express.static('../../frontend/build'))
+}
 
 app.listen(port, () =>{
     console.log(`Server running on ${port}`);
