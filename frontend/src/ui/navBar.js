@@ -30,21 +30,21 @@ function Menus({history}) {
                         as={Link} style={isActive(history,"/productshop")} to="/productshop"> Store
                     </Nav.Link>
 
-                    //Show link to user dashboard when signed in
+                    {/*Show link to user dashboard when signed in*/}
                     {isValidated() && isValidated().user.userType === "user" && (
                         <Nav.Link
                             as={Link} style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard
                         </Nav.Link>
                     )}
 
-                    //Show link to manager dashboard if user type is manager
+                    {/*Show link to manager dashboard if user type is manager*/}
                     {isValidated() && isValidated().user.userType === "manager" && (
                         <Nav.Link
                             as={Link}style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard
                         </Nav.Link>
                     )}
 
-                    //Show link to admin dashboard if user type is admin
+                    {/*Show link to admin dashboard if user type is admin*/}
                     {isValidated() && isValidated().user.userType === "admin" && (
                         <Nav.Link
                             as={Link} style={isActive(history,"/admin/admindashboard")} to="/admin/admindashboard">Dashboard
@@ -69,7 +69,7 @@ function Menus({history}) {
                 </Nav.Link>
             </Nav>
 
-            //Hide signout when user not logged in
+            {/*Hide signout when user not logged in*/}
             {!isValidated() && (
                 <Fragment>
                     <Nav.Link
@@ -82,7 +82,7 @@ function Menus({history}) {
                 </Fragment>
             )}
 
-            //Hide signin and signup when logged in
+            {/*Hide signin and signup when logged in*/}
             {isValidated() && (
                 <Nav.Link
                     as={Link} to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
