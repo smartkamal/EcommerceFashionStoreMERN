@@ -33,7 +33,7 @@ const Product = (props) =>{
 
     }
 
-    //grab the product id when the component mounts
+    //grab the product id when the component did mounts
     useEffect(() =>{
         //product id from url
         const productId = props.match.params.productid

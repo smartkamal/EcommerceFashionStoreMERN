@@ -1,10 +1,11 @@
-import React,{Fragment} from "react";
+import React, {Fragment, useEffect} from "react";
 import {Link, withRouter} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
 import {itemTotal,deleteCart} from "./cartHandler";
 import {deleteWishlist, itemWishTotal} from "./WishlistHandler";
+
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -20,7 +21,7 @@ function Menus({history}) {
     return (
         <div>
 
-        <Navbar   className="py-3 dark bg-dark fixed-top"  style={{height:50}}>
+        <Navbar className="py-3 dark bg-dark fixed-top "  style={{height:50}}>
 
             <Nav className="mr-auto  py-0">
                     <Nav.Link

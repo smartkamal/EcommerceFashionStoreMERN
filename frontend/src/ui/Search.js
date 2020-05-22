@@ -53,7 +53,6 @@ const SearchComp = () =>{
 
     //method to pass the query and retrieve data
     const retrieveData = () =>{
-        console.log(searchVal,aCategory)
         if(!didSearch){
             itemList({searchVal: searchVal || undefined, aCategory: aCategory})
                 .then(response =>{
