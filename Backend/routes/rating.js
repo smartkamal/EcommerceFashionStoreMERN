@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const {errorHandler} = require("../helpers/ErrorHandler");
 const {Rating} = require('../models/rating')
 
 router.post("/rating/getRatings",(req, res) => {

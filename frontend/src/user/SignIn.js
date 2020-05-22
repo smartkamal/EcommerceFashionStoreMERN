@@ -11,8 +11,8 @@ import {signIn, validate,isValidated} from "../validators";
 
 const SignIn=  () => {
     const [values, setValues] = useState({
-        email: 'ush@gmail.com',
-        password:'usha123',
+        email: '',
+        password:'',
         error:'',
         loading:false,
         redirectToRef: false,
@@ -21,6 +21,7 @@ const SignIn=  () => {
     const {email, password, error, loading, redirectToRef} = values
     const {user} = isValidated();
 
+    //Update state data from form
     const handleChange = val => e =>{
         setValues({...values,error: false,[val]: e.target.value})
     }
@@ -51,7 +52,6 @@ const SignIn=  () => {
     }
 
     const signInForm = () =>(
-
         <Container >
             <Row>
                 <Col >
@@ -65,16 +65,14 @@ const SignIn=  () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control onChange={handleChange('password')}  type="password" placeholder="Password" value={password}/>
                         </Form.Group>
+
                         <Button variant="success" type="submit" onClick={submitForm}>
                             SignIn
                         </Button>
                     </Form>
                 </Col>
-
             </Row>
-
         </Container>
-
     );
 
     const errorMessage = () => (
@@ -108,17 +106,13 @@ const SignIn=  () => {
         }
     }
 
-
     return (
         <Layout title="Sign In" description="Welcome to Aubrella"
                 className="container col-md-6 offset-md-3">
-
             {errorMessage()}
             {loadingMessage()}
             {userRedirect()}
             {signInForm()}
-
-
         </Layout>
     );
 }

@@ -6,13 +6,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {addCategory, getCategories} from "./adminApi";
 
-
 const CategoryManagement = () => {
     const [categoryName, setName] = useState('')
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [allCategories, setCategories] = useState([]);
 
+    //destructure user amd token from localstorage
     const {user, token} = isValidated();
 
     const getAllCategories = () =>{
@@ -25,11 +25,12 @@ const CategoryManagement = () => {
         })
     }
 
+    //Grab the category id when the component mounts
     useEffect(() =>{
         getAllCategories()
     }, [])
 
-
+    //Grab form values and set the state
     const handleChange = (e) => {
         setError('');
         setName(e.target.value);
@@ -50,11 +51,9 @@ const CategoryManagement = () => {
                     setError('');
                     setSuccess(true);
                     setName('');
-
                 }
                 refreshPage();
             })
-
     }
 
     function refreshPage() {
@@ -79,19 +78,14 @@ const CategoryManagement = () => {
                     <Col style={{marginTop:50,marginRight: -300}}>
                         <ListGroup variant="flush">
                             {allCategories.map((category,index) =>(
-                                <ListGroup.Item
-                                    key = {index}
-
-                                >
+                                <ListGroup.Item key = {index}>
                                     {category.categoryName}
-
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
                     </Col>
                 </Row>
             </Container>
-
     );
 
     const errorMessage = () => {
@@ -100,9 +94,9 @@ const CategoryManagement = () => {
                 <Alert variant="danger">
                     This category already exists
                 </Alert>
-        )
+            )
         }
-};
+    };
 
     const successMessage = () => {
         if(success){
@@ -110,22 +104,15 @@ const CategoryManagement = () => {
                 <Alert variant="success">
                     Category created successfully
                 </Alert>
-
             )
-
         }
-
     }
 
-
     return (
-        <Layout title="Category Dashboard" description={`Hello ${user.firstName}`}
-                className="container col-md-6 offset-md-3">
-
+        <Layout title="Category Dashboard" description={`Hello ${user.firstName}`} className="container col-md-6 offset-md-3">
             <Container>
                 <Row>
-                    <Col xs={12} >
-
+                    <Col xs={12}>
                         {successMessage()}
                         {errorMessage()}
                         {categoryForm()}

@@ -24,7 +24,6 @@ const MangerSignUp=  () => {
 
     const {user, token} = isValidated();
     const [allManagers ,setManagers] = useState([]);
-
     const {firstName, lastName, email, password,userType, success, error} = values
 
     const getAllManagers = () =>{
@@ -49,10 +48,10 @@ const MangerSignUp=  () => {
         )
     }
 
+    //Grab the category id when the component mounts
     useEffect(() =>{
         getAllManagers()
     }, [])
-
 
     const handleChange = val => e =>{
         setValues({...values,error: false,[val]: e.target.value})
@@ -88,7 +87,6 @@ const MangerSignUp=  () => {
     }
 
     const signUpForm = () =>(
-
         <Container>
             <Row>
                 <Col style={{marginLeft:-300}}>
@@ -123,25 +121,19 @@ const MangerSignUp=  () => {
                 <Col style={{marginTop:50,marginRight: -300}}>
                     <ListGroup variant="flush">
                         {allManagers.map((manager,index) =>(
-                            <ListGroup.Item
-                                key = {index}
-                                className="d-flex justify-content-between"
-                            >
+                            <ListGroup.Item key = {index} className="d-flex justify-content-between">
                                 <strong>{manager.firstName} &nbsp;</strong>
                                 <strong>{manager.lastName}</strong>
-
-                            <Link>
-                                <span className="cursor-pointer" onClick={() => removeManager(manager._id)}>
-                                <Badge variant="danger">Remove</Badge></span>
-                            </Link>
+                                <Link>
+                                    <span className="cursor-pointer" onClick={() => removeManager(manager._id)}>
+                                    <Badge variant="danger">Remove</Badge></span>
+                                </Link>
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
                 </Col>
             </Row>
-
         </Container>
-
     );
 
     const errorMessage = () => (
@@ -156,15 +148,11 @@ const MangerSignUp=  () => {
         </Alert>
     );
 
-
     return (
-        <Layout title="Store Manager Management" description=""
-                className="container col-md-6 offset-md-3">
-
+        <Layout title="Store Manager Management" description="" className="container col-md-6 offset-md-3">
             {errorMessage()}
             {successMessage()}
             {signUpForm()}
-
         </Layout>
     );
 }

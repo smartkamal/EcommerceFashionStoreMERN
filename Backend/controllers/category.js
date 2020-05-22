@@ -1,7 +1,7 @@
 const Category = require('../models/category');
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const {errorHandler} = require("../helpers/ErrorHandler");
 
-
+//Add new category
 exports.addCategory = (req,res)=>{
     const newCat = new Category(req.body);
     newCat.save((err,content) =>{
@@ -14,6 +14,7 @@ exports.addCategory = (req,res)=>{
     });
 };
 
+//Find category based on the id
 exports.findCategoryById = (req, res, next, id) => {
     Category.findById(id).exec((error,category) => {
         if (error || !category) {
@@ -21,18 +22,19 @@ exports.findCategoryById = (req, res, next, id) => {
                 error: 'Category not found'
             });
         }
-        req.productCat = category;
+        req.productCat = category; //When found add to the request object
         next();
     });
 };
 
+//Get a particular category
 exports.contentRead = (req, res) => {
     return res.json(req.productCat);
 };
 
-
+//Update a particular category
 exports.updateCategory = (req, res) => {
-    const  cat = req.productCat
+    const cat = req.productCat
     cat.categoryName = req.body.categoryName
     cat.save((error, content) => {
         if(error){
@@ -44,6 +46,7 @@ exports.updateCategory = (req, res) => {
     });
 };
 
+//Delete a particular category
 exports.deleteCategory = (req, res) => {
     const  cat = req.productCat
     cat.remove((error) => {

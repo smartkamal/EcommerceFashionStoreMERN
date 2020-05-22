@@ -14,91 +14,78 @@ const isActive = (history,path) => {
     }
 }
 
-
-
 function Menus({history}) {
-
     return (
-        <div  >
+        <div>
+            <Navbar   className="py-3 dark bg-dark"  style={{height:60,}}>
+                <Nav className="mr-auto  py-0">
+                        <Nav.Link
+                            as={Link} style={isActive(history,"/")} to="/"> Home
+                         </Nav.Link>
 
+                        <Nav.Link
+                            as={Link} style={isActive(history,"/productshop")} to="/productshop"> Store
+                        </Nav.Link>
 
-        <Navbar   className="py-3 dark bg-dark"  style={{height:60,}}>
+                        //Show link to user dashboard when signed in
+                        {isValidated() && isValidated().user.userType === "user" && (
+                            <Nav.Link
+                                as={Link} style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard
+                            </Nav.Link>
+                        )}
 
-            <Nav className="mr-auto  py-0">
-                    <Nav.Link
-                        as={Link} style={isActive(history,"/")} to="/"> Home
-                     </Nav.Link>
+                        //Show link to manager dashboard if user type is manager
+                        {isValidated() && isValidated().user.userType === "manager" && (
+                            <Nav.Link
+                                as={Link}style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard
+                            </Nav.Link>
+                        )}
 
-                <Nav.Link
-                    as={Link} style={isActive(history,"/productshop")} to="/productshop"> Store
-                </Nav.Link>
+                        //Show link to admin dashboard if user type is admin
+                        {isValidated() && isValidated().user.userType === "admin" && (
+                            <Nav.Link
+                                as={Link} style={isActive(history,"/admin/admindashboard")} to="/admin/admindashboard">Dashboard
+                            </Nav.Link>
+                        )}
 
-                {isValidated() && isValidated().user.userType === "user" && (
-                    <Nav.Link
-                        as={Link} style={isActive(history,"/user/userdashboard")} to="/user/userdashboard">Dashboard
+                        {isValidated() && isValidated().user.userType === "user" && (
+                        <Nav.Link
+                            as={Link}style={isActive(history,"/cart")} to="/cart">Cart <sup><small>{itemTotal()}</small></sup>
+                        </Nav.Link>
+                        )}
 
-                    </Nav.Link>
+                        {isValidated() && isValidated().user.userType === "user" && (
+                            <Nav.Link
+                                as={Link} style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup>
+                            </Nav.Link>
+                        )}
+
+                        <Nav.Link
+                            as={Link} style={{color:'#fafafa' , textDecoration: 'none' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
+                        </Nav.Link>
+                        </Nav>
+
+                //Hide signout when user not logged in
+                {!isValidated() && (
+                    <Fragment>
+                        <Nav.Link
+                            as={Link}  to="/signin" style={isActive(history,"/signin")} className="nav ml-auto" >Sign In
+                        </Nav.Link>
+
+                        <Nav.Link
+                            as={Link} to="/signup" style={isActive(history,"/signup")}>Sign Up
+                        </Nav.Link>
+                    </Fragment>
                 )}
 
-                {isValidated() && isValidated().user.userType === "manager" && (
+                //Hide signin and signup if a user is logged in
+                {isValidated() && (
                     <Nav.Link
-                        as={Link}style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard
-
+                        as={Link} to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
+                            deleteCart();})}>Sign Out
                     </Nav.Link>
                 )}
-
-                {isValidated() && isValidated().user.userType === "admin" && (
-                    <Nav.Link
-                        as={Link} style={isActive(history,"/admin/admindashboard")} to="/admin/admindashboard">Dashboard
-                    </Nav.Link>
-                )}
-
-                {isValidated() && isValidated().user.userType === "user" && (
-                <Nav.Link
-                    as={Link}style={isActive(history,"/cart")} to="/cart">Cart <sup><small>{itemTotal()}</small></sup>
-                </Nav.Link>
-                )}
-
-
-
-                {isValidated() && isValidated().user.userType === "user" && (
-                    <Nav.Link
-
-                        as={Link} style={isActive(history,"/wishlist")} to="/wishlist">Wishlist <sup><small>{itemWishTotal()}</small></sup>
-                    </Nav.Link>
-                )}
-
-
-
-
-
-
-
-                <Nav.Link
-                    as={Link} style={{color:'#fafafa' , textDecoration: 'none' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
-                </Nav.Link>
-            </Nav>
-
-            {!isValidated() && (
-                <Fragment>
-                    <Nav.Link
-                        as={Link}  to="/signin" style={isActive(history,"/signin")} className="nav ml-auto" >Sign In
-                    </Nav.Link>
-
-                    <Nav.Link
-                        as={Link} to="/signup" style={isActive(history,"/signup")}>Sign Up
-                    </Nav.Link>
-                </Fragment>
-            )}
-
-            {isValidated() && (
-                <Nav.Link
-                    as={Link} to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
-                        // history.push('/')
-                        deleteCart();})}>Sign Out
-                </Nav.Link>
-            )}
-        </Navbar>
+            </Navbar>
         </div>
     );
 }

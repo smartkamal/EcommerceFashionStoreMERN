@@ -16,7 +16,6 @@ export const addCategory = (userId,token,productCategory) => {
         .catch(error => {
             console.log(error);
         })
-
 };
 
 export const getManagers = () =>{
@@ -37,7 +36,6 @@ export const deleteManager = (managerId,userId ,token) =>{
             "Content-Type":"application/json",
             Authorization: `Bearer ${token}`
         },
-
     })
         .then(response =>{
             return response.json();

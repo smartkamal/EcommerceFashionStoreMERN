@@ -2,7 +2,7 @@ const Product = require('../models/product');
 const fs = require('fs');
 const formidable = require('formidable');
 const _ = require('lodash');
-const {errorHandler} = require("../helpers/dbErrorHandler");
+const {errorHandler} = require("../helpers/ErrorHandler");
 
 
 exports.ProductAdd=(req,res) =>{

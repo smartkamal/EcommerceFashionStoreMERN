@@ -20,6 +20,7 @@ const UserProfile = ({match}) => {
     const {token} = isValidated()
     const {firstName,lastName,email,password,success} = values
 
+    //Load user data to form based on the user id and token
     const init = (userId) => {
         listUserData(userId,token).then(content => {
             if (content.error){
@@ -31,6 +32,7 @@ const UserProfile = ({match}) => {
         })
     }
 
+    //Grab the user ID
     useEffect(() => {
         init(match.params.userId)
     },[])
