@@ -1,6 +1,5 @@
 import React, {useState}from 'react'
 import {Comment, Avatar, Button, Input} from 'antd'
-import {isValidated} from "../validators";
 import axios from 'axios';
 import {API} from "../Config";
 import LikesDislikes from "./LikeDislikes";
