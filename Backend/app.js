@@ -23,7 +23,7 @@ const ratingRoutes = require('./routes/rating');
 const app  = express();
 
 //db
-mongoose.connect(process.env.DATABASE,{
+mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology:true,
@@ -49,6 +49,9 @@ app.use("/api",likeRoutes);
 app.use("/api",ratingRoutes);
 
 const port = process.env.PORT || 8000;
+
+
+
 
 app.listen(port, () =>{
     console.log(`Server running on ${port}`);
