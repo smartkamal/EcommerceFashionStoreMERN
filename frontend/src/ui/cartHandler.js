@@ -1,3 +1,4 @@
+//add to cart with creating in local storage
 export const addItem = (item,next) =>{
 
     let cart =[];
@@ -18,7 +19,7 @@ export const addItem = (item,next) =>{
         next();
     }
 };
-
+//To return the number of items in the cart
 export const itemTotal =() =>{
     if(typeof window!=='undefined') {
         if (localStorage.getItem('cart')) {
@@ -27,9 +28,12 @@ export const itemTotal =() =>{
     }
 return 0;
 };
+//to refresh the page
 function refreshPage() {
     window.location.reload(false);
 }
+
+//empty the cart
 export const emptyCart = next => {
     if (typeof window !== "undefined"){
         localStorage.removeItem("cart");
@@ -37,13 +41,13 @@ export const emptyCart = next => {
         next();
     }
 };
-
+//delete the cart
 export const deleteCart=x=>{
     if (typeof window !== "undefined") {
         localStorage.removeItem("cart");
     }
 };
-
+//get the items of the cart
 export const getCart =() =>{
     if(typeof window!=='undefined') {
         if (localStorage.getItem('cart')) {
@@ -52,7 +56,7 @@ export const getCart =() =>{
     }
     return [];
 };
-
+//Configure the quantity of each item in the cart
 export  const updateCartItem =(productId, count)=>{
   let cart=[];
     if (typeof window !='undefined'){
@@ -68,7 +72,7 @@ export  const updateCartItem =(productId, count)=>{
     }
 
 };
-
+//To delete the respective item in the cart
 export  const removeCartItem =(productId)=>{
     let cart=[];
     if (typeof window !='undefined'){

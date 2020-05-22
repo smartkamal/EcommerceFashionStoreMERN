@@ -4,12 +4,13 @@ const router = express.Router();
 
 const {Comment} = require('../models/comment')
 
+//add comment
 router.post("/comments/saveComment",(req, res) => {
     const comment = new Comment(req.body)
 
     comment.save((err, comment) => {
         if (err) return res.json({success: false, err})
-        Comment.find({'id':comment._id})
+        Comment.find({'_id':comment._id})
             .populate('writer')
             .exec((err, result) => {
                 if (err) return res.json({success: false, err})
@@ -19,6 +20,7 @@ router.post("/comments/saveComment",(req, res) => {
 
 })
 
+//get comment
 router.post("/comments/getComments",(req, res) => {
     Comment.find({"postId": req.body.productId})
         .populate('writer')

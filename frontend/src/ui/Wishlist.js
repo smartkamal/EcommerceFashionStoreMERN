@@ -21,7 +21,7 @@ const Wishlist = () =>{
                 <h3>Items Quantity: {items.length}</h3>
                 <h3><Link className="btn-success" to="/">
                     Continue Shopping>></Link></h3>
-                <hr/>
+
                 {items.map((product, i)=>(<Card
                     key={i}
                     product={product}
@@ -36,7 +36,7 @@ const Wishlist = () =>{
             </div>
         )
     };
-
+//display the when the wishlist empty
     const emptyItemMsg=()=>(
         <h3>Your Wish List is empty. <br/> <Link to="/">
             Continue Shopping</Link></h3>
@@ -47,7 +47,9 @@ const Wishlist = () =>{
             description ="Manage Your Items"
         >
             <div className="row">
-                <div className="col-6">
+                <div className="col-sm-4" >
+                </div>
+                <div  className="col-sm-3">
                     {items.length>0 ? displayItems(items):emptyItemMsg()}
                 </div>
 

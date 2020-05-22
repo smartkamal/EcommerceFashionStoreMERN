@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {controlSignin, authenticatedUser, userAdmin} = require('../controllers/authentication');
-const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById,userHistory,addToWishList,retrieveAllWishList} = require('../controllers/user');
+const {findUserById, listUserData, updateUserData, listManagers, deleteManager, findManagerById,userHistory} = require('../controllers/user');
 
 /*Response is given based on the user id and if the loggedin user
 and the authenticated user have the same id and if the user is admin */
@@ -17,8 +17,6 @@ router.put('/user/:id', controlSignin, authenticatedUser, updateUserData);
 router.get('/list/storemanager',listManagers);
 router.delete('/user/storemanager/delete/:managerID/:id',controlSignin, authenticatedUser,userAdmin, deleteManager);
 router.get('/orders/by/user/:id', controlSignin, authenticatedUser, userHistory);
-router.post("/cart/addtocart/:id",controlSignin,authenticatedUser,addToWishList);
-router.get("/wishlist/getall",retrieveAllWishList);
 
 router.param('id', findUserById);
 router.param('managerID', findManagerById)

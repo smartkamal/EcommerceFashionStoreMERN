@@ -1,6 +1,5 @@
 import React, {useState}from 'react'
 import {Comment, Avatar, Button, Input} from 'antd'
-import {isValidated} from "../validators";
 import axios from 'axios';
 import {API} from "../Config";
 import LikesDislikes from "./LikeDislikes";
@@ -9,19 +8,21 @@ import LikesDislikes from "./LikeDislikes";
 const {TextArea} = Input;
 
 function SingleComment(props) {
-    const user = isValidated() && isValidated().user._id
+    //hold state
     const [CommentValue, setCommentValue] = useState("")
     const [OpenReply, setOpenReply] = useState(false)
 
+    //reply comment dropdown
     const openReply = () => {
         setOpenReply(!OpenReply)
     }
 
+    //on comment submit action
     const onSubmit = (e) => {
         e.preventDefault();
 
         const variables = {
-            writer: user,
+            writer: props.user,
             postId: props.postId,
             responseTo: props.comment._id,
             content: CommentValue
@@ -39,6 +40,8 @@ function SingleComment(props) {
                 }
             })
     }
+
+    //get the comment value
     const handleChange = (e) => {
         setCommentValue(e.currentTarget.value)
     }
@@ -51,20 +54,20 @@ function SingleComment(props) {
     return(
         <div>
             <Comment
-                actions={actions}
-                author="USER"
-                avatar={
-                    <Avatar
-                        src="dw"
-                        alt="image"
-                    />
-                }
-                content={
-                    <p>
-                        {props.comment.content}
-                    </p>
-                }
-            ></Comment>
+    actions={actions}
+    author="USER"
+    avatar={
+        <Avatar
+            src="dw"
+            alt="image"
+        />
+    }
+    content={
+        <p>
+            {props.comment.content}
+        </p>
+    }
+    />
 
             {OpenReply &&
             <form style={{ display: 'flex' }} onSubmit={onSubmit}>

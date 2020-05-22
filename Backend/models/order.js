@@ -19,11 +19,6 @@ const OrderSchema = new mongoose.Schema(
         products: [CartItemSchema],
         amount: { type: Number },
         address: String,
-        state: {
-            type: String,
-            default: "Processing Payment",
-            enum: ["Processing Payment", "Shipped", "Delivered", "Order Cancelled"] // enum means string objects
-        },
         updated: Date,
         user: { type: ObjectId, ref: "User" }
     },

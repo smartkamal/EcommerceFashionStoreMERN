@@ -1,15 +1,15 @@
 import React, {useState,useEffect} from "react";
 import Layout from "../ui/Layout";
 import {isValidated} from "../validators";
-import {ordersList,getStates,updateStates} from "./storeManagerApi";
+import {ordersList} from "./storeManagerApi";
 import moment from "moment";
 
 
 const Orders=()=>{
     const [orders,setOrders]=useState([]);
-    const [states,setStates]=useState([]);
     const {user,token}=isValidated();
 
+//Load th eorder from the DB
     const load=()=>{
         ordersList(user._id,token).then(data=>{
             if(data.error){
@@ -19,21 +19,10 @@ const Orders=()=>{
             }
         });
     };
-
-    const stateVals=()=>{
-        getStates(user._id,token).then(data=>{
-            if(data.error){
-                console.log(data.error)
-            }else{
-                setStates(data)
-            }
-        });
-    };
     useEffect(()=>{
         load();
-        stateVals();
     },[]);
-
+//Get the number of orders
     const ordersLength = ()=>{
       if(orders.length>0){
           return(
@@ -44,31 +33,6 @@ const Orders=()=>{
 
       }
     };
-
-    const handleStateChange=(e,oId)=>{
-
-        updateStates(user._id,token,oId, e.target.value).then(
-            data=>{
-            if(data.error){
-                console.log("State update failed");
-            }else{
-                load()
-            }
-        })
-    }
-
-   const disState =(o)=>(
-     <div className="form-group">
-         <h4 className="mark mb-4">
-             State:{o.state}
-         </h4>
-         Select to Update the State:
-         <select className="form-control" onChange={e=>handleStateChange(e,o._id)}>
-                <option>Select state</option>
-             {states.map((state, index)=>(<option key={index} value={state}>{state}</option>))}
-         </select>
-     </div>
-   );
     return (
         <Layout title="Orders" description={`Hello ${user.firstName}, Manage Your orders`}
                 className="container col-md-6 offset-md-3">
@@ -84,9 +48,6 @@ const Orders=()=>{
                                </h4>
 
                                <ul className="list-group mb-2">
-                                   <li className="list-group-item">
-                                       {disState(o)}
-                                   </li>
                                    <li className="list-group-item">
                                        Amount: Rs:{o.amount}
                                    </li>
