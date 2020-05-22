@@ -31,8 +31,8 @@ function DisplayRating(props) {
 
     useEffect(() => {
         loadRatings();
-
     },[])
+
 
 
     return(
@@ -42,7 +42,7 @@ function DisplayRating(props) {
 
                     {allRatings.map((ratings, index ) => {
 
-                        if(ratings._id === props.pID){
+                        if(ratings._id === props.pID ){
 
                                 return(
                                     <div key={index}>
@@ -58,21 +58,13 @@ function DisplayRating(props) {
 
                         }
 
-                        
+                    }
 
+                    )}
 
-
-
-                    })}
                 </div>
 
-
-
     )
-
-
-
-
 
 };
 

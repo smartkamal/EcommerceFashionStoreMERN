@@ -45,7 +45,6 @@ router.get("/rating/getAll",(req,res) =>{
                 });
             }
             res.json(data);
-            console.log(data);
         })
 })
 

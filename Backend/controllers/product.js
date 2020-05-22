@@ -5,6 +5,7 @@ const _ = require('lodash');
 const {errorHandler} = require("../helpers/ErrorHandler");
 
 
+//method to add all the form data to the database
 exports.ProductAdd=(req,res) =>{
 
     let formData = new formidable.IncomingForm();
@@ -24,6 +25,7 @@ exports.ProductAdd=(req,res) =>{
             })
         }
 
+        //initilize a new product object
         let product = new Product(data);
 
         if(files.productImage) {
@@ -48,6 +50,7 @@ exports.ProductAdd=(req,res) =>{
     })
 };
 
+//method to search for the product by passing the id
 exports.findProductById = (req,res,next,id) =>{
 
     Product.findById(id).populate("productCat").exec((err, resProduct) =>{
@@ -61,13 +64,14 @@ exports.findProductById = (req,res,next,id) =>{
     })
 };
 
+//get all the products without image
 exports.getProduct = (req,res) =>{
     req.product.productImage = undefined;
 
     return res.json(req.product);
 };
 
-
+//delete a product
 exports.deleteProduct = (req,res) =>{
     let resProduct = req.product;
 
@@ -83,7 +87,7 @@ exports.deleteProduct = (req,res) =>{
     })
 };
 
-
+//update a product
 exports.updateProduct=(req,res) =>{
 
     let formData = new formidable.IncomingForm();
@@ -94,14 +98,6 @@ exports.updateProduct=(req,res) =>{
                 error: 'Image cannot be uploaded'
             })
         }
-        //check that all data is found
-        // const {productName,productPrice,productQuantity,productDesc,productCat,shipping}= data;
-        //
-        // if(!productName || !productPrice || !productQuantity || !productDesc || !productCat|| !shipping){
-        //     return res.status(400).json({
-        //         error:'Please fill all the fields'
-        //     })
-        // }
 
         let updatePro= req.product;
 
@@ -131,7 +127,6 @@ exports.updateProduct=(req,res) =>{
 
 
 //retrieve product image
-
 exports.retrieveImage = (req,res,next) =>{
     if(req.product.productImage.data){
         res.set('Content-Type',req.product.productImage.contentType);
@@ -207,22 +202,9 @@ exports.searchProd= (req, res) => {
     let searchArgs = {};
 
 
-
-
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
-            if (key === "productPrice") {
-                //mongodb keys gte and lte
-                // gte -  greater than price [0-10]
-                // lte - less than
-                searchArgs[key] = {
-                    $gte: req.body.filters[key][0],
-                    $lte: req.body.filters[key][1]
-                };
-            } else {
                 searchArgs[key] = req.body.filters[key];
-
-            }
         }
     }
 
@@ -248,7 +230,6 @@ exports.searchProd= (req, res) => {
 
             });
     }else{
-        console.log("findArgs", searchArgs.category);
         Product.find({productCat:searchArgs.category})
             .select("-productImage")
             .populate("productCat")
@@ -273,9 +254,9 @@ exports.searchProd= (req, res) => {
 
 };
 
+//search a product list by passing a query
 exports.searchProdList = (req,res) =>{
 
-    //console.log('i run')
     const query = {}
 
     if(req.query.searchVal){
@@ -294,32 +275,13 @@ exports.searchProdList = (req,res) =>{
             }
 
             res.json(products)
-            console.log( products)
 
         }).select('-productImage')
     }
 
-
-    // if(req.query.aCategory && req.query.searchVal === undefined && req.query.aCategory !== 'All'){
-    //     query.productCat = {$regex: req.query.aCategory, $options:'i'}
-    //
-    //     console.log('query',query)
-    //     Product.find(query, (error, products) =>{
-    //         if(error){
-    //             return res.status(400).json({
-    //                 error:errorHandler(error)
-    //             })
-    //         }
-    //
-    //         res.json(products)
-    //         console.log("producta", products)
-    //
-    //     }).select('-productImage')
-    //
-    //
-    // }
 }
 
+//update the quantity details of a product
 exports.updateQuantityDetails=(req,res,next)=>{
     let bulkOps=req.body.order.products.map((item)=>{
         return{

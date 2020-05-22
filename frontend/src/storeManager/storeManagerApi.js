@@ -1,7 +1,10 @@
 import {API} from "../Config";
 
+/*
+    method:POST
+    pass all the form data
+ */
 export const addProduct  = (userId,token,product) => {
-
     return fetch(`${API}/product/add/${userId}`, {
         method: "POST",
         headers: {
@@ -18,6 +21,10 @@ export const addProduct  = (userId,token,product) => {
         })
 }
 
+/*
+    method:GET
+    retrieve all the categories
+ */
 export const getCategories = () =>{
     return fetch(`${API}/categoryList`,{
         method: "GET"
@@ -28,7 +35,10 @@ export const getCategories = () =>{
         .catch(err=> console.log(err));
 }
 
-//get all the products to be displayed to manage products
+/*
+    method:GET
+    get all the products to be displayed to manage products
+ */
 export const getProducts= () =>{
     return fetch(`${API}/products?limit=100`,{
         method: "GET"
@@ -39,7 +49,10 @@ export const getProducts= () =>{
         .catch(err=> console.log(err));
 }
 
-//get a particular product with a id
+/*
+    method:GET
+    get a particular product with a id
+ */
 export const getAProduct= (productID) =>{
     return fetch(`${API}/product/${productID}`,{
         method: "GET"
@@ -50,7 +63,10 @@ export const getAProduct= (productID) =>{
         .catch(err=> console.log(err));
 }
 
-//update a particular product
+/*
+    method:PUT
+    update a particular product
+ */
 export const updateProduct = (productId , userId , token,newProduct) =>{
     return fetch(`${API}/product/${productId}/${userId}`,{
         method: "PUT",
@@ -67,9 +83,10 @@ export const updateProduct = (productId , userId , token,newProduct) =>{
         .catch(err => console.log(err));
 };
 
-
-
-//delete a particular product
+/*
+    method:DELETE
+    delete a particular product
+ */
 export const deleteProduct = (productId , userId , token) =>{
     return fetch(`${API}/product/${productId}/${userId}`,{
         method: "DELETE",

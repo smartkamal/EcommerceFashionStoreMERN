@@ -91,9 +91,9 @@ const ProductShop= () =>{
     }
 
     return (
-      <div className="mt-5 ml-5">
+      <div className="mt-lg-5 ml-5">
           <Row>
-              <div className="col-2">
+              <div className="col-2 mt-5">
                   <h4>Category Filter</h4>
                   <div style={{marginTop:40}}>
                       <Check  checkConditions={ conditions => checkConditions(conditions,'category')}  categories={allCat}/>
@@ -101,8 +101,8 @@ const ProductShop= () =>{
 
               </div>
 
-              <div className="col-10">
-                 <h2 className="mb-3">Products</h2>
+              <div className="col-10 mt-5">
+                 <h2 className="mb-3 ml-2">Products</h2>
                   <Row>
                       {filteredResults.map((product, index) =>(
 

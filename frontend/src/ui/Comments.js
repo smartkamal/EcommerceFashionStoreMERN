@@ -12,8 +12,10 @@ import Layout from "./Layout";
 
 function Comments(props) {
 
+
     //hold state
     const user = isValidated() && isValidated().user._id
+
     const [Comment, setComment] = useState("");
 
     //get value
@@ -27,7 +29,7 @@ function Comments(props) {
 
         const variables = {
             content: Comment,
-            writer: user,
+            writer: user._id,
             postId: props.postId,
         }
 
@@ -35,6 +37,7 @@ function Comments(props) {
             .then(response => {
                 if (response.data.success) {
                     setComment("")
+                    console.log(response)
                     props.refreshFunction(response.data.result)
                 }else {
                     alert('Failed to save comment')
@@ -51,6 +54,7 @@ function Comments(props) {
                         <p> Comments </p>
                         <hr/>
 
+
                         {props.CommentLists && props.CommentLists.map((comment, index) => (
                             (!comment.responseTo &&
                                 <div key={index}>
@@ -61,6 +65,7 @@ function Comments(props) {
                                 </div>
                             )
                         ))}
+
 
                         <form style={{display: 'flex'}} onSubmit={onSubmit}>
                             <TextArea

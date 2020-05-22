@@ -7,11 +7,11 @@ import Button from "react-bootstrap/Button";
 import {addProduct,getCategories} from "./storeManagerApi";
 import bsCustomFileInput from "bs-custom-file-input";
 
+
 function AddProduct() {
 
-
+    //initialize state
     const {user, token} = isValidated();
-
     const [values, setValues] = useState({
         productName: '',
         productDesc: '',
@@ -42,9 +42,9 @@ function AddProduct() {
         productAdded,
         formData,
         redirectToProfile
-    } = values;
+        } = values;
 
-
+    //on change set the values
     const handleChange = type => e =>{
         const data = type === 'productImage' ? e.target.files[0] : e.target.value
         formData.set(type,data)
@@ -64,14 +64,14 @@ function AddProduct() {
         )
     }
 
+    //execute on component did mount
     useEffect(() =>{
         load();
         bsCustomFileInput.init();
     },[])
 
-
+    //method to deal with form submission
     const submitProduct = (e) =>{
-
         e.preventDefault()
         setValues({...values, error: "", loading: true});
 
@@ -87,15 +87,17 @@ function AddProduct() {
                         productPrice: '',
                         productQuantity: '',
                         productImage: '',
+                        productCat: '',
+                        shipping: '',
                         loading: false,
                         productAdded: formD.productName
-
 
                     })
                 }
             })
     }
 
+    //product add form
     const productAddForm= () => (
         <Form  className="mb-3" onSubmit={submitProduct}>
             <Form.Group controlId="formBasicProductName">
@@ -112,7 +114,7 @@ function AddProduct() {
             </Form.Group>
             <Form.Group  controlId="formBasicCategory">
                 <Form.Label>Product Category</Form.Label>
-                <Form.Control as="select" size="sm" custom  v
+                <Form.Control as="select" size="sm" custom
                     onChange={handleChange('productCat')} >
                     <option >Please Select Product Category</option>
                     {categories && categories.map((cat,index)=>
@@ -149,6 +151,10 @@ function AddProduct() {
         </Form>
 
     )
+
+    /*
+    methods to execute depending on different conditions
+     */
     const Loading = () => (
         loading && (
             <div className="alert alert-success">
@@ -181,8 +187,6 @@ function AddProduct() {
                         {errorMessage()}
                         {productAddForm()}
 
-                        {/*{categoryForm()}*/}
-                        {/*{backButton()}*/}
                     </Col>
                 </Row>
             </Container>

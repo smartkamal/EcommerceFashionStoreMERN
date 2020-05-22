@@ -1,7 +1,10 @@
 import {API} from "../Config";
 import queryString from 'query-string'
 
-//retrieve all the products based on the order by condition
+/*
+    method:GET
+    retrieve all the products based on the order by condition
+ */
 export const getProducts = (orderBy) =>{
     return fetch(`${API}/products?sortBy=${orderBy}&order=desc&limit=6`,{
         method: "GET"
@@ -12,6 +15,10 @@ export const getProducts = (orderBy) =>{
         .catch(err=> console.log(err));
 }
 
+/*
+    method:GET
+    retrieve product details according to product id
+ */
 export const getUniquePro = (productID) =>{
     return fetch(`${API}/product/${productID}`,{
         method: "GET"
@@ -89,7 +96,6 @@ export const getCheckedResults = (skip,limit,filters={}) => {
     const bodyData = {
        skip,limit,filters
     }
-
 
     return fetch(`${API}/products/search`, {
         method: "POST",

@@ -5,7 +5,6 @@ import SearchComp from "./Search";
 import  Card from './proCard'
 import SlideShow from '../slideshow/SlideShow'
 
-
 const Home=  () => {
 
     //create state to hold the following values
@@ -49,11 +48,11 @@ const Home=  () => {
 
     return (
 
-<div>
+    <div>
             <div className="img-fluid mt-5 mb-5">
-            <SlideShow/>
+             <SlideShow/>
             </div>
-            <SearchComp/>
+                <SearchComp/>
 
             <h2 className="mb-4 ml-4">Best Sellers</h2>
 
@@ -64,7 +63,7 @@ const Home=  () => {
 
                 </Row>
 
-<br/><br/><br/>
+        <br/><br/><br/>
 
             <h2 className="mb-4  ml-4">New Arrivals</h2>
             <Row className="mb-5 ml-5">
@@ -72,8 +71,7 @@ const Home=  () => {
                     <Card  key={index} product={product}/>
                 ))}
             </Row>
-</div>
-
+    </div>
 
 
     );

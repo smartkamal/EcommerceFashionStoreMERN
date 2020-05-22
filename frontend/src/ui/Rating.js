@@ -11,6 +11,7 @@ function Rating(props) {
     const [Ratings,setRatings] = useState(0)
     const [RatingAction,setRatingAction] = useState(null)
     const {user, token} = isValidated();
+    const [allRatings, setAllRatings] = useState([]);
 
     let variables = {
         productId:props.productId,
@@ -32,6 +33,7 @@ function Rating(props) {
                     alert('Failed to get ratings')
                 }
             })
+
 
 
     },[Rating])
@@ -61,7 +63,10 @@ function Rating(props) {
                     }
                 })
         }
+
+
     }
+
 
 
     return(
@@ -71,7 +76,9 @@ function Rating(props) {
                     <Col xs={12}>
                         <div>
                             <br/>
-                            <p> Rate this prodouct</p>
+
+                            <p> Rate this product </p>
+
                             <hr/>
                             <div>
                             </div>

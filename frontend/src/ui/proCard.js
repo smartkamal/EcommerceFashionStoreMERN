@@ -7,40 +7,31 @@ import Badge from "react-bootstrap/Badge";
 import {addItem,updateCartItem,removeCartItem} from "./cartHandler";
 import Redirect from "react-router-dom/es/Redirect";
 import {addWishItem, removeWishlistItem} from "./WishlistHandler";
-
-
 import {isValidated} from "../validators";
-
 import DisplayRating from "./DisplayRating";
 
 
 
 
-
-
-
-//check stock avilabilty
+//check stock availability and render
 const stockAvailabilty = (quantity) =>{
     return (quantity > 0 ?
-
                 <Badge  pill variant="primary">In Stock</Badge>: <Badge pill variant="warning">Out of stock</Badge>
-
-
     )
 
 }
 
+//check if discount applied and render
 const checkDiscount = (discount, totPrice) =>{
    if(discount> 0){
        return(
-
            <h4>
                <Badge pill className="iconPM"  variant="danger">Discounted Price : {totPrice}</Badge>
            </h4>
        )
    }
-
 }
+
 
 const ProductCard = ({
                          product,
@@ -64,12 +55,8 @@ const ProductCard = ({
     const addToWishListButton=(addWish)=>{
         if(user && user.userType === 'user'  ){
             return(
-
                 addWish && <Button className="form-control mb-2" variant="outline-warning" onClick={addToWishList}>Add to Wish List</Button>
-                //addWish && <Button className="form-control m-2" variant="outline-warning" onClick={() => addWishList(pid)}>Add to Wish List</Button>
-
             )
-
         }
     }
 
@@ -78,7 +65,6 @@ const ProductCard = ({
             return(
                 addCart && <Button className="form-control" variant="success" onClick={addToCart}>Add to cart</Button>
             )
-
         }
     }
 
@@ -88,38 +74,11 @@ const ProductCard = ({
         })
    };
 
-    // const addWishList = (pid) =>{
-    //
-    //     addProToWishList({pid},user._id,token)
-    //         .then(content => {
-    //             if (content.error){
-    //                console.log(error)
-    //             }
-    //             else {
-    //
-    //             }
-    //         })
-    // }
-
-
     const addToWishList =()=>{
         addWishItem(product, ()=>{
             setWRedirect(true)
         })
 
-        // setError('');
-        // setSuccess(false);
-        // addUserWishList({productID},user._id,token,)
-        //     .then(content => {
-        //     if (content.error){
-        //         setError(true);
-        //     }
-        //     else {
-        //         setError('');
-        //         setSuccess(true);
-        //         setWRedirect(true)
-        //     }
-        // })
     };
     const userCartRedirect = redirect=>{
         if(redirect){
@@ -149,6 +108,7 @@ const ProductCard = ({
     return<div className="form-group" style={{margin:25}}>
 
         <div className="shadow bg-light rounded">
+
             {userCartRedirect(redirect)}
             {userWishRedirect(wredirect)}
             <div className="card border-secondary mb-3" style={{ width: '25rem'}}>
@@ -162,30 +122,18 @@ const ProductCard = ({
                     <DisplayRating pID={product._id} />
                     <div className="card-footer bg-transparent border-danger">
                         <div className="d-flex flex-row">
-
                             <div className="p-2">{stockAvailabilty(product.productQuantity)}</div>
                            {checkDiscount(product.productDisc, product.totalDiscPrice)}
                         </div>
                         <br/><br/>
-
-
                         <Link to={`/product/${product._id}`}>
                             {
                                 viewProductBtn &&    <Button className="form-control mb-2" variant="outline-dark" >View Product</Button>
                             }
-
                         </Link>
 
-                        {
-                            //addToWishListBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToWishList}>Add to Wish List</Button>
-                            addToWishListButton(addToWishListBtn)
-                            //addToWishListButton(addToWishListBtn,product._id)
-                        }
-
-                        {
-                            //addToCartBtn && <Button className="form-control m-2" variant="outline-success" onClick={addToCart}>Add to cart</Button>
-                            addToCartButton(addToCartBtn)
-                        }
+                        {addToWishListButton(addToWishListBtn)}
+                        {addToCartButton(addToCartBtn)}
 
                         {
                             removeItemBtn && <Button className="form-control" variant="danger"
@@ -217,9 +165,6 @@ const ProductCard = ({
         </div>
 
     </div>
-
-
-
 
 }
 

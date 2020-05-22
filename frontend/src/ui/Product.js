@@ -1,12 +1,10 @@
 import React,{useEffect,useState} from 'react';
-import Layout from "./Layout";
 import {getUniquePro} from './apiCore'
 import { Row} from "react-bootstrap";
 import  Card from './proCard'
 import Comments from "./Comments";
 import axios from "axios";
 import {API} from "../Config";
-
 import Rating from "./Rating";
 
 
@@ -16,7 +14,7 @@ const Product = (props) =>{
     const [product,giveProduct] = useState({})
     const [err,setError] = useState(false)
     const [CommentLists, setCommentLists] = useState(false)
-    //const productId = props.match.params.productId
+
 
     const productVariable = {
         productId: props.match.params.productid
@@ -35,7 +33,7 @@ const Product = (props) =>{
 
     }
 
-    //grab the product id when the component mounts
+    //grab the product id when the component did mounts
     useEffect(() =>{
         //product id from url
         const productId = props.match.params.productid
@@ -57,32 +55,27 @@ const Product = (props) =>{
     }
 
     return (
-        <Layout title="Product Details"
-                description={null}
-                className="container-fluid"
-        >
+        <div className="mt-3">
+                    <h2 className="mb-1 ml-4"> {product && product.productName}</h2>
+                    <Row>
+                        <div  style={{margin:'auto'}}>
+                            {
+                                product &&  product.productDesc && <Card product={product}
+                                                                         viewProductBtn={false}/>
+                            }
+                        </div>
 
-            <h2 className="mb-1"> {product && product.productName}</h2>
-           <Row>
-               <div  style={{margin:'auto'}}>
-                   {
-                       product &&  product.productDesc && <Card product={product}
-                       viewProductBtn={false}/>
-                   }
-               </div>
+                    </Row>
 
+                    <div>
+                        <Rating product productId={product._id} userId={localStorage.getItem('userId')} />
+                    </div>
 
-           </Row>
+                    <div>
+                        <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
+                    </div>
 
-            <div>
-                <Rating product productId={product._id} userId={localStorage.getItem('userId')} />
-            </div>
-
-            <div>
-                <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
-            </div>
-
-        </Layout>
+        </div>
 
     );
 }

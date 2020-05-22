@@ -8,6 +8,7 @@ import Layout from "../ui/Layout";
 import {Col, Container, Row} from "react-bootstrap";
 
 const StoreManagerUserProfile = ({match}) => {
+    //initialize state
     const [values, setValues] = useState({
         firstName: '',
         lastName: '',
@@ -16,10 +17,10 @@ const StoreManagerUserProfile = ({match}) => {
         error: false,
         success: false
     })
-
     const {token} = isValidated()
     const {firstName,lastName,email,password,success} = values
 
+    //method to list the store manager details
     const init = (userId) => {
         listUserData(userId,token).then(content => {
             if (content.error){
@@ -28,17 +29,19 @@ const StoreManagerUserProfile = ({match}) => {
             else{
                 setValues({...values,firstName: content.firstName, lastName: content.lastName,email: content.email, })
             }
-        })
-    }
+        })    }
 
+        //execute on component did mount
     useEffect(() => {
         init(match.params.userId)
     },[])
 
+    //on change set values
     const handleChanges = firstName => e => {
         setValues({...values, error: false, [firstName]: e.target.value})
     }
 
+    //execute on form submission
     const submitForm = e => {
         e.preventDefault();
         updateUserData(match.params.userId,token, {firstName, lastName, email, password}).then(content => {
@@ -53,12 +56,14 @@ const StoreManagerUserProfile = ({match}) => {
         })
     }
 
+    //redirect if updating successful
     const userRedirect = (success) => {
         if (success){
             return <Redirect to="/manager/managerdashboard"/>
         }
     }
 
+    //update form
     const updateUserProfile = (firstName,lastName,email,password) => (
         <Form>
             <Form.Group controlId="formBasicFName">

@@ -3,16 +3,20 @@ import {Comment, Avatar, Button, Input} from 'antd'
 import axios from 'axios';
 import {API} from "../Config";
 import LikesDislikes from "./LikeDislikes";
-
+import {isValidated} from "../validators";
 
 const {TextArea} = Input;
 
 function SingleComment(props) {
+
+    const {user,token} = isValidated();
+
     //hold state
     const [CommentValue, setCommentValue] = useState("")
     const [OpenReply, setOpenReply] = useState(false)
 
     //reply comment dropdown
+
     const openReply = () => {
         setOpenReply(!OpenReply)
     }

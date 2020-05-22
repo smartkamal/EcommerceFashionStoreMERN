@@ -6,7 +6,6 @@ import {getProducts, deleteProduct}from './storeManagerApi'
 import {Link} from "react-router-dom";
 
 
-
 const ProductManagement = () =>{
 
     //initilaize the state.
@@ -25,6 +24,7 @@ const ProductManagement = () =>{
         })
     }
 
+    //remove product method
     const removeProduct = productID =>{
         deleteProduct(productID,user._id,token).then(
             res =>{
@@ -37,7 +37,7 @@ const ProductManagement = () =>{
         )
     }
 
-    //load the method when componentmounts
+    //execute on component did mount
     useEffect(() =>{
             getTheProducts()
     }, [])
@@ -63,9 +63,8 @@ const ProductManagement = () =>{
                                          <Badge variant="warning">Update</Badge>
                                     </span>
 
-
                                 </Link>
-                                <Link >
+                                <Link to="/storemanager/manageproducts">
                                     <span className="cursor-pointer" onClick={() => removeProduct(product._id)}><Badge variant="danger">Remove</Badge></span>
                                 </Link>
 
@@ -76,9 +75,6 @@ const ProductManagement = () =>{
                 </Col>
             </Row>
         </Container>
-
-
-
 
         </Layout>
 

@@ -1,10 +1,11 @@
-import React,{Fragment} from "react";
+import React, {Fragment, useEffect} from "react";
 import {Link, withRouter} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {signOut, isValidated} from "../validators";
 import {itemTotal,deleteCart} from "./cartHandler";
 import {deleteWishlist, itemWishTotal} from "./WishlistHandler";
+
 
 const isActive = (history,path) => {
     if(history.location.pathname === path){
@@ -17,8 +18,10 @@ const isActive = (history,path) => {
 function Menus({history}) {
     return (
         <div>
-            <Navbar className="py-3 dark bg-dark fixed-top"  style={{height:60,}}>
-                <Nav className="mr-auto  py-0">
+
+        <Navbar className="py-3 dark bg-dark fixed-top "  style={{height:50}}>
+
+            <Nav className="mr-auto  py-0">
                     <Nav.Link
                         as={Link} style={isActive(history,"/")} to="/"> Home
                     </Nav.Link>
@@ -60,10 +63,11 @@ function Menus({history}) {
                         </Nav.Link>
                     )}
 
-                     <Nav.Link
-                        as={Link} style={{color:'#fafafa' , textDecoration: 'none' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
-                    </Nav.Link>
-                </Nav>
+
+                <Nav.Link
+                    as={Link} style={{color:'#fafafa' , textDecoration: 'none' }} className="nav abs-center-x  rainbow" to="/"> <b><i>AUBRELLA </i></b>
+                </Nav.Link>
+            </Nav>
 
             //Hide signout when user not logged in
             {!isValidated() && (

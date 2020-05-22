@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+//require methods
 const {ProductAdd, findProductById,getProduct,deleteProduct,searchProdList,
     updateProduct,listProducts,listRelatedProducts,listCategories,searchProd,retrieveImage} = require("../controllers/product");
 const {findUserById} = require("../controllers/user");
@@ -24,6 +25,8 @@ router.get('/retrieveproduct/search',searchProdList);
 //product image get
 router.get('/product/image/:productid',retrieveImage);
 
+//product finds
 router.param('id',findUserById);
 router.param('productid',findProductById);
+
 module.exports = router;

@@ -103,9 +103,8 @@ function UpdateProduct({match}) {
 
     },[])
 
-
+    //method executed on form submission
     const submitProduct = (e) =>{
-
         e.preventDefault()
         setValues({...values, error: "", loading: true});
 
@@ -143,6 +142,7 @@ function UpdateProduct({match}) {
             })
     }
 
+    //product update form
     const productUpdateForm= () => (
         <Form  className="mb-3" onSubmit={submitProduct}>
             <Form.Group controlId="formBasicProductName">
@@ -167,13 +167,12 @@ function UpdateProduct({match}) {
             </Form.Group>
             <Form.Group  controlId="formBasicCategory">
                 <Form.Label>Product Category</Form.Label>
-                <Form.Control as="select" size="sm" custom  v
+                <Form.Control as="select" size="sm" custom
                               onChange={handleChange('productCat')} >
                     <option >Please Select Product Category</option>
                     {categories && categories.map((cat,index)=>
                         (<option key = {index} value={cat._id}>{cat.categoryName}</option>)
                     )}
-
                 </Form.Control>
             </Form.Group>
             <Form.Group controlId="formBasicQuantity">
@@ -183,7 +182,7 @@ function UpdateProduct({match}) {
             <Form.Group controlId="formBasicShipping">
                 <Form.Label>Product Shipping</Form.Label>
                 <Form.Control as="select" size="sm" custom
-                              onChange={handleChange('shipping')}   >
+                              onChange={handleChange('shipping')}>
                     <option >Please Select Shipping Details</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -205,6 +204,9 @@ function UpdateProduct({match}) {
 
 
     )
+    /*
+   methods to execute depending on different conditions
+    */
     const Loading = () => (
         loading && (
             <div className="alert alert-success">
@@ -246,9 +248,6 @@ function UpdateProduct({match}) {
                         {errorMessage()}
                         {productUpdateForm()}
                         {userRedirect()}
-
-                        {/*{categoryForm()}*/}
-                        {/*{backButton()}*/}
                     </Col>
                 </Row>
             </Container>
