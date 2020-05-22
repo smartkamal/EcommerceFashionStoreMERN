@@ -23,7 +23,7 @@ const ratingRoutes = require('./routes/rating');
 const app  = express();
 
 //db
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://projectAdmin:admin123@cluster0-1lyhw.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connect(process.env.MONGODB_URI , {
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology:true,
@@ -51,9 +51,9 @@ app.use("/api",ratingRoutes);
 const port = process.env.PORT || 8000;
 
 //custom variable inside heroku
-if(process.env.NODE_ENV ){
-    app.use(express.static('frontend/build'));
-}
+// if(process.env.NODE_ENV ){
+//     app.use(express.static('frontend/build'));
+// }
 
 app.listen(port, () =>{
     console.log(`Server running on ${port}`);
