@@ -2,9 +2,12 @@
   "name": "fashionstorecartsystem",
   "version": "1.0.0",
   "description": "Fashion Store development using MERN stack",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "build": "cd .. && cd frontend && npm run build",
+    "install-client": "cd .. && cd frontend && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
