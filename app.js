@@ -52,7 +52,12 @@ app.use("/api",ratingRoutes);
 
 const port = process.env.PORT || 8000;
 
-if(process.env.NODE_ENV){
+const development = 'http://localhost:3000/';
+const production  = 'https://mernfashionstore.herokuapp.com/';
+
+const url = (process.env.NODE_ENV ? production : development);
+
+if(url === 'production'){
     app.use(express.static('./frontend/build'))
 
     app.get('/*', function(req, res) {
