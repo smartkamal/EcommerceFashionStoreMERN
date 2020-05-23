@@ -57,7 +57,7 @@ const production  = 'https://mernfashionstore.herokuapp.com/';
 
 const url = (process.env.NODE_ENV ? production : development);
 
-if(url === 'production'){
+if(process.env.NODE_ENV ){
     app.use(express.static('./frontend/build'))
 
     app.get('/*', function(req, res) {
