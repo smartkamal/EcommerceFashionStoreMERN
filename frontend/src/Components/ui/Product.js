@@ -6,6 +6,8 @@ import Comments from "./Comments";
 import axios from "axios";
 import {API} from "../../Config";
 import Rating from "./Rating";
+import {isValidated} from "../../validators";
+import Nav from "react-bootstrap/Nav";
 
 
 const Product = (props) =>{
@@ -14,6 +16,7 @@ const Product = (props) =>{
     const [product,giveProduct] = useState({})
     const [err,setError] = useState(false)
     const [CommentLists, setCommentLists] = useState(false)
+
 
 
     const productVariable = {
@@ -67,11 +70,13 @@ const Product = (props) =>{
 
                     </Row>
 
+            {isValidated() && isValidated().user.userType === "user" && (
                     <div>
                         <Rating product productId={product._id} userId={localStorage.getItem('userId')} />
                     </div>
+            )}
 
-                    <div>
+            <div>
                         <Comments CommentLists={CommentLists} postId={product._id} refreshFunction={updateComment}/>
                     </div>
 

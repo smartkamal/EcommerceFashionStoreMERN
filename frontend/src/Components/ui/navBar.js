@@ -40,7 +40,7 @@ function Menus({history}) {
                     {/*Show link to manager dashboard if user type is manager*/}
                     {isValidated() && isValidated().user.userType === "manager" && (
                         <Nav.Link
-                            as={Link}style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard
+                            as={Link} style={isActive(history,"/manager/managerdashboard")} to="/manager/managerdashboard">Dashboard
                         </Nav.Link>
                     )}
 
@@ -85,7 +85,7 @@ function Menus({history}) {
             {/*Hide signin and signup when logged in*/}
             {isValidated() && (
                 <Nav.Link
-                    as={Link} to="/signin" style={isActive(history,"/signin")} onClick={() => signOut(() => {
+                    as={Link} to="/" style={isActive(history,"/")} onClick={() => signOut(() => {
                         deleteCart();
                     deleteWishlist()})}>Sign Out
                 </Nav.Link>
