@@ -31,6 +31,7 @@ function DisplayRating(props) {
 
     useEffect(() => {
         loadRatings();
+        // eslint-disable-next-line
     },[])
 
 
@@ -39,7 +40,7 @@ function DisplayRating(props) {
 
 
                 <div>
-
+                    {/*eslint-disable-next-line*/}
                     {allRatings.map((ratings, index ) => {
 
                         if(ratings._id === props.pID ){

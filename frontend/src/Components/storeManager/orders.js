@@ -21,8 +21,9 @@ const Orders=()=>{
     };
     useEffect(()=>{
         load();
+        // eslint-disable-next-line
     },[]);
-//Get the number of orders
+    //Get the number of orders
     const ordersLength = ()=>{
       if(orders.length>0){
           return(

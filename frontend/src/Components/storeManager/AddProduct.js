@@ -34,13 +34,16 @@ function AddProduct() {
         productDesc,
         productPrice,
         categories,
+        // eslint-disable-next-line
         productCat,
+        // eslint-disable-next-line
         shipping,
         productQuantity,
         error,
         loading,
         productAdded,
         formData,
+        // eslint-disable-next-line
         redirectToProfile
         } = values;
 
@@ -68,6 +71,7 @@ function AddProduct() {
     useEffect(() =>{
         load();
         bsCustomFileInput.init();
+        // eslint-disable-next-line
     },[])
 
     //method to deal with form submission

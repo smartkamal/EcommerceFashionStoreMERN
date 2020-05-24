@@ -28,6 +28,7 @@ const UserDashboard = () => {
 
     useEffect(()=>{
         init(_id,token);
+        // eslint-disable-next-line
     },[])
 
     const userLinks = () => {

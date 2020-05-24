@@ -10,7 +10,9 @@ function Rating(props) {
     const [Rating,setRating] = useState(0)
     const [Ratings,setRatings] = useState(0)
     const [RatingAction,setRatingAction] = useState(null)
+    // eslint-disable-next-line
     const {user, token} = isValidated();
+    // eslint-disable-next-line
     const [allRatings, setAllRatings] = useState([]);
 
     let variables = {
@@ -23,7 +25,7 @@ function Rating(props) {
             .then(response => {
                 if (response.data.success) {
                     setRatings(response.data.ratings.length)
-
+                    // eslint-disable-next-line
                     response.data.ratings.map(like => {
                         if (like.userId === props.userId){
                             setRatingAction('rated')
@@ -35,7 +37,7 @@ function Rating(props) {
             })
 
 
-
+        // eslint-disable-next-line
     },[Rating])
 
 

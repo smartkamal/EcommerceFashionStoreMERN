@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import Layout from './Layout';
 import {
+    // eslint-disable-next-line
     getProducts,
     getBraintreeClientToken,
     processPayment,
     createOrder
 } from '../../FrontEndAPIs/apiCore';
 import {emptyCart} from "./cartHandler";
-import Card from "./proCard";
 import {isValidated} from '../../validators';
 import {Link} from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
@@ -37,6 +36,7 @@ const Checkout = ({products}) => {
 
     useEffect(() => {
         getToken(userId, token)
+        // eslint-disable-next-line
     }, [])
 
     const handleAddress = event => {
@@ -66,6 +66,7 @@ const Checkout = ({products}) => {
         // send the nonce to your server
         // nonce = data.instance.requestPaymentMethod()
         let nonce;
+        // eslint-disable-next-line
         let getNonce = data.instance.requestPaymentMethod().then
         (data => {
                 //console.log(data)

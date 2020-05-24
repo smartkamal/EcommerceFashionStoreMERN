@@ -7,13 +7,14 @@ import axios from "axios";
 import {API} from "../../Config";
 import Rating from "./Rating";
 import {isValidated} from "../../validators";
-import Nav from "react-bootstrap/Nav";
+
 
 
 const Product = (props) =>{
 
     //hold product state
     const [product,giveProduct] = useState({})
+    // eslint-disable-next-line
     const [err,setError] = useState(false)
     const [CommentLists, setCommentLists] = useState(false)
 
@@ -51,6 +52,7 @@ const Product = (props) =>{
                     alert('Failed to get comments')
                 }
             })
+        // eslint-disable-next-line
     },[])
 
     const updateComment = (newComment) => {
