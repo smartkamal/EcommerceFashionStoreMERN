@@ -35,6 +35,7 @@ const UserProfile = ({match}) => {
     //Grab the user ID
     useEffect(() => {
         init(match.params.userId)
+        // eslint-disable-next-line
     },[])
 
     const handleChanges = firstName => e => {

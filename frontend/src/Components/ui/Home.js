@@ -10,6 +10,7 @@ const Home=  () => {
     //create state to hold the following values
     const [productsArrival, accessProductsArrival] = useState([])
     const [soldProducts, accessSoldProducts] = useState([])
+    // eslint-disable-next-line
     const [error, accessError] = useState(false)
 
 

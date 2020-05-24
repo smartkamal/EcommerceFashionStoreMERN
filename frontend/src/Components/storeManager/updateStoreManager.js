@@ -34,6 +34,7 @@ const StoreManagerUserProfile = ({match}) => {
         //execute on component did mount
     useEffect(() => {
         init(match.params.userId)
+        // eslint-disable-next-line
     },[])
 
     //on change set values

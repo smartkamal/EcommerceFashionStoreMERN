@@ -63,6 +63,7 @@ export  const updateCartItem =(productId, count)=>{
         if (localStorage.getItem('cart')){
             cart =JSON.parse(localStorage.getItem('cart'))
         }
+        // eslint-disable-next-line
         cart.map((product, i)=>{
            if (product._id===productId){
                cart[i].count=count;
@@ -78,7 +79,9 @@ export  const removeCartItem =(productId)=>{
     if (typeof window !='undefined'){
         if (localStorage.getItem('cart')){
             cart =JSON.parse(localStorage.getItem('cart'))
+
         }
+        // eslint-disable-next-line
         cart.map((product, i)=>{
             if (product._id===productId){
                 cart.splice(i,1);

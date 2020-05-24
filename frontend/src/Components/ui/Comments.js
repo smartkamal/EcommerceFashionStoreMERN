@@ -1,14 +1,13 @@
 import React , {useState} from 'react';
-import { Button, Input } from 'antd';
+import { Button} from 'antd';
 import axios from 'axios';
-import {useSelector} from 'react-redux';
 import TextArea from "antd/es/input/TextArea";
 import {isValidated} from "../../validators";
 import {API} from "../../Config";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
 import {Col, Container, Row} from "react-bootstrap";
-import Layout from "./Layout";
+
 
 function Comments(props) {
 

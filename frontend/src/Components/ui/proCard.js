@@ -48,8 +48,11 @@ const ProductCard = ({
     const [ redirect, setRedirect]= useState(false);
     const [count, setCount]=useState(product.count);
     const [ wredirect, setWRedirect]= useState(false);
+    // eslint-disable-next-line
     const [success, setSuccess] = useState(false)
+    // eslint-disable-next-line
     const [error, setError] = useState(false)
+    // eslint-disable-next-line
     const {user,token} = isValidated();
 
     const addToWishListButton=(addWish)=>{

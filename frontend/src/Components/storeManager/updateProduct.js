@@ -38,7 +38,9 @@ function UpdateProduct({match}) {
         productPrice,
         categories,
         productDisc,
+        // eslint-disable-next-line
         productCat,
+        // eslint-disable-next-line
         shipping,
         totalDiscPrice,
         productQuantity,
@@ -100,7 +102,7 @@ function UpdateProduct({match}) {
         loadProduct(match.params.productID);
         bsCustomFileInput.init();
 
-
+        // eslint-disable-next-line
     },[])
 
     //method executed on form submission

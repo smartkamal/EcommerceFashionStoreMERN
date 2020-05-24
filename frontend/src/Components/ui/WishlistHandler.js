@@ -52,6 +52,7 @@ export  const removeWishlistItem =(productId)=>{
         if (localStorage.getItem('wishlist')){
             wishlist =JSON.parse(localStorage.getItem('wishlist'))
         }
+        // eslint-disable-next-line
         wishlist.map((product, i)=>{
             if (product._id===productId){
                 wishlist.splice(i,1);

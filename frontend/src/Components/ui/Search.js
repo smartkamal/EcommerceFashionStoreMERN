@@ -18,6 +18,7 @@ const SearchComp = () =>{
         didSearch:false
     })
     // retrieve the values from state
+    // eslint-disable-next-line
     const {aCategory,allCategories,searchVal,resultData,didSearch} = values
 
     //retrieve the categories and set the allCategories with retrieved data
